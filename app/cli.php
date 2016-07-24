@@ -16,10 +16,12 @@ defined('APPLICATION_PATH')
  * Register the autoloader and tell it to register the tasks directory
  */
 $loader = new \Phalcon\Loader();
-$loader->registerDirs(
-    array(
-        APPLICATION_PATH . '/tasks'
-    )
+$loader->registerDirs([
+        APPLICATION_PATH . '/library',
+        APPLICATION_PATH . '/models',
+        APPLICATION_PATH . '/controllers',
+        APPLICATION_PATH . '/tasks',
+    ]
 );
 $loader->register();
 

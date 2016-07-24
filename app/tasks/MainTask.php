@@ -6,17 +6,25 @@ class MainTask extends \Phalcon\Cli\Task
         echo "\nThis is the default task and the default action \n";
     }
 
-    /**
-     * @param array $params
-     */
-    public function testAction(array $params) {
-        echo sprintf('hello %s', $params[0]) . PHP_EOL;
-        echo sprintf('best regards, %s', $params[1]) . PHP_EOL;
+    public function startAction(array $params = []) {
+
+        shell_exec('gpio -g mode 17 out');
+        shell_exec('gpio -g write 17 1');
 
         while(true) {
-            echo __DIR__;
 
-            shell_exec('python ' . __DIR__.'/../python/gpio.py test');
+            shell_exec('gpio -g write 17 1');
+            usleep(100);
+            shell_exec('gpio -g write 17 0');
+            usleep(900);
+
         }
+
+        shell_exec('gpio -g write 17 0');
+
+        //echo GPIO::clean();
+        //echo GPIO::setup(17,GPIO::$out);
+        //echo GPIO::output(11,1);
+
     }
 }
