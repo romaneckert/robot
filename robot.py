@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 from bionics.controller import Controller
+from bionics.logger import Logger
 import RPi.GPIO as GPIO
 import urllib.request
 import os
-import _thread
 
 class Robot(Controller):
 
@@ -15,15 +15,17 @@ class Robot(Controller):
 
         Controller.__init__(self)
 
-        GPIO.cleanup()
-
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(27, GPIO.OUT)
         self.motor = GPIO.PWM(27, 50)
         self.motor.start(self.cycle)
 
         #self.playMessage('Hello')
-        self.activate()
+        Logger.log('hello', 'info')
+        #self.activate()
+        GPIO.setwarnings(False)
+        GPIO.cleanup()
+        GPIO.setwarnings(True)
 
 
     def playMessage(self, message):
