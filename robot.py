@@ -1,27 +1,30 @@
 #!/usr/bin/env python
-from hawk.controller import Controller
+from bionics.controller import Controller
 import RPi.GPIO as GPIO
 import urllib.request
-import subprocess
-import pyglet
-
+import os
+import _thread
 
 class Robot(Controller):
 
     motor = None
-    cycle = 2
+    cycle = 5
     cycle_direction = 1
 
     def __init__(self):
 
         Controller.__init__(self)
 
+        GPIO.cleanup()
+
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(17, GPIO.OUT)
-        self.motor = GPIO.PWM(17, 50)
+        GPIO.setup(27, GPIO.OUT)
+        self.motor = GPIO.PWM(27, 50)
         self.motor.start(self.cycle)
-        #self.activate()
-        self.playMessage('Hello')
+
+        #self.playMessage('Hello')
+        self.activate()
+
 
     def playMessage(self, message):
         urllib.request.urlretrieve('http://mary.dfki.de:59125/process?INPUT_TEXT=Starte%20Systeme!&INPUT_TYPE=TEXT&OUTPUT_TYPE=AUDIO&AUDIO=WAVE_FILE&LOCALE=de', 'wav.wav')
@@ -29,10 +32,10 @@ class Robot(Controller):
 
     def update(self):
 
-        self.cycle += self.delta_time * self.cycle_direction * 30
+        self.cycle += self.delta_time * self.cycle_direction * 20
 
-        if self.cycle < 2:
-            self.cycle = 2
+        if self.cycle < 5:
+            self.cycle = 5
             self.cycle_direction *= -1
 
         if self.cycle > 9:
