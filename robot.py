@@ -32,7 +32,7 @@ class Robot(Controller):
 
         #self.playMessage('Hello')
         #Logger.log('hello', 'info')
-        self.activate()
+        #self.activate()
         GPIO.setwarnings(False)
         GPIO.cleanup()
         GPIO.setwarnings(True)
