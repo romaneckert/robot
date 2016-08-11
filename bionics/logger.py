@@ -5,7 +5,7 @@ class Logger:
 
     @staticmethod
     def log(message,type):
-        logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG, filename='robot.log', datefmt='%m-%d-%Y %H:%M:%S')
+        logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG, filename='logs/info.log', datefmt='%m-%d-%Y %H:%M:%S')
 
         if 'info' == type:
             logging.info(message)

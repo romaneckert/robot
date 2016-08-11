@@ -7,9 +7,11 @@ class Controller:
 
     delta_time = 0
     last_time = 0
+    start_time = 0
 
     def __init__(self):
         self.last_time = time.time()
+        self.start_time = self.last_time
 
     def activate(self):
         while True:
