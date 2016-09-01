@@ -1,0 +1,174 @@
+/* line 1, ../sass/_basic.scss */
+body, html {
+  color: black;
+  height: 100%;
+  width: 100%;
+  line-height: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  color: #2C3E50;
+}
+
+/* line 10, ../sass/_basic.scss */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0px 0px 20px 0px;
+}
+
+/* line 13, ../sass/_basic.scss */
+ul {
+  padding: 0px;
+}
+/* line 15, ../sass/_basic.scss */
+ul li {
+  list-style: none;
+}
+
+/* line 1, ../sass/_grid.scss */
+.row {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+/* line 5, ../sass/_grid.scss */
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* line 1, ../sass/_forms.scss */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* line 4, ../sass/_forms.scss */
+.form-control {
+  width: 100%;
+  display: block;
+  height: 34px;
+  padding: 6px 12px;
+  color: #2C3E50;
+  background-color: #ECF0F1;
+  background-image: none;
+  border: 1px solid #2C3E50;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* line 1, ../sass/_buttons.scss */
+.btn {
+  display: inline-block;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 5px 10px 5px 10px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #3498DB;
+  border: 1px solid #2980B9;
+  color: #ECF0F1;
+  cursor: pointer;
+}
+/* line 13, ../sass/_buttons.scss */
+.btn:focus, .btn:active, .btn:hover {
+  color: #ECF0F1;
+  background-color: #2980B9;
+  border: 1px solid #2980B9;
+}
+
+/* line 1, ../sass/_tables.scss */
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 8px 8px 8px 8px;
+}
+
+/* line 9, ../sass/_tables.scss */
+.table {
+  background-color: #ffffff;
+  border-top: 1px solid #dde2e4;
+  border-left: 1px solid #dde2e4;
+  border-right: 1px solid #dde2e4;
+  border-bottom: 1px solid #dde2e4;
+}
+/* line 17, ../sass/_tables.scss */
+.table td.error,
+.table th.error,
+.table tr.error {
+  background-color: #E74C3C;
+  color: #ECF0F1;
+}
+/* line 24, ../sass/_tables.scss */
+.table td.warning,
+.table th.warning,
+.table tr.warning {
+  background-color: #E78B00;
+  color: #ECF0F1;
+}
+/* line 31, ../sass/_tables.scss */
+.table td.success,
+.table th.success,
+.table tr.success {
+  background-color: #00B259;
+  color: #ECF0F1;
+}
+/* line 40, ../sass/_tables.scss */
+.table thead tr th {
+  border-bottom: 1px solid #dde2e4;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #dde2e4;
+  white-space: nowrap;
+}
+/* line 53, ../sass/_tables.scss */
+.table tbody tr:first-child td {
+  border-top: 0px;
+}
+/* line 60, ../sass/_tables.scss */
+.table td.type {
+  text-transform: uppercase;
+  width: 120px;
+}
+/* line 64, ../sass/_tables.scss */
+.table th.size,
+.table td.size {
+  width: 80px;
+}
+/* line 68, ../sass/_tables.scss */
+.table th.unsigned,
+.table td.unsigned {
+  text-align: center;
+  width: 120px;
+}
+/* line 73, ../sass/_tables.scss */
+.table th.not-null,
+.table td.not-null {
+  text-align: center;
+  width: 120px;
+}
+/* line 78, ../sass/_tables.scss */
+.table th.primary,
+.table td.primary {
+  text-align: center;
+  width: 120px;
+}
+/* line 83, ../sass/_tables.scss */
+.table th.auto-increment,
+.table td.auto-increment {
+  text-align: center;
+  width: 120px;
+}
+/* line 88, ../sass/_tables.scss */
+.table th.default,
+.table td.default {
+  width: 240px;
+}
+/* line 92, ../sass/_tables.scss */
+.table i.fa {
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */
