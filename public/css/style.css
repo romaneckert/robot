@@ -1,38 +1,39 @@
 /* line 1, ../sass/_basic.scss */
 body, html {
-  color: black;
   height: 100%;
   width: 100%;
   line-height: 20px;
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
-  color: #2C3E50;
+  color: #e4e4e4;
+  background-color: #2C3E50;
 }
 
 /* line 10, ../sass/_basic.scss */
+a {
+  color: #e4e4e4;
+}
+/* line 13, ../sass/_basic.scss */
+a:active, a:focus {
+  color: #e4e4e4;
+}
+/* line 17, ../sass/_basic.scss */
+a:hover {
+  color: #dde2e4;
+}
+
+/* line 21, ../sass/_basic.scss */
 h1, h2, h3, h4, h5, h6 {
   margin: 0px 0px 20px 0px;
 }
 
-/* line 13, ../sass/_basic.scss */
+/* line 24, ../sass/_basic.scss */
 ul {
   padding: 0px;
 }
-/* line 15, ../sass/_basic.scss */
+/* line 26, ../sass/_basic.scss */
 ul li {
   list-style: none;
-}
-
-/* line 1, ../sass/_grid.scss */
-.row {
-  margin-left: -10px;
-  margin-right: -10px;
-}
-
-/* line 5, ../sass/_grid.scss */
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
 /* line 1, ../sass/_forms.scss */
@@ -58,7 +59,6 @@ ul li {
 /* line 1, ../sass/_buttons.scss */
 .btn {
   display: inline-block;
-  border: 1px solid transparent;
   white-space: nowrap;
   padding: 5px 10px 5px 10px;
   -moz-border-radius: 5px;
@@ -70,7 +70,7 @@ ul li {
   color: #ECF0F1;
   cursor: pointer;
 }
-/* line 13, ../sass/_buttons.scss */
+/* line 12, ../sass/_buttons.scss */
 .btn:focus, .btn:active, .btn:hover {
   color: #ECF0F1;
   background-color: #2980B9;
@@ -169,6 +169,31 @@ ul li {
 /* line 92, ../sass/_tables.scss */
 .table i.fa {
   font-size: 20px;
+}
+
+/* line 1, ../sass/_header_nav.scss */
+.header-nav {
+  background-color: #233140;
+}
+/* line 3, ../sass/_header_nav.scss */
+.header-nav .icon-bar {
+  background-color: #e4e4e4;
+}
+
+/* line 4, ../sass/_main_nav.scss */
+#main-nav .nav li a {
+  font-size: 18px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 8, ../sass/_main_nav.scss */
+#main-nav .nav li a span {
+  padding-right: 10px;
+  top: 3px;
+}
+/* line 12, ../sass/_main_nav.scss */
+#main-nav .nav li a:focus, #main-nav .nav li a:hover {
+  background-color: #233140;
 }
 
 /*# sourceMappingURL=style.css.map */

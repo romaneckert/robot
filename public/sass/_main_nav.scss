@@ -1,0 +1,19 @@
+#main-nav {
+  .nav {
+    li {
+      a {
+        font-size:18px;
+        padding-top:20px;
+        padding-bottom:20px;
+        span {
+          padding-right:10px;
+          top:3px;
+        }
+        &:focus,
+        &:hover {
+          background-color: $color_blue_darker;
+        }
+      }
+    }
+  }
+}
