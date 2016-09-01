@@ -1,0 +1,18 @@
+body, html {
+  color: black;
+  height: 100%;
+  width: 100%;
+  line-height: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-size:13px;
+  color:$color_blue_dark;
+}
+h1,h2,h3,h4,h5,h6 {
+  margin:0px 0px 20px 0px;
+}
+ul {
+  padding:0px;
+  li {
+    list-style: none;
+  }
+}

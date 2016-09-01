@@ -1,0 +1,95 @@
+.table>tbody>tr>th,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>tbody>tr>td,
+.table>tfoot>tr>td {
+  padding:8px 8px 8px 8px;
+}
+
+.table {
+
+  background-color: #ffffff;
+  border-top:1px solid $color_light_grey;
+  border-left:1px solid $color_light_grey;
+  border-right:1px solid $color_light_grey;
+  border-bottom:1px solid $color_light_grey;
+
+  td.error,
+  th.error,
+  tr.error {
+    background-color: $color_red;
+    color:$color_white;
+  }
+
+  td.warning,
+  th.warning,
+  tr.warning {
+    background-color: $color_warning;
+    color:$color_white;
+  }
+
+  td.success,
+  th.success,
+  tr.success {
+    background-color: $color_green;
+    color:$color_white;
+  }
+
+  thead {
+    tr {
+      th {
+        border-bottom:1px solid $color_light_grey;
+        padding-top:10px;
+        padding-bottom:10px;
+        background-color: $color_light_grey;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      &:first-child {
+        td {
+          border-top:0px;
+        }
+      }
+    }
+  }
+
+  td.type {
+    text-transform: uppercase;
+    width:120px;
+  }
+  th.size,
+  td.size {
+    width:80px;
+  }
+  th.unsigned,
+  td.unsigned {
+    text-align: center;
+    width:120px;
+  }
+  th.not-null,
+  td.not-null {
+    text-align: center;
+    width:120px;
+  }
+  th.primary,
+  td.primary {
+    text-align: center;
+    width:120px;
+  }
+  th.auto-increment,
+  td.auto-increment {
+    text-align: center;
+    width:120px;
+  }
+  th.default,
+  td.default {
+    width:240px;
+  }
+  i.fa {
+    font-size:20px;
+  }
+}
