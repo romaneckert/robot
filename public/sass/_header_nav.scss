@@ -2,8 +2,10 @@
   background-color: $color_blue_darker;
 
   .navbar-brand {
-    span.glyphicon-repeat {
-      animation: spin 3s infinite linear;
+    span {
+      &.flashing {
+        animation: pulse 1s infinite linear;
+      }
     }
   }
 
@@ -12,7 +14,8 @@
   }
 }
 
-@keyframes spin {
-  0%   {transform: rotate(0deg)}
-  100% {transform: rotate(360deg)}
+@keyframes pulse {
+  0%   {opacity:1}
+  50%  {opacity:0}
+  100% {opacity:1}
 }

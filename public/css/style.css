@@ -175,21 +175,24 @@ ul li {
 #header-nav {
   background-color: #233140;
 }
-/* line 5, ../sass/_header_nav.scss */
-#header-nav .navbar-brand span.glyphicon-repeat {
-  animation: spin 3s infinite linear;
+/* line 6, ../sass/_header_nav.scss */
+#header-nav .navbar-brand span.flashing {
+  animation: pulse 1s infinite linear;
 }
-/* line 10, ../sass/_header_nav.scss */
+/* line 12, ../sass/_header_nav.scss */
 #header-nav .icon-bar {
   background-color: #e4e4e4;
 }
 
-@keyframes spin {
+@keyframes pulse {
   0% {
-    transform: rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
   }
   100% {
-    transform: rotate(360deg);
+    opacity: 1;
   }
 }
 /* line 1, ../sass/_main_nav.scss */
