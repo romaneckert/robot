@@ -177,7 +177,7 @@ ul li {
 }
 /* line 6, ../sass/_header_nav.scss */
 #header-nav .navbar-brand span.flashing {
-  animation: pulse 1s infinite linear;
+  animation: pulse 0.5s infinite linear;
 }
 /* line 12, ../sass/_header_nav.scss */
 #header-nav .icon-bar {
@@ -188,7 +188,10 @@ ul li {
   0% {
     opacity: 1;
   }
-  50% {
+  25% {
+    opacity: 0;
+  }
+  60% {
     opacity: 0;
   }
   100% {
