@@ -4,16 +4,15 @@
   padding:5px 10px 5px 10px;
   @include border-radius(5px);
   margin-bottom:20px;
-  background-color: $color_blue_light;
-  border:1px solid $color_blue_middle;
+  background-color: $color_red;
+  border:1px solid $color_blue_darker;
   color:$color_white;
   cursor:pointer;
 
   &:focus,
   &:active,
   &:hover {
+    background-color: $color_blue_light;
     color:$color_white;
-    background-color: $color_blue_middle;
-    border:1px solid $color_blue_middle;
   }
 }

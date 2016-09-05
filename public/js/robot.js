@@ -7,6 +7,9 @@ var Robot = {
     },
 
     handleDocumentReady : function() {
+
+        $('body').on('click', 'a', this.handleButtonClick.bind(this));
+
         this.update();
     },
 
@@ -18,7 +21,7 @@ var Robot = {
 
         $('#header-nav .navbar-brand span').removeClass('flashing');
 
-        setTimeout(this.update.bind(this), 200);
+        setTimeout(this.update.bind(this), 100);
 
     },
 
@@ -26,10 +29,32 @@ var Robot = {
 
         $('#header-nav .navbar-brand span').addClass('flashing');
 
-        console.log(data);
+        setTimeout(this.update.bind(this), 100);
 
-        setTimeout(this.update.bind(this), 200);
+    },
 
+    handleButtonClick : function(e) {
+        var $button = $(e.currentTarget);
+        var action = $button.data('action');
+
+        $('body').append('<div id="loading"><span class="glyphicon glyphicon-repeat spinner"></span></div>');
+
+        if(action) {
+            e.preventDefault();
+
+            switch(action) {
+                case '':
+                default:
+                    $.get('/robot/' + action, function(data) {
+                        $('#content').html(data);
+                        $('#loading').remove();
+                    }.bind(this)).fail(function() {
+                        $('#content').html('error in action ' + action);
+                        $('#loading').remove();
+                    });
+                    break;
+            }
+        }
     }
 
 };

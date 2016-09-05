@@ -27,3 +27,15 @@ ul {
     list-style: none;
   }
 }
+.center {
+  text-align:center;
+  display:inline-block;
+  width:100%;
+}
+.bg-success {
+  background-color: $color_blue_darker;
+  color:$color_white;
+  padding:20px;
+  border-left:3px solid $color_blue_light;
+  margin-bottom:20px;
+}

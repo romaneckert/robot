@@ -30,9 +30,11 @@ class RobotController extends Controller {
 
     public function updateAction() {
 
-        $lastLine = system('git pull', $return);
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
 
-        $this->flash->notice($return);
+        $output = shell_exec('git pull');
+
+        $this->view->output = $output;
 
     }
 }

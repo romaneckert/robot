@@ -7,8 +7,7 @@ use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Application;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Router;
-
-use Phalcon\Flash\Direct as FlashDirect;
+use Phalcon\Tag;
 
 try {
 
@@ -29,13 +28,14 @@ try {
     $view->setViewsDir('../app/views/');
     $di->set('view', $view);
 
+    $tag = new Tag();
+    $di->set('tag', $tag);
+
     $router = new Router();
     $router->setDefaultController('robot');
     $router->setDefaultAction('dashboard');
 
     $di->set('router', $router);
-
-    $di->set('flash', new FlashDirect());
 
     $application = new Application($di);
 
