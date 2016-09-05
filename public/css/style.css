@@ -172,26 +172,32 @@ ul li {
 }
 
 /* line 1, ../sass/_header_nav.scss */
-.header-nav {
+#header-nav {
   background-color: #233140;
 }
 /* line 3, ../sass/_header_nav.scss */
-.header-nav .icon-bar {
+#header-nav .icon-bar {
   background-color: #e4e4e4;
 }
 
-/* line 4, ../sass/_main_nav.scss */
+/* line 1, ../sass/_main_nav.scss */
+#main-nav {
+  padding-top: 30px;
+}
+/* line 7, ../sass/_main_nav.scss */
 #main-nav .nav li a {
   font-size: 14px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
-/* line 8, ../sass/_main_nav.scss */
+/* line 14, ../sass/_main_nav.scss */
 #main-nav .nav li a span {
   padding-right: 10px;
   top: 3px;
 }
-/* line 12, ../sass/_main_nav.scss */
+/* line 18, ../sass/_main_nav.scss */
 #main-nav .nav li a:focus, #main-nav .nav li a:hover {
   background-color: #233140;
 }
