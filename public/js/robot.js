@@ -16,7 +16,7 @@ var Robot = {
 
     handleUpdateSuccess : function(data) {
 
-        $('.header-nav .navbar-brand span').attr('class', 'glyphicon glyphicon-flash');
+        $('#header-nav .navbar-brand span').attr('class', 'glyphicon glyphicon-flash');
 
         setTimeout(this.update.bind(this), 200);
 
@@ -24,7 +24,7 @@ var Robot = {
 
     handleUpdateFail : function(data) {
 
-        $('.header-nav .navbar-brand span').attr('class', 'glyphicon glyphicon-repeat');
+        $('#header-nav .navbar-brand span').attr('class', 'glyphicon glyphicon-repeat');
 
         console.log(data);
 
