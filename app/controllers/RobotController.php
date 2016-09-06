@@ -18,13 +18,43 @@ class RobotController extends Controller {
 
     }
 
-    public function configurationAction() {
+    public function dataAction() {
 
         $this->view->disable();
 
         $this->response->setContentType('application/json', 'UTF-8');
 
-        echo json_encode($this->config);
+        $data = [];
+
+        $data['config'] = $this->config;
+
+        $handle = fopen(ROOT.'logs/log.log','r');
+
+        if(false !== $handle) {
+            $counter = 0;
+            $logs = [];
+
+            while (!feof($handle)) {
+
+                $line = fgets($handle);
+                $parts = explode(' ', $line);
+                $date = array_shift($parts);
+                $time = array_shift($parts);
+                $message = trim(implode(' ', $parts));
+
+                $logs[] = [$date, $time, $message];
+
+                $counter++;
+
+                if($counter > 200) break;
+            }
+
+            fclose($handle);
+
+            $data['logs'] = $logs;
+        }
+
+        echo json_encode($data);
 
     }
 

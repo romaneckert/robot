@@ -14,12 +14,14 @@ var Robot = {
     },
 
     update : function() {
-        $.get('/robot/configuration', this.handleUpdateSuccess.bind(this)).fail(this.handleUpdateFail.bind(this));
+        $.get('/robot/data', this.handleUpdateSuccess.bind(this)).fail(this.handleUpdateFail.bind(this));
     },
 
     handleUpdateSuccess : function(data) {
 
         $('#header-nav .navbar-brand span').removeClass('flashing');
+
+        console.log(data);
 
         setTimeout(this.update.bind(this), 100);
 

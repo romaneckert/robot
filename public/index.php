@@ -11,6 +11,8 @@ use Phalcon\Tag;
 
 try {
 
+    define('ROOT', dirname(__DIR__) . '/');
+
     $loader = new Loader();
 
     $loader->registerDirs([
