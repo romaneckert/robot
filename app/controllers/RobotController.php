@@ -32,7 +32,7 @@ class RobotController extends Controller {
 
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
 
-        $output = shell_exec('git pull');
+        $output = shell_exec('git pull 2>&1');
 
         var_dump($output);
         die();
