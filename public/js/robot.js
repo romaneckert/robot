@@ -21,7 +21,28 @@ var Robot = {
 
         $('#header-nav .navbar-brand span').removeClass('flashing');
 
-        console.log(data);
+        if(data.logs) {
+
+            var $logContainer = $('.logs');
+
+            if($logContainer.length > 0) {
+
+                $logContainer.html('');
+
+                $.each(data.logs, function(l, log) {
+
+                    var $logEntry = $('<div class="entry"/>')
+
+                    $.each(log, function(key, value) {
+                        $logEntry.append('<span class="' + key + '">' + value + '</span>');
+                    });
+
+                    $logContainer.append($logEntry);
+                });
+            }
+
+
+        }
 
         setTimeout(this.update.bind(this), 100);
 

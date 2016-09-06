@@ -269,5 +269,11 @@ ul li {
     transform: rotate(360deg);
   }
 }
+/* line 1, ../sass/_logs.scss */
+.logs {
+  background-color: #233140;
+  padding: 20px;
+  border-radius: 10px;
+}
 
 /*# sourceMappingURL=style.css.map */
