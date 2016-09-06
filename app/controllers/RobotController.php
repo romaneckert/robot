@@ -34,9 +34,6 @@ class RobotController extends Controller {
 
         $output = shell_exec('git pull 2>&1');
 
-        var_dump($output);
-        die();
-
         $this->view->output = $output;
 
     }
