@@ -1,5 +1,6 @@
 .logs {
-  background-color: $color_blue_darker;
-  padding:20px;
-  border-radius:10px;
+  span {
+    padding-right:10px;
+    display: inline-block;
+  }
 }

@@ -41,10 +41,16 @@ var Robot = {
                 });
             }
 
-
         }
 
-        setTimeout(this.update.bind(this), 100);
+        var $cpuContainer = $('.cpu');
+
+        if($cpuContainer.length > 0) {
+
+            $cpuContainer.text('CPU: ' + data.env.load + '%');
+        }
+
+        setTimeout(this.update.bind(this), 200);
 
     },
 
@@ -52,7 +58,7 @@ var Robot = {
 
         $('#header-nav .navbar-brand span').addClass('flashing');
 
-        setTimeout(this.update.bind(this), 100);
+        setTimeout(this.update.bind(this), 200);
 
     },
 

@@ -54,6 +54,9 @@ class RobotController extends Controller {
             $data['logs'] = $logs;
         }
 
+        $data['env'] = [];
+        $data['env']['load'] = round(sys_getloadavg()[0],2);
+
         echo json_encode($data);
 
     }

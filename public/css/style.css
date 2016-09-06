@@ -269,11 +269,17 @@ ul li {
     transform: rotate(360deg);
   }
 }
-/* line 1, ../sass/_logs.scss */
-.logs {
+/* line 1, ../sass/_stat.scss */
+.stat {
   background-color: #233140;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 10px 15px 10px 15px;
+  border-radius: 2px;
+}
+
+/* line 2, ../sass/_logs.scss */
+.logs span {
+  padding-right: 10px;
+  display: inline-block;
 }
 
 /*# sourceMappingURL=style.css.map */
