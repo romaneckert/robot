@@ -41,7 +41,7 @@ class Robot(Controller):
 
     def playMessage(self, message):
 
-        params = (('INPUT_TEXT', 'Alle Systeme aktiv'),
+        params = (('INPUT_TEXT', 'Meikal, ich bin Kitt'),
                   ('INPUT_TYPE', 'TEXT'),
                   ('OUTPUT_TYPE', 'AUDIO'),
                   ('AUDIO', 'WAVE_FILE'),
