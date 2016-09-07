@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from bionics.controller import Controller
-from bionics.logger import Logger
+from bionics.system import Logger
 import time
 import subprocess
 import urllib.request
