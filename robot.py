@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from bionics.controller import Controller
-from bionics.system import Logger
+from bionics.system import System
 import RPi.GPIO as GPIO
 import urllib.request
 import urllib.parse
