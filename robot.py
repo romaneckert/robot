@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 from bionics.controller import Controller
-from bionics.system import System
 import RPi.GPIO as GPIO
 
 class Robot(Controller):
@@ -28,13 +27,18 @@ class Robot(Controller):
         #self.motor2.start(self.cycle2)
         #self.motor3.start(self.cycle3)
 
-        System.say('Starte Systeme');
-        #self.activate()
+        self.say('Starte Systeme');
+        self.activate()
         GPIO.setwarnings(False)
         GPIO.cleanup()
         GPIO.setwarnings(True)
 
     def update(self):
+
+        print(self.delta_time)
+
+        #print(self.queue.get())
+
 
         """
         self.cycle1 += self.delta_time * self.cycle_direction1 * 5
