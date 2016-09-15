@@ -1,12 +1,14 @@
 #!/usr/bin/env python
-import time
 import logging
-import urllib.request
-import urllib.parse
 import os
 import subprocess
-from slugify import slugify
+import time
+import urllib.parse
+import urllib.request
 from multiprocessing import Process, Queue
+from slugify import slugify
+import Adafruit_PCA9685
+
 
 class Controller:
 
@@ -17,6 +19,9 @@ class Controller:
     start_time = 0
 
     queue = Queue()
+
+    pwm = Adafruit_PCA9685.PCA9685()
+    pwm.set_pwm_freq(60)
 
     def __init__(self):
         self.last_time = time.time()
@@ -50,7 +55,6 @@ class Controller:
         process = Process(target=self.speak, args=(message,))
         process.start()
         # p.join()
-        # System.speak(message)
 
     def speak(self, message):
 

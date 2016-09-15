@@ -2,6 +2,7 @@
 from bionics.controller import Controller
 import RPi.GPIO as GPIO
 
+
 class Robot(Controller):
 
     #motor = None
@@ -36,6 +37,8 @@ class Robot(Controller):
     def update(self):
 
         print(self.delta_time)
+
+        pwm.setPWM(0, 0, 500)
 
         #print(self.queue.get())
 
