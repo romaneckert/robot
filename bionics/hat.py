@@ -57,13 +57,3 @@ class Hat:
         self.bus.write_byte_data(self.address, 0xFB, on >> 8)
         self.bus.write_byte_data(self.address, 0xFC, off & 0xFF)
         self.bus.write_byte_data(self.address, 0xFD, off >> 8)
-
-
-pwm = ServoHat()
-pwm.set_pwm_freq(60)
-
-while True:
-    pwm.set_pwm(1, 0, 400)
-    time.sleep(1)
-    pwm.set_pwm(1, 0, 500)
-    time.sleep(1)
