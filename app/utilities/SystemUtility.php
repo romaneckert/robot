@@ -1,9 +1,6 @@
 <?php
 
-/**
- * Class EnvUtility
- */
-class EnvUtility {
+class SystemUtility {
 
     /**
      * @return float
