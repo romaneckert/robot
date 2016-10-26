@@ -7,7 +7,9 @@ class ApiController extends Controller {
     public function dataAction() {
         $this->view->disable();
 
-        $data = [1,2,3];
+        $data['system'] = [];
+        $data['system']['load'] = round(sys_getloadavg()[0],2);
+        $data['system']['processes'] = (integer)trim(exec('ps -A | wc -l'));
 
         $response = new \Phalcon\Http\Response();
         $response->setContentType('application/json', 'UTF-8');
