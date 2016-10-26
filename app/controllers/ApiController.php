@@ -8,14 +8,16 @@ class ApiController extends Controller {
         $this->view->disable();
 
         $data['system'] = [];
-        $data['system']['load'] = round(sys_getloadavg()[0],2);
-        $data['system']['processes'] = (integer)trim(exec('ps -A | wc -l'));
+        $data['system']['load'] = EnvUtility::getLoad();
+        $data['system']['processes'] = EnvUtility::countProcesses();
+        $data['system']['uptime'] = EnvUtility::getUpTime();
 
-        $response = new \Phalcon\Http\Response();
-        $response->setContentType('application/json', 'UTF-8');
-        $response->setContent(json_encode($data));
+        $data['config'] = $this->config;
 
-        return $response;
+        $this->response->setContentType('application/json', 'UTF-8');
+        $this->response->setContent(json_encode($data));
+
+        return $this->response;
     }
 
 }
