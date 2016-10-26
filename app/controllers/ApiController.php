@@ -16,7 +16,7 @@ class ApiController extends Controller {
         $data['system'] = [];
         $data['system']['loadAverage'] = SystemUtility::getLoadAverage();
         $data['system']['processes'] = SystemUtility::countProcesses();
-        $data['system']['uptime'] = SystemUtility::getUpTime();
+        $data['system']['upTime'] = SystemUtility::getUpTime();
 
         // get global config
         $data['config'] = $this->config;
