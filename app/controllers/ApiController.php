@@ -21,11 +21,8 @@ class ApiController extends Controller {
         // get global config
         $data['config'] = $this->config;
 
-        // set content type to json
-        $this->response->setContentType('application/json', 'UTF-8');
-
         // encode json data
-        $this->response->setContent(json_encode($data));
+        $this->response->setJsonContent($data);
 
         return $this->response;
     }
