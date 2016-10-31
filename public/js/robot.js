@@ -14,41 +14,20 @@ var Robot = {
     },
 
     update : function() {
-        $.get('/robot/data', this.handleUpdateSuccess.bind(this)).fail(this.handleUpdateFail.bind(this));
+        $.get('/api/data', this.handleUpdateSuccess.bind(this)).fail(this.handleUpdateFail.bind(this));
     },
 
     handleUpdateSuccess : function(data) {
 
         $('#header-nav .navbar-brand span').removeClass('flashing');
 
-        if(data.logs) {
-
-            var $logContainer = $('.logs');
-
-            if($logContainer.length > 0) {
-
-                $logContainer.html('');
-
-                $.each(data.logs, function(l, log) {
-
-                    var $logEntry = $('<div class="entry"/>')
-
-                    $.each(log, function(key, value) {
-                        $logEntry.append('<span class="' + key + '">' + value + '</span>');
-                    });
-
-                    $logContainer.append($logEntry);
-                });
+        $('[data-model]').each(function(i, elem) {
+            var model = $(elem).data('model');
+            var attribute = $(elem).data('attribute');
+            if(data[model] && data[model][attribute]) {
+                $(elem).text(data[model][attribute]);
             }
-
-        }
-
-        var $cpuContainer = $('.cpu');
-
-        if($cpuContainer.length > 0) {
-
-            $cpuContainer.text('CPU: ' + data.env.load + '%');
-        }
+        });
 
         setTimeout(this.update.bind(this), 200);
 

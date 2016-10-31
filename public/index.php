@@ -17,7 +17,8 @@ try {
 
     $loader->registerDirs([
         '../app/controllers/',
-        '../app/models/'
+        '../app/models/',
+        '../app/utilities'
     ])->register();
 
     // Create a DI
@@ -36,6 +37,14 @@ try {
     $router = new Router();
     $router->setDefaultController('robot');
     $router->setDefaultAction('dashboard');
+
+    $router->add(
+        '/api/data',
+        [
+            'controller' => 'api',
+            'action' => 'data'
+        ]
+    );
 
     $di->set('router', $router);
 

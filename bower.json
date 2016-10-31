@@ -1,0 +1,10 @@
+{
+  "name": "robot",
+  "devDependencies": {
+    "jquery" : "~3",
+    "bootstrap" : "~3"
+  },
+  "install": {
+    "path": "libs"
+  }
+}
