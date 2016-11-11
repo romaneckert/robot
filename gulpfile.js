@@ -6,17 +6,21 @@ var rename = require('gulp-rename');
 var filter = require('gulp-filter');
 
 gulp.task('js', function() {
-
     return gulp.src(['vendor/jquery/dist/jquery.js', 'src/js/robot.js'])
         .pipe(concat('robot.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('public/js'));
 });
 
-gulp.task('sass', function() {
-    return sass('src/sass/style.scss', {style: 'compressed', noCache: true})
+gulp.task('scss', function() {
+    return sass('src/scss/style.scss', {style: 'compressed', noCache: true})
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('default', ['js', 'sass']);
+gulp.task('watch', function() {
+    gulp.watch('src/js', ['scripts']);
+    gulp.watch('src/scss', ['scss']);
+});
+
+gulp.task('default', ['js', 'scss', 'watch']);
