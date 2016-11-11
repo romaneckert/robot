@@ -14,7 +14,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('sass', function() {
-    return sass('src/sass/style.scss', {style: 'compressed'})
+    return sass('src/sass/style.scss', {style: 'compressed', noCache: true})
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('public/css'));
 });
