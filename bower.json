@@ -1,6 +1,6 @@
 {
   "name": "robot",
   "devDependencies": {
-    "jquery" : "~3"
+    "jquery" : ""
   }
 }

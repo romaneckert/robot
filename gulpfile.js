@@ -1,19 +1,22 @@
-// Include gulp
 var gulp = require('gulp');
-
-// Include plugins
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var sass = require('gulp-ruby-sass');
 var rename = require('gulp-rename');
+var filter = require('gulp-filter');
 
-// Concatenate & Minify JS
-gulp.task('scripts', function() {
-    return gulp.src('src/js/*.js')
-        .pipe(concat('robot.js'))
-        .pipe(rename({suffix: '.min'}))
+gulp.task('js', function() {
+
+    return gulp.src(['vendor/jquery/dist/jquery.js', 'src/js/robot.js'])
+        .pipe(concat('robot.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('public/js'));
 });
 
-// Default Task
-gulp.task('default', ['scripts']);
+gulp.task('sass', function() {
+    return sass('src/sass/style.scss', {style: 'compressed'})
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest('public/css'));
+});
+
+gulp.task('default', ['js', 'sass']);

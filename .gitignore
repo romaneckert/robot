@@ -4,3 +4,4 @@
 .sass-cache
 logs/*
 node_modules/
+vendor/
