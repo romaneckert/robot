@@ -2,7 +2,6 @@
 
 how to install
 
-npm install
-bower install
+npm update
 
 use gulp

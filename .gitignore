@@ -4,4 +4,3 @@
 .sass-cache
 logs/*
 node_modules/
-bower_components/

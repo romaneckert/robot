@@ -2,12 +2,13 @@
   "name": "robot",
   "version": "1.0.0",
   "dependencies": {
-    "bower": "latest",
     "gulp": "latest",
     "gulp-concat": "latest",
     "gulp-filter": "latest",
     "gulp-rename": "latest",
     "gulp-ruby-sass": "latest",
-    "gulp-uglify": "latest"
+    "gulp-uglify": "latest",
+    "jquery": "latest",
+    "three": "latest"
   }
 }

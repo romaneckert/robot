@@ -6,7 +6,12 @@ var rename = require('gulp-rename');
 var filter = require('gulp-filter');
 
 gulp.task('js', function() {
-    return gulp.src(['bower_components/jquery/dist/jquery.js', 'src/js/robot.js'])
+
+    var files = ['node_modules/jquery/dist/jquery.js',
+                 'node_modules/three/build/three.js',
+                 'src/js/robot.js'];
+
+    return gulp.src(files)
         .pipe(concat('robot.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('public/js'));
