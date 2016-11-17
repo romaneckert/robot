@@ -4,6 +4,7 @@ var uglify = require('gulp-uglify');
 var sass = require('gulp-ruby-sass');
 var rename = require('gulp-rename');
 var filter = require('gulp-filter');
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('js', function() {
 
@@ -12,20 +13,24 @@ gulp.task('js', function() {
                  'src/js/robot.js'];
 
     return gulp.src(files)
+        .pipe(sourcemaps.init())
         .pipe(concat('robot.min.js'))
         .pipe(uglify())
+        .pipe(sourcemaps.write(''))
         .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('scss', function() {
-    return sass('src/scss/style.scss', {style: 'compressed', noCache: true})
+    return sass('src/scss/style.scss', {style: 'compressed', noCache: true, sourcemap: true})
+        .pipe(sourcemaps.init())
         .pipe(rename({suffix: '.min'}))
+        .pipe(sourcemaps.write(''))
         .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('watch', function() {
-    gulp.watch('src/js', ['scripts']);
-    gulp.watch('src/scss', ['scss']);
+    gulp.watch('src/js/*', ['scripts']);
+    gulp.watch('src/scss/*', ['scss']);
 });
 
 gulp.task('default', ['js', 'scss', 'watch']);
