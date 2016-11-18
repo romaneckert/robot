@@ -10,7 +10,7 @@ class RobotController extends Controller {
         $this->assets->addJs('js/robot.min.js');
     }
 
-    public function dashboardAction() {
+    public function controlAction() {
 
     }
 

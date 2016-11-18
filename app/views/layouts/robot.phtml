@@ -14,39 +14,7 @@
         <?php $this->assets->outputCss() ?>
     </head>
     <body>
-        <nav id="header-nav">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span></a>
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-            </div>
-        </nav>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div id="main-nav" class="collapse navbar-collapse">
-                        <ul class="nav nav-stacked">
-                            <li class="active"><a href="/"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>Monitoring</a></li>
-                            <li><a href="/" data-action="update"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>Update System</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-9">
-                    <div id="content">
-                        <?php echo $this->getContent(); ?>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+        <?php echo $this->getContent(); ?>
         <?php $this->assets->outputJs() ?>
     </body>
 </html>

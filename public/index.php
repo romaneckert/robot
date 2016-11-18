@@ -36,7 +36,7 @@ try {
 
     $router = new Router();
     $router->setDefaultController('robot');
-    $router->setDefaultAction('dashboard');
+    $router->setDefaultAction('control');
 
     $router->add(
         '/api/data',

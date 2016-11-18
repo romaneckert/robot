@@ -4,38 +4,4 @@ body, html {
   line-height: 20px;
   font-family: 'Open Sans', sans-serif;
   font-size:13px;
-  color:$color_very_light_grey;
-  background-color: $color_blue_dark;
-}
-a {
-  color:$color_very_light_grey;
-
-  &:active,
-  &:focus {
-    color:$color_very_light_grey;
-  }
-  &:hover {
-    color:$color_light_grey;
-  }
-}
-h1,h2,h3,h4,h5,h6 {
-  margin:0px 0px 20px 0px;
-}
-ul {
-  padding:0px;
-  li {
-    list-style: none;
-  }
-}
-.center {
-  text-align:center;
-  display:inline-block;
-  width:100%;
-}
-.bg-success {
-  background-color: $color_blue_darker;
-  color:$color_white;
-  padding:20px;
-  border-left:3px solid $color_blue_light;
-  margin-bottom:20px;
 }
