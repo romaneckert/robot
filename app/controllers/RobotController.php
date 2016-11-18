@@ -6,6 +6,7 @@ class RobotController extends Controller {
 
     public function initialize() {
         $this->assets->addCss('css/style.min.css');
+        $this->assets->addJs('js/vendor.min.js');
         $this->assets->addJs('js/robot.min.js');
     }
 

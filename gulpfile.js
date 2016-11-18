@@ -6,11 +6,18 @@ var rename = require('gulp-rename');
 var filter = require('gulp-filter');
 var sourcemaps = require('gulp-sourcemaps');
 
-gulp.task('js', function() {
+gulp.task('vendor', function() {
 
-    var files = ['node_modules/jquery/dist/jquery.js',
-                 'node_modules/three/build/three.js',
-                 'src/js/robot.js'];
+    var files = ['node_modules/jquery/dist/jquery.min.js',
+                 'node_modules/three/build/three.min.js'];
+
+    return gulp.src(files)
+        .pipe(concat('vendor.min.js'))
+        .pipe(gulp.dest('public/js'));
+});
+
+gulp.task('js', function() {
+    var files = ['src/js/robot.js'];
 
     return gulp.src(files)
         .pipe(sourcemaps.init())
@@ -29,8 +36,8 @@ gulp.task('scss', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('src/js/*', ['scripts']);
+    gulp.watch('src/js/*', ['js']);
     gulp.watch('src/scss/*', ['scss']);
 });
 
-gulp.task('default', ['js', 'scss', 'watch']);
+gulp.task('default', ['vendor', 'js', 'scss', 'watch']);
