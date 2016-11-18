@@ -5,7 +5,6 @@ var Interface = {
     scene : null,
     camera : null,
     renderer: null,
-    cube: null,
 
     clock : new THREE.Clock(),
 
@@ -18,16 +17,30 @@ var Interface = {
         $('body').on('click', 'a', this.handleButtonClick.bind(this));
 
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(100, window.innerWidth/window.innerHeight, 0.1, 1000);
         this.camera.position.z = 5;
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer({antialias:true});
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
 
-        var geometry = new THREE.BoxGeometry(1, 1, 1);
-        var material = new THREE.MeshBasicMaterial({color: 0xffffff});
-        this.cube = new THREE.Mesh(geometry, material);
-        this.scene.add(this.cube);
+        var material = new THREE.LineBasicMaterial({color: 0xffffff, linewidth:1, opacity: 0.5, transparent:true});
+
+        var geometry = new THREE.Geometry();
+        geometry.vertices.push(
+            new THREE.Vector3( -5, 0, 0 ),
+            new THREE.Vector3( 0, 3, 0 )
+        );
+
+        var line = new THREE.Line( geometry, material );
+        this.scene.add( line );
+
+        var radius   = 0.1,
+            segments = 128,
+            geometry = new THREE.CircleGeometry( radius, segments );
+
+        geometry.vertices.shift();
+
+        this.scene.add( new THREE.Line( geometry, material ) );
 
         this.render();
 
@@ -43,8 +56,6 @@ var Interface = {
         var delta = this.clock.getDelta();
 
         window.requestAnimationFrame(this.render.bind(this));
-        this.cube.rotation.x += delta;
-        this.cube.rotation.y += delta;
 
         this.renderer.render(this.scene, this.camera);
     },
