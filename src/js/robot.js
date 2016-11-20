@@ -6,6 +6,13 @@ var Interface = {
     camera : null,
     renderer: null,
 
+    objects : [],
+    materials: {
+        lines : []
+    },
+
+
+
     clock : new THREE.Clock(),
 
     init : function() {
@@ -19,20 +26,34 @@ var Interface = {
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(100, window.innerWidth/window.innerHeight, 0.1, 1000);
         this.camera.position.z = 5;
-        this.renderer = new THREE.WebGLRenderer({antialias:true});
+        this.renderer = new THREE.WebGLRenderer({antialias:true,alpha:true});
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
 
-        var material = new THREE.LineBasicMaterial({color: 0xffffff, linewidth:1, opacity: 0.5, transparent:true});
+        this.materials.lines[107] = new THREE.LineBasicMaterial({color: 0xffffff, linewidth:1, opacity: 0.7, transparent:true});
 
         var geometry = new THREE.Geometry();
-        geometry.vertices.push(
-            new THREE.Vector3( -5, 0, 0 ),
-            new THREE.Vector3( 0, 3, 0 )
-        );
 
-        var line = new THREE.Line( geometry, material );
-        this.scene.add( line );
+        geometry.vertices = [
+            new THREE.Vector3(-7,2,0),
+            new THREE.Vector3(-4,0,0),
+            new THREE.Vector3(-4,-2,0),
+            new THREE.Vector3(-5,-3,0)
+        ];
+
+        var line = new THREE.Line(geometry,this.materials.lines[107]);
+        this.scene.add(line);
+
+        var geometry = new THREE.Geometry();
+        geometry.vertices = [
+            new THREE.Vector3(7,2,0),
+            new THREE.Vector3(4,0,0),
+            new THREE.Vector3(4,-2,0),
+            new THREE.Vector3(5,-3,0)
+        ];
+
+        var line = new THREE.Line(geometry,this.materials.lines[107]);
+        this.scene.add(line);
 
         var radius   = 0.1,
             segments = 128,
@@ -40,7 +61,7 @@ var Interface = {
 
         geometry.vertices.shift();
 
-        this.scene.add( new THREE.Line( geometry, material ) );
+        this.scene.add( new THREE.Line(geometry,this.materials.lines[107]) );
 
         this.render();
 
