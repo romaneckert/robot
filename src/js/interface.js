@@ -22,10 +22,15 @@ Interface.Main = {
 
         $('body').on('click', 'a', this.handleButtonClick.bind(this));
 
-        this.scene.add(new Interface.Line([[-7,2,0],[-4,0,0],[-4,-2,0],[-5,-3,0]], 0xffffff,1,0.5));
-        this.scene.add(new Interface.Line([[-6,1.2,0],[-4.1,-0.05,0],[-4.1,-1,0]], 0xffffff,3,0.6));
+        var helper = new THREE.GridHelper(10, 20, 0x0000ff, 0x808080 );
+        helper.position.y = 0;
+        helper.rotateX(90 * Math.PI / 180);
+        //this.scene.add(helper);
 
-        this.scene.add(new Interface.Line([[7,2,0],[4,0,0],[4,-2,0],[5,-3,0]], 0xffffff,1,0.5));
+        this.scene.add(new Interface.Line([[-7,2,0],[-4,0,0],[-4,-2,0],[-4.5,-2.5,0]], 0xffffff,1,0.5));
+        this.scene.add(new Interface.Line([[7,2,0],[4,0,0],[4,-2,0],[4.5,-2.5,0]], 0xffffff,1,0.5));
+
+        this.scene.add(new Interface.Line([[-6,1.2,0],[-4.1,-0.05,0],[-4.1,-1,0]], 0xffffff,3,0.6));
         this.scene.add(new Interface.Line([[6,1.2,0],[4.1,-0.05,0],[4.1,-1,0]], 0xffffff,3,0.6));
 
         this.scene.add(new Interface.Circle(0.1,128,[0,1,0],0xffffff,1,0.7));
@@ -34,7 +39,13 @@ Interface.Main = {
         this.scene.add(new Interface.Circle(1.3,128,[2,1,0],0xffffff,1,0.7));
         this.scene.add(new Interface.Circle(1.3,128,[-2,1,0],0xffffff,1,0.7));
 
-        this.scene.add(new Interface.Line([[1,-2,0],[3,2,0]], 0xffffff,1,0.5));
+        this.scene.add(new Interface.Circle(1.2,128,[2,1,0],0xffffff,6,0.05));
+        this.scene.add(new Interface.Circle(1.2,128,[-2,1,0],0xffffff,6,0.05));
+
+        this.scene.add(new Interface.Circle(0.5,128,[4,3,0],0xffffff,1,0.7));
+
+        this.scene.add(new Interface.Line([[-0.3,-2,0],[-1,-2,0],[-1.3,-2.3,0],[-1.3,-4,0],[-1,-4.3,0],[-1,-5,0]], 0xffffff,1,0.5));
+        this.scene.add(new Interface.Line([[0.3,-2,0],[1,-2,0],[1.3,-2.3,0],[1.3,-4,0],[1,-4.3,0],[1,-5,0]], 0xffffff,1,0.5));
 
         this.render();
 
