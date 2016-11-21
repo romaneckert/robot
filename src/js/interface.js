@@ -1,4 +1,6 @@
-var Interface = {
+var Interface = Interface || {};
+
+Interface.Main = {
 
     timer : null,
 
@@ -7,11 +9,6 @@ var Interface = {
     renderer: null,
 
     objects : [],
-    materials: {
-        lines : []
-    },
-
-
 
     clock : new THREE.Clock(),
 
@@ -21,51 +18,40 @@ var Interface = {
 
     handleDocumentReady : function() {
 
+        this.createScene();
+
         $('body').on('click', 'a', this.handleButtonClick.bind(this));
 
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(100, window.innerWidth/window.innerHeight, 0.1, 1000);
-        this.camera.position.z = 5;
-        this.renderer = new THREE.WebGLRenderer({antialias:true,alpha:true});
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(this.renderer.domElement);
+        this.scene.add(new Interface.Line([[-7,2,0],[-4,0,0],[-4,-2,0],[-5,-3,0]], 0xffffff,1,0.5));
+        this.scene.add(new Interface.Line([[-6,1.2,0],[-4.1,-0.05,0],[-4.1,-1,0]], 0xffffff,3,0.6));
 
-        this.materials.lines[107] = new THREE.LineBasicMaterial({color: 0xffffff, linewidth:1, opacity: 0.7, transparent:true});
+        this.scene.add(new Interface.Line([[7,2,0],[4,0,0],[4,-2,0],[5,-3,0]], 0xffffff,1,0.5));
+        this.scene.add(new Interface.Line([[6,1.2,0],[4.1,-0.05,0],[4.1,-1,0]], 0xffffff,3,0.6));
 
-        var geometry = new THREE.Geometry();
+        this.scene.add(new Interface.Circle(0.1,128,[0,1,0],0xffffff,1,0.7));
+        this.scene.add(new Interface.Circle(0.2,128,[0,1,0],0xffffff,1,0.2));
 
-        geometry.vertices = [
-            new THREE.Vector3(-7,2,0),
-            new THREE.Vector3(-4,0,0),
-            new THREE.Vector3(-4,-2,0),
-            new THREE.Vector3(-5,-3,0)
-        ];
+        this.scene.add(new Interface.Circle(1.3,128,[2,1,0],0xffffff,1,0.7));
+        this.scene.add(new Interface.Circle(1.3,128,[-2,1,0],0xffffff,1,0.7));
 
-        var line = new THREE.Line(geometry,this.materials.lines[107]);
-        this.scene.add(line);
-
-        var geometry = new THREE.Geometry();
-        geometry.vertices = [
-            new THREE.Vector3(7,2,0),
-            new THREE.Vector3(4,0,0),
-            new THREE.Vector3(4,-2,0),
-            new THREE.Vector3(5,-3,0)
-        ];
-
-        var line = new THREE.Line(geometry,this.materials.lines[107]);
-        this.scene.add(line);
-
-        var radius   = 0.1,
-            segments = 128,
-            geometry = new THREE.CircleGeometry( radius, segments );
-
-        geometry.vertices.shift();
-
-        this.scene.add( new THREE.Line(geometry,this.materials.lines[107]) );
+        this.scene.add(new Interface.Line([[1,-2,0],[3,2,0]], 0xffffff,1,0.5));
 
         this.render();
 
         this.update();
+    },
+
+    createScene : function () {
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(100, window.innerWidth/window.innerHeight, 0.1, 1000);
+        this.camera.position.z = 5;
+        this.renderer = new THREE.WebGLRenderer({
+            antialias:true,
+            alpha:true
+        });
+
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(this.renderer.domElement);
     },
 
     update : function() {
@@ -131,4 +117,4 @@ var Interface = {
 
 };
 
-Interface.init();
+Interface.Main.init();

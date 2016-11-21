@@ -17,11 +17,16 @@ gulp.task('vendor', function() {
 });
 
 gulp.task('js', function() {
-    var files = ['src/js/robot.js'];
+
+    var files = [
+        'src/js/interface.circle.js',
+        'src/js/interface.line.js',
+        'src/js/interface.js'
+    ];
 
     return gulp.src(files)
         .pipe(sourcemaps.init())
-        .pipe(concat('robot.min.js'))
+        .pipe(concat('interface.min.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write(''))
         .pipe(gulp.dest('public/js'));
