@@ -4,6 +4,8 @@ Interface.Main = {
 
     timer : null,
 
+    debug: false,
+
     scene : null,
     camera : null,
     renderer: null,
@@ -21,11 +23,6 @@ Interface.Main = {
         this.createScene();
 
         $('body').on('click', 'a', this.handleButtonClick.bind(this));
-
-        var helper = new THREE.GridHelper(10, 20, 0x0000ff, 0x808080 );
-        helper.position.y = 0;
-        helper.rotateX(90 * Math.PI / 180);
-        //this.scene.add(helper);
 
         this.scene.add(new Interface.Line([[-7,2,0],[-4,0,0],[-4,-2,0],[-4.5,-2.5,0]], 0xffffff,1,0.5));
         this.scene.add(new Interface.Line([[7,2,0],[4,0,0],[4,-2,0],[4.5,-2.5,0]], 0xffffff,1,0.5));
@@ -47,6 +44,35 @@ Interface.Main = {
         this.scene.add(new Interface.Line([[-0.3,-2,0],[-1,-2,0],[-1.3,-2.3,0],[-1.3,-4,0],[-1,-4.3,0],[-1,-5,0]], 0xffffff,1,0.5));
         this.scene.add(new Interface.Line([[0.3,-2,0],[1,-2,0],[1.3,-2.3,0],[1.3,-4,0],[1,-4.3,0],[1,-5,0]], 0xffffff,1,0.5));
 
+        // We will use 2D canvas element to render our HUD.
+        var hudCanvas = document.createElement('canvas');
+
+        // Again, set dimensions to fit the screen.
+        hudCanvas.width = 512;
+        hudCanvas.height = 256;
+
+        // Get 2D context and draw something supercool.
+        var hudBitmap = hudCanvas.getContext('2d');
+        hudBitmap.font = "Normal 120px Open Sans";
+        hudBitmap.textAlign = 'center';
+        hudBitmap.fillStyle = "rgba(255,255,255,0.9)";
+        hudBitmap.fillText('10', 256, 128);
+
+        // Create texture from rendered graphics.
+        var hudTexture = new THREE.Texture(hudCanvas)
+        hudTexture.needsUpdate = true;
+
+        // Create HUD material.
+        var material = new THREE.MeshBasicMaterial( {map: hudTexture} );
+        material.transparent = true;
+
+        // Create plane to render the HUD. This plane fill the whole screen.
+        var planeGeometry = new THREE.PlaneGeometry(2,1);
+        var plane = new THREE.Mesh(planeGeometry,material);
+        plane.position.x = 3.98;
+        plane.position.y = 2.82;
+        this.scene.add(plane);
+
         this.render();
 
         this.update();
@@ -63,6 +89,13 @@ Interface.Main = {
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
+
+        if(this.debug) {
+            var helper = new THREE.GridHelper(10, 20, 0x000000, 0x000000 );
+            helper.position.y = 0;
+            helper.rotateX(90 * Math.PI / 180);
+            this.scene.add(helper);
+        }
     },
 
     update : function() {
@@ -105,8 +138,6 @@ Interface.Main = {
     handleButtonClick : function(e) {
         var $button = $(e.currentTarget);
         var action = $button.data('action');
-
-        $('body').append('<div id="loading"><span class="glyphicon glyphicon-repeat spinner"></span></div>');
 
         if(action) {
             e.preventDefault();
