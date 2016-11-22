@@ -1,6 +1,6 @@
 var Interface = Interface || {};
 
-Interface.Circle = function(radius,segments,coord,color,lineWidth,opacity) {
+Interface.Circle = function(radius,segments,coord,color,lineWidth,opacity,thetaStart,thetaLength) {
 
     var material = new THREE.LineBasicMaterial({
         color: color,
@@ -10,6 +10,11 @@ Interface.Circle = function(radius,segments,coord,color,lineWidth,opacity) {
     });
 
     var geometry = new THREE.CircleGeometry(radius,segments);
+
+    if(undefined != thetaStart && undefined != thetaLength) {
+        geometry = new THREE.CircleGeometry(radius,segments,thetaStart,thetaLength);
+    }
+
     geometry.vertices.shift();
 
     var line = new THREE.Line(geometry,material);

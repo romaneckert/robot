@@ -30,6 +30,8 @@ Interface.Main = {
         this.objects.leftEye.add(new Interface.Line([[-0.5,0,0],[-1.5,0,0]],0xffffff,1,0.5));
         this.objects.leftEye.add(new Interface.Circle(1.3,128,[0,0,0],0xffffff,1,0.7));
         this.objects.leftEye.add(new Interface.Circle(1.2,128,[0,0,0],0xffffff,6,0.05));
+        this.objects.leftEye.add(new Interface.Circle(0.26,128,[0,0,0],0xffffff,1,0.2,45 * Math.PI / 180, 90 * Math.PI / 180));
+        this.objects.leftEye.add(new Interface.Circle(0.26,128,[0,0,0],0xffffff,1,0.2,-135 * Math.PI / 180, 90 * Math.PI / 180));
         this.objects.leftEye.position.x = -2;
         this.objects.leftEye.position.y = 1;
         this.scene.add(this.objects.leftEye);
