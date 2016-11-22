@@ -10,7 +10,7 @@ Interface.Main = {
     camera : null,
     renderer: null,
 
-    objects : [],
+    objects : {},
 
     clock : new THREE.Clock(),
 
@@ -24,6 +24,24 @@ Interface.Main = {
 
         $('body').on('click', 'a', this.handleButtonClick.bind(this));
 
+        // create left eye
+        this.objects.leftEye = new THREE.Object3D();
+        this.objects.leftEye.add(new Interface.Line([[0.5,0,0],[1.5,0,0]],0xffffff,1,0.5));
+        this.objects.leftEye.add(new Interface.Line([[-0.5,0,0],[-1.5,0,0]],0xffffff,1,0.5));
+        this.objects.leftEye.add(new Interface.Circle(1.3,128,[0,0,0],0xffffff,1,0.7));
+        this.objects.leftEye.add(new Interface.Circle(1.2,128,[0,0,0],0xffffff,6,0.05));
+        this.objects.leftEye.position.x = -2;
+        this.objects.leftEye.position.y = 1;
+        this.scene.add(this.objects.leftEye);
+
+        // create right eye
+        this.objects.rightEye = new THREE.Object3D();
+        this.objects.rightEye.add(new Interface.Circle(1.3,128,[0,0,0],0xffffff,1,0.7));
+        this.objects.rightEye.add(new Interface.Circle(1.2,128,[0,0,0],0xffffff,6,0.05));
+        this.objects.rightEye.position.x = 2;
+        this.objects.rightEye.position.y = 1;
+        this.scene.add(this.objects.rightEye);
+
         this.scene.add(new Interface.Line([[-7,2,0],[-4,0,0],[-4,-2,0],[-4.5,-2.5,0]], 0xffffff,1,0.5));
         this.scene.add(new Interface.Line([[7,2,0],[4,0,0],[4,-2,0],[4.5,-2.5,0]], 0xffffff,1,0.5));
 
@@ -32,12 +50,6 @@ Interface.Main = {
 
         this.scene.add(new Interface.Circle(0.1,128,[0,1,0],0xffffff,1,0.7));
         this.scene.add(new Interface.Circle(0.2,128,[0,1,0],0xffffff,1,0.2));
-
-        this.scene.add(new Interface.Circle(1.3,128,[2,1,0],0xffffff,1,0.7));
-        this.scene.add(new Interface.Circle(1.3,128,[-2,1,0],0xffffff,1,0.7));
-
-        this.scene.add(new Interface.Circle(1.2,128,[2,1,0],0xffffff,6,0.05));
-        this.scene.add(new Interface.Circle(1.2,128,[-2,1,0],0xffffff,6,0.05));
 
         this.scene.add(new Interface.Circle(0.5,128,[4,3,0],0xffffff,1,0.7));
 
@@ -105,6 +117,8 @@ Interface.Main = {
     render : function() {
 
         var delta = this.clock.getDelta();
+
+        this.objects.leftEye.rotateZ(delta * 100 * Math.PI / 180);
 
         window.requestAnimationFrame(this.render.bind(this));
 
