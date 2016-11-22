@@ -15,10 +15,10 @@ Interface.Main = {
     clock : new THREE.Clock(),
 
     init : function() {
-        $(document).ready(this.handleDocumentReady.bind(this));
+        $(window).on('load',this.handleWindowLoad.bind(this));
     },
 
-    handleDocumentReady : function() {
+    handleWindowLoad : function() {
 
         this.createScene();
 
@@ -67,7 +67,7 @@ Interface.Main = {
 
         // Get 2D context and draw something supercool.
         var hudBitmap = hudCanvas.getContext('2d');
-        hudBitmap.font = "Normal 120px Open Sans";
+        hudBitmap.font = '120px "Roboto"';
         hudBitmap.textAlign = 'center';
         hudBitmap.fillStyle = "rgba(255,255,255,0.9)";
         hudBitmap.fillText('10', 256, 128);
