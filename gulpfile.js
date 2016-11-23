@@ -19,6 +19,7 @@ gulp.task('vendor', function() {
 gulp.task('js', function() {
 
     var files = [
+        'src/js/interface.config.js',
         'src/js/interface.circle.js',
         'src/js/interface.line.js',
         'src/js/interface.js'

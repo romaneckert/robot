@@ -7,5 +7,6 @@ body, html {
   background-color: #151924;
 }
 .preloader {
-  text-indent: -9999px;
+  position: absolute;
+  top:-1000px;
 }

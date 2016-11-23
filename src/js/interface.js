@@ -2,6 +2,7 @@ var Interface = Interface || {};
 
 Interface.Main = {
 
+    config : null,
     timer : null,
 
     debug: false,
@@ -15,6 +16,11 @@ Interface.Main = {
     clock : new THREE.Clock(),
 
     init : function() {
+
+        this.config = new Interface.Config();
+
+        console.log(this.config);
+
         $(window).on('load',this.handleWindowLoad.bind(this));
     },
 
@@ -26,37 +32,37 @@ Interface.Main = {
 
         // create left eye
         this.objects.leftEye = new THREE.Object3D();
-        this.objects.leftEye.add(new Interface.Line([[0.5,0,0],[1.5,0,0]],0xffffff,1,0.5));
-        this.objects.leftEye.add(new Interface.Line([[-0.5,0,0],[-1.5,0,0]],0xffffff,1,0.5));
-        this.objects.leftEye.add(new Interface.Circle(1.3,128,[0,0,0],0xffffff,1,0.7));
-        this.objects.leftEye.add(new Interface.Circle(1.2,128,[0,0,0],0xffffff,6,0.05));
-        this.objects.leftEye.add(new Interface.Circle(0.26,128,[0,0,0],0xffffff,1,0.2,45 * Math.PI / 180, 90 * Math.PI / 180));
-        this.objects.leftEye.add(new Interface.Circle(0.26,128,[0,0,0],0xffffff,1,0.2,-135 * Math.PI / 180, 90 * Math.PI / 180));
+        this.objects.leftEye.add(new Interface.Line([[0.5,0,0],[1.5,0,0]],this.config.cMain,1,0.5));
+        this.objects.leftEye.add(new Interface.Line([[-0.5,0,0],[-1.5,0,0]],this.config.cMain,1,0.5));
+        this.objects.leftEye.add(new Interface.Circle(1.3,128,[0,0,0],this.config.cMain,1,0.7));
+        this.objects.leftEye.add(new Interface.Circle(1.2,128,[0,0,0],this.config.cMain,6,0.05));
+        this.objects.leftEye.add(new Interface.Circle(0.26,128,[0,0,0],this.config.cMain,1,0.2,45 * Math.PI / 180, 90 * Math.PI / 180));
+        this.objects.leftEye.add(new Interface.Circle(0.26,128,[0,0,0],this.config.cMain,1,0.2,-135 * Math.PI / 180, 90 * Math.PI / 180));
         this.objects.leftEye.position.x = -2;
         this.objects.leftEye.position.y = 1;
         this.scene.add(this.objects.leftEye);
 
         // create right eye
         this.objects.rightEye = new THREE.Object3D();
-        this.objects.rightEye.add(new Interface.Circle(1.3,128,[0,0,0],0xffffff,1,0.7));
-        this.objects.rightEye.add(new Interface.Circle(1.2,128,[0,0,0],0xffffff,6,0.05));
+        this.objects.rightEye.add(new Interface.Circle(1.3,128,[0,0,0],this.config.cMain,1,0.7));
+        this.objects.rightEye.add(new Interface.Circle(1.2,128,[0,0,0],this.config.cMain,6,0.05));
         this.objects.rightEye.position.x = 2;
         this.objects.rightEye.position.y = 1;
         this.scene.add(this.objects.rightEye);
 
-        this.scene.add(new Interface.Line([[-7,2,0],[-4,0,0],[-4,-2,0],[-4.5,-2.5,0]], 0xffffff,1,0.5));
-        this.scene.add(new Interface.Line([[7,2,0],[4,0,0],[4,-2,0],[4.5,-2.5,0]], 0xffffff,1,0.5));
+        this.scene.add(new Interface.Line([[-7,2,0],[-4,0,0],[-4,-2,0],[-4.5,-2.5,0]], this.config.cMain,1,0.5));
+        this.scene.add(new Interface.Line([[7,2,0],[4,0,0],[4,-2,0],[4.5,-2.5,0]], this.config.cMain,1,0.5));
 
-        this.scene.add(new Interface.Line([[-6,1.2,0],[-4.1,-0.05,0],[-4.1,-1,0]], 0xffffff,3,0.6));
-        this.scene.add(new Interface.Line([[6,1.2,0],[4.1,-0.05,0],[4.1,-1,0]], 0xffffff,3,0.6));
+        this.scene.add(new Interface.Line([[-6,1.2,0],[-4.1,-0.05,0],[-4.1,-1,0]], this.config.cMain,3,0.6));
+        this.scene.add(new Interface.Line([[6,1.2,0],[4.1,-0.05,0],[4.1,-1,0]], this.config.cMain,3,0.6));
 
-        this.scene.add(new Interface.Circle(0.1,128,[0,1,0],0xffffff,1,0.7));
-        this.scene.add(new Interface.Circle(0.2,128,[0,1,0],0xffffff,1,0.2));
+        this.scene.add(new Interface.Circle(0.1,128,[0,1,0],this.config.cMain,1,0.7));
+        this.scene.add(new Interface.Circle(0.2,128,[0,1,0],this.config.cMain,1,0.2));
 
-        this.scene.add(new Interface.Circle(0.5,128,[4,3,0],0xffffff,1,0.7));
+        this.scene.add(new Interface.Circle(384,128,[0,0,0],this.config.cMain,1,0.7));
 
-        this.scene.add(new Interface.Line([[-0.3,-2,0],[-1,-2,0],[-1.3,-2.3,0],[-1.3,-4,0],[-1,-4.3,0],[-1,-5,0]], 0xffffff,1,0.5));
-        this.scene.add(new Interface.Line([[0.3,-2,0],[1,-2,0],[1.3,-2.3,0],[1.3,-4,0],[1,-4.3,0],[1,-5,0]], 0xffffff,1,0.5));
+        this.scene.add(new Interface.Line([[-0.3,-2,0],[-1,-2,0],[-1.3,-2.3,0],[-1.3,-4,0],[-1,-4.3,0],[-1,-5,0]], this.config.cMain,1,0.5));
+        this.scene.add(new Interface.Line([[0.3,-2,0],[1,-2,0],[1.3,-2.3,0],[1.3,-4,0],[1,-4.3,0],[1,-5,0]], this.config.cMain,1,0.5));
 
         // We will use 2D canvas element to render our HUD.
         var hudCanvas = document.createElement('canvas');
@@ -67,7 +73,7 @@ Interface.Main = {
 
         // Get 2D context and draw something supercool.
         var hudBitmap = hudCanvas.getContext('2d');
-        hudBitmap.font = '120px "Roboto"';
+        hudBitmap.font = '1000px "Roboto"';
         hudBitmap.textAlign = 'center';
         hudBitmap.fillStyle = "rgba(255,255,255,0.9)";
         hudBitmap.fillText('10', 256, 128);
@@ -81,10 +87,10 @@ Interface.Main = {
         material.transparent = true;
 
         // Create plane to render the HUD. This plane fill the whole screen.
-        var planeGeometry = new THREE.PlaneGeometry(2,1);
+        var planeGeometry = new THREE.PlaneGeometry(1000,500);
         var plane = new THREE.Mesh(planeGeometry,material);
-        plane.position.x = 3.98;
-        plane.position.y = 2.82;
+        plane.position.x = 0;
+        plane.position.y = 0;
         this.scene.add(plane);
 
         this.render();
@@ -94,8 +100,8 @@ Interface.Main = {
 
     createScene : function () {
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(100, window.innerWidth/window.innerHeight, 0.1, 1000);
-        this.camera.position.z = 5;
+        this.camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / -2, window.innerHeight / 2, 0.1, 1000);
+        this.camera.position.z = 1000;
         this.renderer = new THREE.WebGLRenderer({
             antialias:true,
             alpha:true
