@@ -2,6 +2,8 @@ var Interface = Interface || {};
 
 Interface.Config = function() {
 
-    this.cMain = 0xffffff;
+    this.colors = {
+        main : 0xffffff
+    }
 
 };

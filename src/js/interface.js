@@ -16,7 +16,8 @@ Interface.Main = {
 
     objects : {},
 
-    clock : new THREE.Clock(),
+    clock : null,
+    delta : null,
 
     init : function() {
         $(window).on('load',this.handleWindowLoad.bind(this));
@@ -37,12 +38,12 @@ Interface.Main = {
         // create left eye
         /*
         this.objects.leftEye = new THREE.Object3D();
-        this.objects.leftEye.add(new Interface.Line([[0.5,0,0],[1.5,0,0]],this.config.cMain,1,0.5));
-        this.objects.leftEye.add(new Interface.Line([[-0.5,0,0],[-1.5,0,0]],this.config.cMain,1,0.5));
-        this.objects.leftEye.add(new Interface.Circle(1.3,128,[0,0,0],this.config.cMain,1,0.7));
-        this.objects.leftEye.add(new Interface.Circle(1.2,128,[0,0,0],this.config.cMain,6,0.05));
-        this.objects.leftEye.add(new Interface.Circle(0.26,128,[0,0,0],this.config.cMain,1,0.2,45 * Math.PI / 180, 90 * Math.PI / 180));
-        this.objects.leftEye.add(new Interface.Circle(0.26,128,[0,0,0],this.config.cMain,1,0.2,-135 * Math.PI / 180, 90 * Math.PI / 180));
+        this.objects.leftEye.add(new Interface.Line([[0.5,0,0],[1.5,0,0]],this.config.colors.main,1,0.5));
+        this.objects.leftEye.add(new Interface.Line([[-0.5,0,0],[-1.5,0,0]],this.config.colors.main,1,0.5));
+        this.objects.leftEye.add(new Interface.Circle(1.3,128,[0,0,0],this.config.colors.main,1,0.7));
+        this.objects.leftEye.add(new Interface.Circle(1.2,128,[0,0,0],this.config.colors.main,6,0.05));
+        this.objects.leftEye.add(new Interface.Circle(0.26,128,[0,0,0],this.config.colors.main,1,0.2,45 * Math.PI / 180, 90 * Math.PI / 180));
+        this.objects.leftEye.add(new Interface.Circle(0.26,128,[0,0,0],this.config.colors.main,1,0.2,-135 * Math.PI / 180, 90 * Math.PI / 180));
         this.objects.leftEye.position.x = -2;
         this.objects.leftEye.position.y = 1;
         this.scene.add(this.objects.leftEye);
@@ -51,35 +52,35 @@ Interface.Main = {
         // create right eye
         /*
         this.objects.rightEye = new THREE.Object3D();
-        this.objects.rightEye.add(new Interface.Circle(1.3,128,[0,0,0],this.config.cMain,1,0.7));
-        this.objects.rightEye.add(new Interface.Circle(1.2,128,[0,0,0],this.config.cMain,6,0.05));
+        this.objects.rightEye.add(new Interface.Circle(1.3,128,[0,0,0],this.config.colors.main,1,0.7));
+        this.objects.rightEye.add(new Interface.Circle(1.2,128,[0,0,0],this.config.colors.main,6,0.05));
         this.objects.rightEye.position.x = 2;
         this.objects.rightEye.position.y = 1;
         this.scene.add(this.objects.rightEye);
         */
 
-        //this.scene.add(new Interface.Line([[0,0,0],[100,0,0],[100,100,0]], this.config.cMain,1,0.5));
+        //this.scene.add(new Interface.Line([[0,0,0],[100,0,0],[100,100,0]], this.config.colors.main,1,0.5));
 
-        this.scene.add(new Interface.Circle(100,256,[0,160,0],this.config.cMain,4,0.7));
-        this.scene.add(new Interface.Circle(60,256,[0,160,-100],this.config.cMain,2,0.4));
-        this.scene.add(new Interface.Circle(60,256,[0,160,100],this.config.cMain,2,0.4));
+        this.scene.add(new Interface.Circle(100,256,[0,160,0],this.config.colors.main,4,0.7));
+        this.scene.add(new Interface.Circle(60,256,[0,160,-100],this.config.colors.main,2,0.4));
+        this.scene.add(new Interface.Circle(60,256,[0,160,100],this.config.colors.main,2,0.4));
 
-        this.scene.add(new Interface.Circle(100,256,[0,-160,0],this.config.cMain,4,0.7));
-        this.scene.add(new Interface.Circle(60,256,[0,-160,-100],this.config.cMain,2,0.4));
-        this.scene.add(new Interface.Circle(60,256,[0,-160,100],this.config.cMain,2,0.4));
+        this.scene.add(new Interface.Circle(100,256,[0,-160,0],this.config.colors.main,4,0.7));
+        this.scene.add(new Interface.Circle(60,256,[0,-160,-100],this.config.colors.main,2,0.4));
+        this.scene.add(new Interface.Circle(60,256,[0,-160,100],this.config.colors.main,2,0.4));
 
-        this.scene.add(new Interface.Circle(100,256,[-220,0,0],this.config.cMain,4,0.7));
-        this.scene.add(new Interface.Circle(60,256,[-220,0,-100],this.config.cMain,2,0.4));
-        this.scene.add(new Interface.Circle(60,256,[-220,0,100],this.config.cMain,2,0.4));
-
-
-        this.scene.add(new Interface.Circle(100,256,[220,0,0],this.config.cMain,4,0.7));
-        this.scene.add(new Interface.Circle(60,256,[220,0,-100],this.config.cMain,2,0.4));
-        this.scene.add(new Interface.Circle(60,256,[220,0,100],this.config.cMain,2,0.4));
+        this.scene.add(new Interface.Circle(100,256,[-220,0,0],this.config.colors.main,4,0.7));
+        this.scene.add(new Interface.Circle(60,256,[-220,0,-100],this.config.colors.main,2,0.4));
+        this.scene.add(new Interface.Circle(60,256,[-220,0,100],this.config.colors.main,2,0.4));
 
 
-        this.scene.add(new Interface.Circle(20,256,[0,0,0],this.config.cMain,4,0.7));
-        this.scene.add(new Interface.Circle(384,256,[0,0,0],this.config.cMain,4,0.7));
+        this.scene.add(new Interface.Circle(100,256,[220,0,0],this.config.colors.main,4,0.7));
+        this.scene.add(new Interface.Circle(60,256,[220,0,-100],this.config.colors.main,2,0.4));
+        this.scene.add(new Interface.Circle(60,256,[220,0,100],this.config.colors.main,2,0.4));
+
+
+        this.scene.add(new Interface.Circle(20,256,[0,0,0],this.config.colors.main,4,0.7));
+        this.scene.add(new Interface.Circle(384,256,[0,0,0],this.config.colors.main,4,0.7));
 
         // We will use 2D canvas element to render our HUD.
         var hudCanvas = document.createElement('canvas');
@@ -130,16 +131,14 @@ Interface.Main = {
         if(!this.camera) {
             this.cameraObject = new THREE.Object3D();
             this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 0.1, 10000);
-            this.camera.aspect = this.width / this.height;
-            this.camera.position.z = 1024;
-            this.camera.updateProjectionMatrix();
             this.cameraObject.add(this.camera);
         }
 
+        this.camera.aspect = this.width / this.height;
+        this.camera.position.z = 1024;
+        this.camera.updateProjectionMatrix();
+
         this.scene.add(this.cameraObject);
-
-
-
 
         /*
         if(!this.camera) {
@@ -152,9 +151,6 @@ Interface.Main = {
         this.camera.position.z = 5;
         this.camera.updateProjectionMatrix();
         */
-
-
-
 
         //this.camera.position.z = -10;
         //this.camera.rotateY(10 * Math.PI / 180);
@@ -172,18 +168,17 @@ Interface.Main = {
 
     render : function() {
 
-        var delta = this.clock.getDelta();
-
-        this.cameraObject.rotateY(delta * -10 * Math.PI / 180);
+        if(!this.clock) this.clock = new THREE.Clock();
+        this.delta = this.clock.getDelta();
 
         window.requestAnimationFrame(this.render.bind(this));
+
+        this.cameraObject.rotateY(this.delta * -10 * Math.PI / 180);
 
         this.renderer.render(this.scene, this.camera);
     },
 
     handleUpdateSuccess : function(data) {
-
-        $('#header-nav .navbar-brand span').removeClass('flashing');
 
         $('[data-model]').each(function(i, elem) {
             var model = $(elem).data('model');
