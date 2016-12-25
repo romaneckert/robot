@@ -48,11 +48,17 @@ class Controller:
         log_directory = 'logs'
         os.makedirs(log_directory, exist_ok=True)
 
-        logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG, filename=log_directory + '/log.log',
+        logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s',
+                            level=logging.DEBUG,
+                            filename=log_directory + '/' + '.log',
                             datefmt='%d-%m-%Y %H:%M:%S')
 
         if 'info' == type:
             logging.info(message)
+        elif 'error' == type:
+            logging.error(message)
+        elif 'critical' == type:
+            logging.critical(message)
 
     # start new process with a message to speak
     def say(self, message):
@@ -91,7 +97,7 @@ class Controller:
                         urllib.request.urlretrieve('http://mary.dfki.de:59125/process?' + urllib.parse.urlencode(params), file_path)
 
                     except:
-                        self.log('Kommunikations Server nicht erreichbar.')
+                        self.log('Kommunikations Server nicht erreichbar.','error')
                         error = 1
 
                 if not error:
