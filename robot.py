@@ -7,6 +7,7 @@ except ImportError:
 
 from bionics.controller import Controller
 #from bionics.hat import Hat
+import time
 
 
 class Robot(Controller):
@@ -38,7 +39,7 @@ class Robot(Controller):
         #self.motor2.start(self.cycle2)
         #self.motor3.start(self.cycle3)
 
-        self.say('Starte Systeme')
+        self.say('Fehler! Alarm! Abbruch!')
         self.say('Alle Systeme erfolgreich gestartet. Beginne mit laufen...')
         self.activate()
         #GPIO.setwarnings(False)

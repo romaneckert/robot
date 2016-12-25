@@ -2,8 +2,9 @@
 *.pyc
 .DS_Store
 .sass-cache
-logs
-sounds
+logs/*
+sounds/*
+!sounds/error.wav
 node_modules/
 *.map
 

@@ -88,11 +88,16 @@ class Controller:
                               ('effect_Chorus_parameters',
                                'delay1:466;amp1:0.54;delay2:600;amp2:-0.10;delay3:250;amp3:0.30'))
 
-                    urllib.request.urlretrieve('http://mary.dfki.de:59125/process?' + urllib.parse.urlencode(params),
-                                               file_path)
+                    try:
+                        urllib.request.urlretrieve('http://mary.dfki.de:59125/process?' + urllib.parse.urlencode(params), file_path)
+                    except:
+                        file_path = sound_directory + '/error.wav'
 
                 if 'darwin' == platform:
                     os.system('afplay ' + file_path + ' > /dev/null 2>&1')
                 else:
                     os.system('mplayer ' + file_path + ' > /dev/null 2>&1')
+
+            else:
+                time.sleep(0.1)
 
