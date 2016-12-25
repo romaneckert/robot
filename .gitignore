@@ -2,9 +2,8 @@
 *.pyc
 .DS_Store
 .sass-cache
-logs/*
-sounds/*
+logs
+sounds
 node_modules/
 *.map
-!*.gitkeep
 

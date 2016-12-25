@@ -1,7 +1,12 @@
 #!/usr/bin/env python
-import RPi.GPIO as GPIO
+try:
+    import RPi.GPIO as GPIO
+    gpio = 1
+except ImportError:
+    gpio = 0
+
 from bionics.controller import Controller
-from bionics.hat import Hat
+#from bionics.hat import Hat
 
 
 class Robot(Controller):
@@ -13,13 +18,13 @@ class Robot(Controller):
     #cycle_direction2 = 1
     #cycle_direction3 = 1
 
-    hat = Hat()
+    #hat = Hat()
 
     def __init__(self):
 
         Controller.__init__(self)
 
-        self.hat.set_pwm_freq(60)
+        #self.hat.set_pwm_freq(60)
 
 
         #GPIO.setmode(GPIO.BCM)
@@ -33,15 +38,16 @@ class Robot(Controller):
         #self.motor2.start(self.cycle2)
         #self.motor3.start(self.cycle3)
 
-        self.say('Starte Systeme');
+        self.say('Starte Systeme')
+        self.say('Alle Systeme erfolgreich gestartet. Beginne mit laufen...')
         self.activate()
-        GPIO.setwarnings(False)
-        GPIO.cleanup()
-        GPIO.setwarnings(True)
+        #GPIO.setwarnings(False)
+        #GPIO.cleanup()
+        #GPIO.setwarnings(True)
 
     def update(self):
 
-        print(self.delta_time)
+        #print(self.delta_time)
 
 
 
@@ -59,7 +65,7 @@ class Robot(Controller):
 
         print(round(self.cycle1))
 
-        self.hat.set_pwm(1, 0, round(self.cycle1))
+        #self.hat.set_pwm(1, 0, round(self.cycle1))
 
         """
         if self.cycle1 > 10:
