@@ -3,6 +3,8 @@
 .DS_Store
 .sass-cache
 logs/*
+sounds/*
 node_modules/
 *.map
 !*.gitkeep
+
