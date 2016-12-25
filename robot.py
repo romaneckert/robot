@@ -39,7 +39,7 @@ class Robot(Controller):
         #self.motor2.start(self.cycle2)
         #self.motor3.start(self.cycle3)
 
-        self.say('Fehler! Alarm! Abbruch!')
+        self.say('Starte Systeme')
         self.say('Alle Systeme erfolgreich gestartet. Beginne mit laufen...')
         self.activate()
         #GPIO.setwarnings(False)

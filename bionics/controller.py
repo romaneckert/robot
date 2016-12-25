@@ -66,8 +66,7 @@ class Controller:
             if not queue.empty():
 
                 message = queue.get()
-
-                print(message)
+                error = 0
 
                 self.log(message, 'info')
 
@@ -90,13 +89,16 @@ class Controller:
 
                     try:
                         urllib.request.urlretrieve('http://mary.dfki.de:59125/process?' + urllib.parse.urlencode(params), file_path)
-                    except:
-                        file_path = sound_directory + '/error.wav'
 
-                if 'darwin' == platform:
-                    os.system('afplay ' + file_path + ' > /dev/null 2>&1')
-                else:
-                    os.system('mplayer ' + file_path + ' > /dev/null 2>&1')
+                    except:
+                        self.log('Kommunikations Server nicht erreichbar.')
+                        error = 1
+
+                if not error:
+                    if 'darwin' == platform:
+                        os.system('afplay ' + file_path + ' > /dev/null 2>&1')
+                    else:
+                        os.system('mplayer ' + file_path + ' > /dev/null 2>&1')
 
             else:
                 time.sleep(0.1)

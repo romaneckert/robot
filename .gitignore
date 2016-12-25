@@ -4,7 +4,6 @@
 .sass-cache
 logs/*
 sounds/*
-!sounds/error.wav
 node_modules/
 *.map
 
