@@ -48,11 +48,11 @@ class Controller:
 
     def say(self, message):
 
-        process = Process(target=self.speak, args=(message,))
+        process = Process(target=self.__speak, args=(message,))
         process.start()
         # p.join()
 
-    def speak(self, message):
+    def __speak(self, message):
 
         self.log(message, 'info')
 
