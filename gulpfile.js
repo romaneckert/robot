@@ -30,12 +30,13 @@ gulp.task('js', function() {
         .pipe(gulp.dest('public/js'));
 });
 
-gulp.task('scss', function() {
-    return sass('src/scss/style.scss', {style: 'compressed', noCache: true, sourcemap: true})
-        .pipe(sourcemaps.init())
-        .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write(''))
-        .pipe(gulp.dest('public/css'));
+gulp.task('scss', function () {
+ return gulp.src('src/scss/style.scss')
+  .pipe(sourcemaps.init())
+  .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+  .pipe(rename({suffix: '.min'}))
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('watch', function() {
