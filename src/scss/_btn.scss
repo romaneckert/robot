@@ -1,0 +1,14 @@
+.btn {
+    position:absolute;
+
+    &.control {
+        &.left {
+            left:20px;
+            top:50%;
+            margin-top:-50px;
+        }
+    }
+    .hexagon {
+        @include hexagon(100px,rgba(255,255,255,0.5));
+    }
+}

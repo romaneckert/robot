@@ -60,7 +60,7 @@ class Controller:
 
         logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s',
                             level=logging.DEBUG,
-                            filename=log_directory + '/' + '.log',
+                            filename=log_directory + '/' + type + '.log',
                             datefmt='%d-%m-%Y %H:%M:%S')
 
         if 'info' == type:

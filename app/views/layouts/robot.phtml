@@ -14,8 +14,9 @@
         <?php $this->assets->outputCss() ?>
     </head>
     <body>
-        <div class="preloader">Roboto</div>
-        <?php echo $this->getContent(); ?>
+        <div class="main">
+            <?php echo $this->getContent(); ?>
+        </div>
         <?php $this->assets->outputJs() ?>
     </body>
 </html>
