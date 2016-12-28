@@ -8,6 +8,7 @@ import urllib.parse
 import urllib.request
 from multiprocessing import Process, Queue
 from slugify import slugify
+import websockets
 
 
 class Controller:
@@ -26,6 +27,15 @@ class Controller:
         self.messageProcess = Process(target=self.__speak, args=(self.messageQueue,)).start()
         self.last_time = time.time()
         self.start_time = self.last_time
+        start_server = websockets.serve(self.hello, 'localhost', 8765)
+
+    def hello(self):
+
+        while True:
+            print('hello')
+            websocket.send('hello')
+
+
 
     def activate(self):
         while True:
