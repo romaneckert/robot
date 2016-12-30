@@ -1,15 +1,12 @@
 #!/usr/bin/env python
 import logging
-import os
-from sys import platform
 import subprocess
 import time
 import urllib.parse
 import urllib.request
 from multiprocessing import Process, Queue
-from slugify import slugify
 from bionics.server import Server
-
+from bionics.speaker_thread import SpeakerThread
 
 class Controller:
 
@@ -20,14 +17,13 @@ class Controller:
     start_time = 0
 
     messageQueue = Queue()
-    messageProcess = 0
 
     serverQueue = Queue()
     serverProcess = 0
 
     def __init__(self):
 
-        self.messageProcess = Process(target=self.__speak, args=(self.messageQueue,)).start()
+        self.speakerThread = SpeakerThread(self.messageQueue).start()
         self.serverProcess = Process(target=Server, args=(self.serverQueue,)).start()
 
         self.last_time = time.time()
