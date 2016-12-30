@@ -6,6 +6,7 @@ except ImportError:
     gpio = 0
 
 from bionics.controller import Controller
+from bionics.command import Command
 #from bionics.hat import Hat
 import time
 
@@ -41,10 +42,12 @@ class Robot(Controller):
 
         self.say('Starte Systeme')
         self.say('Alle Systeme erfolgreich gestartet. Beginne mit laufen...')
+        self.serverQueue.put(Command('log', 'test'))
         self.activate()
         #GPIO.setwarnings(False)
         #GPIO.cleanup()
         #GPIO.setwarnings(True)
+
 
     def update(self):
 
@@ -64,7 +67,9 @@ class Robot(Controller):
             self.cycle1 = 600
             self.cycle_direction1 *= -1
 
-        print(round(self.cycle1))
+        #print(round(self.cycle1))
+
+        self.serverQueue.put(Command('log', str(round(self.cycle1))))
 
         #self.hat.set_pwm(1, 0, round(self.cycle1))
 

@@ -8,12 +8,12 @@ import urllib.parse
 import urllib.request
 from multiprocessing import Process, Queue
 from slugify import slugify
-import websockets
+from bionics.server import Server
 
 
 class Controller:
 
-    fps = 2
+    fps = 60
 
     delta_time = 0
     last_time = 0
@@ -22,19 +22,16 @@ class Controller:
     messageQueue = Queue()
     messageProcess = 0
 
+    serverQueue = Queue()
+    serverProcess = 0
+
     def __init__(self):
 
         self.messageProcess = Process(target=self.__speak, args=(self.messageQueue,)).start()
+        self.serverProcess = Process(target=Server, args=(self.serverQueue,)).start()
+
         self.last_time = time.time()
         self.start_time = self.last_time
-        start_server = websockets.serve(self.hello, 'localhost', 8765)
-
-    def hello(self):
-
-        while True:
-            print('hello')
-            websocket.send('hello')
-
 
 
     def activate(self):
