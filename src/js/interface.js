@@ -7,21 +7,27 @@ Interface.Main = {
     init : function() {
         $(document).ready(this.handleDocumentReady.bind(this));
 
-        this.websocket = new WebSocket('ws://' + window.location.host + ':4000');
+        this.websocket = new WebSocket('ws://' + window.location.host + ':8000');
         this.websocket.onmessage = this.handleWebSocketMessage.bind(this);
 
     },
 
     handleWebSocketMessage : function(e) {
+        $('.log').text($('.log').text() + '<br/>' + e.data);
         console.log(e.data);
     },
 
     handleDocumentReady : function() {
         $(document).on('touchmove', this.handleDocumentTouchMove.bind(this));
+        $('.btn').on('click', this.handleButtonClick.bind(this));
     },
 
     handleDocumentTouchMove : function(e) {
         e.preventDefault();
+    },
+
+    handleButtonClick : function(e) {
+        this.websocket.send('Taste gedrückt');
     }
 };
 

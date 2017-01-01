@@ -15,6 +15,10 @@ class Controller:
         self.server = Server()
         self.server.start()
 
+
+        time.sleep(5)
+        self.server.send()
+
         self.last_time = time.time()
         self.start_time = self.last_time
         self.delta_time = 0
