@@ -1,21 +1,23 @@
 import threading
 import time
 import os
+import urllib.parse
+import urllib.request
 from slugify import slugify
 from sys import platform
+from bionics.queues import Queues
 
-class SpeakerThread (threading.Thread):
+class Speaker (threading.Thread):
 
-    def __init__(self, messageQueue):
+    def __init__(self):
         threading.Thread.__init__(self)
-        self.messageQueue = messageQueue
 
     def run(self):
         while True:
 
-            if not self.messageQueue.empty():
+            if not Queues.message.empty():
 
-                message = self.messageQueue.get()
+                message = Queues.message.get()
                 error = 0
 
                 sound_directory = 'sounds'
@@ -42,6 +44,9 @@ class SpeakerThread (threading.Thread):
                         error = 1
 
                 if not error:
+
+                    Queues.command.put(message)
+
                     if 'darwin' == platform:
                         os.system('afplay ' + file_path + ' > /dev/null 2>&1')
                     else:

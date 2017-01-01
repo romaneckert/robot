@@ -1,33 +1,24 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 import logging
-import subprocess
 import time
-import urllib.parse
-import urllib.request
-from multiprocessing import Process, Queue
 from bionics.server import Server
-from bionics.speaker_thread import SpeakerThread
+from bionics.speaker import Speaker
+from bionics.queues import Queues
 
 class Controller:
 
-    fps = 60
-
-    delta_time = 0
-    last_time = 0
-    start_time = 0
-
-    messageQueue = Queue()
-
-    serverQueue = Queue()
-    serverProcess = 0
-
     def __init__(self):
 
-        self.speakerThread = SpeakerThread(self.messageQueue).start()
-        self.serverProcess = Process(target=Server, args=(self.serverQueue,)).start()
+        self.speaker = Speaker()
+        self.speaker.start()
+
+        self.server = Server()
+        self.server.start()
 
         self.last_time = time.time()
         self.start_time = self.last_time
+        self.delta_time = 0
+        self.fps = 60
 
 
     def activate(self):
@@ -65,50 +56,5 @@ class Controller:
 
     # start new process with a message to speak
     def say(self, message):
-        self.messageQueue.put(message)
-
-    # play a message
-    def __speak(self, queue):
-
-        while True:
-
-            if not queue.empty():
-
-                message = queue.get()
-                error = 0
-
-                self.log(message, 'info')
-
-                sound_directory = 'sounds'
-                os.makedirs(sound_directory, exist_ok=True)
-
-                file_path = sound_directory + '/' + slugify(message) + '.wav'
-
-                if not (os.path.exists(file_path)):
-                    params = (('INPUT_TEXT', message),
-                              ('INPUT_TYPE', 'TEXT'),
-                              ('OUTPUT_TYPE', 'AUDIO'),
-                              ('AUDIO', 'WAVE_FILE'),
-                              ('LOCALE', 'de'),
-                              ('effect_Volume_selected', 'on'),
-                              ('effect_Volume_parameters', 'amount:2.0'),
-                              ('effect_Chorus_selected', 'on'),
-                              ('effect_Chorus_parameters',
-                               'delay1:466;amp1:0.54;delay2:600;amp2:-0.10;delay3:250;amp3:0.30'))
-
-                    try:
-                        urllib.request.urlretrieve('http://mary.dfki.de:59125/process?' + urllib.parse.urlencode(params), file_path)
-
-                    except:
-                        self.log('Kommunikations Server nicht erreichbar.','error')
-                        error = 1
-
-                if not error:
-                    if 'darwin' == platform:
-                        os.system('afplay ' + file_path + ' > /dev/null 2>&1')
-                    else:
-                        os.system('mplayer ' + file_path + ' > /dev/null 2>&1')
-
-            else:
-                time.sleep(0.1)
+        Queues.message.put(message)
 
