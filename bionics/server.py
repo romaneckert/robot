@@ -23,7 +23,7 @@ class Socket(WebSocket):
         Queues.message.put(self.data)
 
     def handleConnected(self):
-        Queues.message.put('connected')
+        Queues.message.put('Externes Gerät verbunden.')
         Server.clients.append(self)
 
     def handleClose(self):
