@@ -6,6 +6,7 @@ import urllib.request
 from slugify import slugify
 from sys import platform
 from bionics.queues import Queues
+from bionics.log import Log
 
 class Speaker (threading.Thread):
 
@@ -18,6 +19,7 @@ class Speaker (threading.Thread):
             if not Queues.message.empty():
 
                 message = Queues.message.get()
+                Log.info(message)
                 error = 0
 
                 sound_directory = 'sounds'
@@ -30,7 +32,7 @@ class Speaker (threading.Thread):
                               ('INPUT_TYPE', 'TEXT'),
                               ('OUTPUT_TYPE', 'AUDIO'),
                               ('AUDIO', 'WAVE_FILE'),
-                              ('LOCALE', 'de'),
+                              ('LOCALE', 'en'),
                               ('effect_Volume_selected', 'on'),
                               ('effect_Volume_parameters', 'amount:2.0'),
                               ('effect_Chorus_selected', 'on'),
@@ -51,6 +53,8 @@ class Speaker (threading.Thread):
                         os.system('afplay ' + file_path + ' > /dev/null 2>&1')
                     else:
                         os.system('mplayer ' + file_path + ' > /dev/null 2>&1')
+                else:
+                    Log.error('Mary TTS not running.')
 
             else:
                 time.sleep(0.1)

@@ -41,7 +41,7 @@ class Robot(Controller):
         #self.motor2.start(self.cycle2)
         #self.motor3.start(self.cycle3)
 
-        self.say('Alle Systeme erfolgreich gestartet.')
+        self.say('Systems running.')
 
         Queues.command.put('Hallo')
         #self.serverQueue.put(Command('log', 'test'))
@@ -70,7 +70,7 @@ class Robot(Controller):
             self.cycle_direction1 *= -1
 
         print(round(self.cycle1))
-
+        self.server.send('running')
 
         #self.serverQueue.put(Command('log', str(round(self.cycle1))))
 

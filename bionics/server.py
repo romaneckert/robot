@@ -10,9 +10,9 @@ class Server (threading.Thread):
         threading.Thread.__init__(self)
         self.server = SimpleWebSocketServer('', 8000, Socket)
 
-    def send(self):
+    def send(self, command):
         for client in self.clients:
-            client.sendMessage('hallo')
+            client.sendMessage(command)
 
     def run(self):
         self.server.serveforever()
