@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import logging
 import time
 from bionics.server import Server
 from bionics.speaker import Speaker
@@ -9,6 +8,8 @@ from bionics.log import Log
 class Controller:
 
     def __init__(self):
+
+        Log.setup()
 
         self.speaker = Speaker()
         self.speaker.start()

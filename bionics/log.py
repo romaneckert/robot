@@ -7,12 +7,10 @@ class Log:
 
     @staticmethod
     def info(message):
-        Log.setup()
         logging.info(message)
 
     @staticmethod
     def error(message):
-        Log.setup()
         logging.error(message)
 
     @staticmethod
