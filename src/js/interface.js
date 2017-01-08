@@ -13,12 +13,12 @@ Interface.Main = {
     },
 
     handleWebSocketMessage : function(e) {
-        $('.log').text($('.log').text() + '<br/>' + e.data);
+        $('.log').html(e.data + '<br/>' + $('.log').html());
         console.log(e.data);
     },
 
     handleDocumentReady : function() {
-        $(document).on('touchmove', this.handleDocumentTouchMove.bind(this));
+        //$(document).on('touchmove', this.handleDocumentTouchMove.bind(this));
         $('.btn').on('click', this.handleButtonClick.bind(this));
     },
 

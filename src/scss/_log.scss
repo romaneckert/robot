@@ -1,8 +1,11 @@
 .log {
     position:absolute;
-    top:20px;
-    bottom:20px;
-    left:100px;
-    right:100px;
-    border:1px solid #ffffff;
+    top:10px;
+    height:300px;
+    left:10px;
+    right:10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+
 }
