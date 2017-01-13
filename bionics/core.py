@@ -10,6 +10,7 @@ from sys import platform
 from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
 import threading
 import queue
+import subprocess
 
 
 class Controller:
@@ -79,6 +80,17 @@ class Speaker (threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
 
+        version = 'Mary TTS Version not defined.'
+
+        try:
+            version = urllib.request.urlopen('http://localhost:59125/version').read().decode('utf-8')
+        except:
+
+
+            #pid = subprocess.Popen("./vendor/marytts-5.2/bin/marytts-server")
+            os.system("./vendor/marytts-5.2/bin/marytts-server")
+        print(version)
+
     def run(self):
         while True:
 
@@ -103,7 +115,7 @@ class Speaker (threading.Thread):
                               ('effect_Chorus_parameters',
                                'delay1:466;amp1:0.54;delay2:600;amp2:-0.10;delay3:250;amp3:0.30'))
 
-                    url = 'http://mary.dfki.de:59125/process?' + urllib.parse.urlencode(params)
+                    url = 'http://localhost:59125/process?' + urllib.parse.urlencode(params)
 
                     try:
                         urllib.request.urlretrieve(url, file_path)
