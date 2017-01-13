@@ -86,9 +86,12 @@ class Speaker (threading.Thread):
             version = urllib.request.urlopen('http://localhost:59125/version').read().decode('utf-8')
         except:
 
+            command = "./vendor/marytts-5.2/bin/marytts-server"
 
-            #pid = subprocess.Popen("./vendor/marytts-5.2/bin/marytts-server")
-            os.system("./vendor/marytts-5.2/bin/marytts-server")
+            pid = subprocess.Popen(command, preexec_fn=os.setpgrp)
+
+
+
         print(version)
 
     def run(self):
