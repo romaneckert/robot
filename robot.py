@@ -6,11 +6,10 @@ try:
 except ImportError:
     gpio = 0
 
-from bionics.controller import Controller
+from bionics.core import Controller
 from bionics.command import Command
-from bionics.queues import Queues
+from bionics.core import Queues
 #from bionics.hat import Hat
-from bionics.server import Server
 
 
 class Robot(Controller):
@@ -42,7 +41,7 @@ class Robot(Controller):
         #self.motor2.start(self.cycle2)
         #self.motor3.start(self.cycle3)
 
-        self.say('Systems running.')
+        self.say('Alle Systeme gestartet.')
 
         Queues.command.put('Hallo')
         #self.serverQueue.put(Command('log', 'test'))
@@ -70,8 +69,8 @@ class Robot(Controller):
             self.cycle1 = 600
             self.cycle_direction1 *= -1
 
-        print(round(self.cycle1))
-        Server.send('running')
+        #print(round(self.cycle1))
+        #Server.send('running')
 
         #self.serverQueue.put(Command('log', str(round(self.cycle1))))
 
