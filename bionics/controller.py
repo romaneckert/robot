@@ -24,7 +24,6 @@ class Controller:
         self.delta_time = 0
         self.fps = 60
 
-
     def activate(self):
         while True:
             current_time = time.time()

@@ -10,7 +10,7 @@ from bionics.controller import Controller
 from bionics.command import Command
 from bionics.queues import Queues
 #from bionics.hat import Hat
-import time
+from bionics.server import Server
 
 
 class Robot(Controller):
@@ -71,7 +71,7 @@ class Robot(Controller):
             self.cycle_direction1 *= -1
 
         print(round(self.cycle1))
-        self.server.send('running')
+        Server.send('running')
 
         #self.serverQueue.put(Command('log', str(round(self.cycle1))))
 

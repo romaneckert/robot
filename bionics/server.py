@@ -13,12 +13,14 @@ class Server (threading.Thread):
         threading.Thread.__init__(self)
         self.server = SimpleWebSocketServer('', 8000, Socket)
 
-    def send(self, command):
-        for client in self.clients:
+    @staticmethod
+    def send(command):
+        for client in Server.clients:
             client.sendMessage(command)
 
     def run(self):
         self.server.serveforever()
+
 
 class Socket(WebSocket):
 
