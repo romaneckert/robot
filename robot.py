@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 try:
     import RPi.GPIO as GPIO
     gpio = 1

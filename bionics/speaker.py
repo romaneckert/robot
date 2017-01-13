@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import threading
 import time
 import os
@@ -7,6 +9,7 @@ from slugify import slugify
 from sys import platform
 from bionics.queues import Queues
 from bionics.log import Log
+
 
 class Speaker (threading.Thread):
 

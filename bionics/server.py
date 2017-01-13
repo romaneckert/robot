@@ -1,6 +1,9 @@
+#!/usr/bin/env python3
+
 from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
 import threading
 from bionics.queues import Queues
+
 
 class Server (threading.Thread):
 

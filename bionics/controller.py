@@ -1,9 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+
 import time
 from bionics.server import Server
 from bionics.speaker import Speaker
 from bionics.queues import Queues
 from bionics.log import Log
+
 
 class Controller:
 
