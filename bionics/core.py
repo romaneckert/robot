@@ -5,6 +5,7 @@ import time
 import os
 import urllib.parse
 import urllib.request
+import urllib.error
 from slugify import slugify
 from sys import platform
 from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
@@ -18,6 +19,13 @@ class Controller:
     def __init__(self):
 
         Log.setup()
+
+        mary_tts = MaryTTS()
+        mary_tts.run()
+
+        while 1:
+            if 5.2 == mary_tts.get_version():
+                break
 
         self.speaker = Speaker()
         self.speaker.start()
@@ -75,24 +83,35 @@ class Log:
                             datefmt='%d-%m-%Y %H:%M:%S')
 
 
+class MaryTTS (threading.Thread):
+
+    version = 0
+    pid = 0
+
+    def __init(self):
+        threading.Thread.__init__(self)
+
+    def run(self):
+        try:
+            urllib.request.urlopen('http://localhost:59125/version').read().decode('utf-8')
+        except urllib.error.URLError:
+            command = "./vendor/marytts-5.2/bin/marytts-server"
+            self.pid = subprocess.Popen(command, preexec_fn=os.setpgrp)
+            Log.info('Starting MaryTTS')
+
+    def get_version(self):
+        try:
+            urllib.request.urlopen('http://localhost:59125/version').read().decode('utf-8')
+            self.version = 5.2
+        except:
+            self.version = 0
+        return self.version
+
+
 class Speaker (threading.Thread):
 
     def __init__(self):
         threading.Thread.__init__(self)
-
-        version = 'Mary TTS Version not defined.'
-
-        try:
-            version = urllib.request.urlopen('http://localhost:59125/version').read().decode('utf-8')
-        except:
-
-            command = "./vendor/marytts-5.2/bin/marytts-server"
-
-            pid = subprocess.Popen(command, preexec_fn=os.setpgrp)
-
-
-
-        print(version)
 
     def run(self):
         while True:

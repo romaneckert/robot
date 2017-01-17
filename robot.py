@@ -69,7 +69,7 @@ class Robot(Controller):
             self.cycle1 = 600
             self.cycle_direction1 *= -1
 
-        #print(round(self.cycle1))
+        print(round(self.cycle1))
         #Server.send('running')
 
         #self.serverQueue.put(Command('log', str(round(self.cycle1))))
