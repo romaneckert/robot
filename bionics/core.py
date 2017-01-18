@@ -20,12 +20,10 @@ class Controller:
 
         Log.setup()
 
-        mary_tts = MaryTTS()
-        mary_tts.run()
+        mary_tts_server = MaryTtsServer()
 
-        while 1:
-            if 5.2 == mary_tts.get_version():
-                break
+        while 5.2 != mary_tts_server.get_version():
+            pass
 
         self.speaker = Speaker()
         self.speaker.start()
@@ -36,7 +34,7 @@ class Controller:
         self.last_time = time.time()
         self.start_time = self.last_time
         self.delta_time = 0
-        self.fps = 60
+        self.fps = 2
 
     def activate(self):
         while True:
@@ -83,29 +81,35 @@ class Log:
                             datefmt='%d-%m-%Y %H:%M:%S')
 
 
-class MaryTTS (threading.Thread):
+class MaryTtsServer (threading.Thread):
 
-    version = 0
-    pid = 0
+    __version = 0
+    __pid = 0
 
-    def __init(self):
+    def __init__(self):
         threading.Thread.__init__(self)
+        self.start()
 
     def run(self):
-        try:
-            urllib.request.urlopen('http://localhost:59125/version').read().decode('utf-8')
-        except urllib.error.URLError:
-            command = "./vendor/marytts-5.2/bin/marytts-server"
-            self.pid = subprocess.Popen(command, preexec_fn=os.setpgrp)
-            Log.info('Starting MaryTTS')
+
+        while True:
+
+            if self.get_version() != 5.2:
+                print(self.get_version())
+                command = "./vendor/marytts-5.2/bin/marytts-server"
+                self.__pid = subprocess.Popen(command, preexec_fn=os.setpgrp)
+                Log.info('Starting MaryTTS')
+                time.sleep(10)
+
+            time.sleep(1)
 
     def get_version(self):
         try:
             urllib.request.urlopen('http://localhost:59125/version').read().decode('utf-8')
-            self.version = 5.2
-        except:
-            self.version = 0
-        return self.version
+            self.__version = 5.2
+        except urllib.error.URLError:
+            self.__version = 0
+        return self.__version
 
 
 class Speaker (threading.Thread):
@@ -159,6 +163,7 @@ class Speaker (threading.Thread):
 
             else:
                 time.sleep(0.1)
+
 
 class Server (threading.Thread):
 
