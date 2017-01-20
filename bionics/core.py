@@ -59,6 +59,20 @@ class Controller:
 
 class Log:
 
+    log_directory = 'logs'
+    log_file = 'log.log'
+
+    @staticmethod
+    def latest():
+
+        messages = []
+
+        file_object = open(Log.log_directory + '/' + Log.log_file)
+        for line in file_object:
+            messages.append(line)
+        file_object.close()
+        return messages
+
     @staticmethod
     def info(message):
         logging.info(message)
@@ -72,12 +86,11 @@ class Log:
 
     @staticmethod
     def setup():
-        log_directory = 'logs'
-        os.makedirs(log_directory, exist_ok=True)
+        os.makedirs(Log.log_directory, exist_ok=True)
 
         logging.basicConfig(format='[%(asctime)s] [%(levelname)s] [%(message)s]',
                             level=logging.DEBUG,
-                            filename=log_directory + '/log.log',
+                            filename=Log.log_directory + '/' + Log.log_file,
                             datefmt='%d-%m-%Y %H:%M:%S')
 
 
@@ -174,9 +187,9 @@ class Server (threading.Thread):
         self.server = SimpleWebSocketServer('', 8000, Socket)
 
     @staticmethod
-    def send(command):
+    def send(message):
         for client in Server.clients:
-            client.sendMessage(command)
+            client.sendMessage(message)
 
     def run(self):
         self.server.serveforever()
@@ -190,6 +203,9 @@ class Socket(WebSocket):
     def handleConnected(self):
         Queues.message.put('Externes Gerät verbunden.')
         Server.clients.append(self)
+
+        for message in Log.latest():
+            Server.send(message)
 
     def handleClose(self):
         print('close')
