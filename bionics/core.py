@@ -12,6 +12,7 @@ from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
 import threading
 import queue
 import subprocess
+from http.server import SimpleHTTPRequestHandler,HTTPServer
 
 
 class Controller:
@@ -28,8 +29,11 @@ class Controller:
         self.speaker = Speaker()
         self.speaker.start()
 
-        self.server = Server()
-        self.server.start()
+        self.socketServer = SocketServer()
+        self.socketServer.start()
+
+        self.httpServer = SimpleHTTPServer()
+        self.httpServer.start()
 
         self.last_time = time.time()
         self.start_time = self.last_time
@@ -76,13 +80,13 @@ class Log:
     @staticmethod
     def info(message):
         logging.info(message)
-        Server.send(message)
+        SocketServer.send(message)
 
 
     @staticmethod
     def error(message):
         logging.error(message)
-        Server.send(message)
+        SocketServer.send(message)
 
     @staticmethod
     def setup():
@@ -178,17 +182,17 @@ class Speaker (threading.Thread):
                 time.sleep(0.1)
 
 
-class Server (threading.Thread):
+class SocketServer (threading.Thread):
 
     clients = []
 
     def __init__(self):
         threading.Thread.__init__(self)
-        self.server = SimpleWebSocketServer('', 8000, Socket)
+        self.server = SimpleWebSocketServer('', 8001, Socket)
 
     @staticmethod
     def send(message):
-        for client in Server.clients:
+        for client in SocketServer.clients:
             client.sendMessage(message)
 
     def run(self):
@@ -202,13 +206,33 @@ class Socket(WebSocket):
 
     def handleConnected(self):
         Queues.message.put('Externes Gerät verbunden.')
-        Server.clients.append(self)
+        SocketServer.clients.append(self)
 
         for message in Log.latest():
-            Server.send(message)
+            SocketServer.send(message)
 
     def handleClose(self):
         print('close')
+
+
+class HTTPRequestHandler(SimpleHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+
+        message = "Hello world!"
+        self.wfile.write(bytes(message, "utf8"))
+        return
+
+
+class SimpleHTTPServer(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.server = HTTPServer(('', 8000), HTTPRequestHandler)
+
+    def run(self):
+        self.server.serve_forever()
 
 
 class Queues:
