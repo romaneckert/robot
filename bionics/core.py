@@ -223,14 +223,28 @@ class HTTPRequestHandler(SimpleHTTPRequestHandler):
             self.path = "robot.html"
 
         try:
-            f = open(curdir + sep + 'public' + sep + self.path)
-            print(curdir + sep + 'public' + sep + self.path)
-            self.send_response(200)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
 
-            self.wfile.write(f.read().encode('utf-8'))
-            f.close()
+            mime_type = ''
+
+            if self.path.endswith('.html'):
+                mime_type = 'text/html'
+            elif self.path.endswith('.jpg'):
+                mime_type = 'image/jpg'
+            elif self.path.endswith('.min.js'):
+                mime_type = 'application/javascript'
+            elif self.path.endswith('.min.css'):
+                mime_type = 'text/css'
+
+            if '' != mime_type:
+                f = open(curdir + sep + 'public' + sep + self.path)
+                self.send_response(200)
+                self.send_header('Content-type', mime_type)
+                self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+                self.send_header('Pragma', 'no-cache')
+                self.send_header('Expires', '0')
+                self.end_headers()
+                self.wfile.write(f.read().encode('utf-8'))
+                f.close()
             return
         except IOError:
             self.send_error(404, 'File Not Found: %s' % self.path)

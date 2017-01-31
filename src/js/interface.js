@@ -7,7 +7,7 @@ Interface.Main = {
     init : function() {
         $(document).ready(this.handleDocumentReady.bind(this));
 
-        this.websocket = new WebSocket('ws://' + window.location.host + ':8000');
+        this.websocket = new WebSocket('ws://' + window.location.hostname + ':8001');
         this.websocket.onmessage = this.handleWebSocketMessage.bind(this);
 
     },
