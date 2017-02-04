@@ -10,6 +10,7 @@ from bionics.core import Controller
 from bionics.command import Command
 from bionics.core import Queues
 #from bionics.hat import Hat
+from bionics.core import Message
 
 
 class Robot(Controller):

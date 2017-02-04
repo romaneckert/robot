@@ -10,10 +10,11 @@ from slugify import slugify
 from sys import platform
 from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
 import threading
-import queue
+import test
 import subprocess
-from http.server import SimpleHTTPRequestHandler,HTTPServer
+from http.server import SimpleHTTPRequestHandler, HTTPServer
 from os import curdir, sep
+
 
 class Controller:
 
@@ -261,5 +262,6 @@ class SimpleHTTPServer(threading.Thread):
 
 
 class Queues:
-    message = queue.Queue()
-    command = queue.Queue()
+    message = test.Queue()
+    command = test.Queue()
+
