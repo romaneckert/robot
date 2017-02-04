@@ -13,12 +13,9 @@ class Controller:
 
         self.speaker = SpeakerThread(self.interface)
 
-        self.interface.queues.speaker.put('Komm her du geile Sau')
-        self.interface.queues.speaker.put('Lass dich abknutschen')
-        self.interface.queues.speaker.put('Jetzt sofort!')
+        self.interface.queues.speaker.put('Es nervt')
 
-
-        print('hello')
+        self.run()
 
     def run(self):
         while True:

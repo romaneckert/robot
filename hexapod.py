@@ -9,4 +9,3 @@ class Hexapod(Controller):
         Controller.__init__(self)
 
 hexapod = Hexapod()
-hexapod.run()

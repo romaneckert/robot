@@ -18,4 +18,6 @@ class SpeakerThread(Thread):
             if not self.interface.queues.speaker.empty():
 
                 message = self.interface.queues.speaker.get()
+                self.interface.queues.logger.put(message)
                 self.speaker.speak(message)
+
