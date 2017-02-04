@@ -4,9 +4,8 @@ import queue
 
 class Queue:
 
-    __queue = queue.Queue()
-
     def __init__(self):
+        self.__queue = queue.Queue()
         pass
 
     def put(self, item):
@@ -14,6 +13,9 @@ class Queue:
 
     def get(self):
         return self.__queue.get()
+
+    def empty(self):
+        return self.__queue.empty()
 
 
 class Queues:

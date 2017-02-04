@@ -11,27 +11,26 @@ from sys import platform
 
 class Speaker(Thread):
 
-    def __init__(self, speaker_queue, logger_queue):
+    def __init__(self, interface):
         Thread.__init__(self)
-        self.speaker_queue = speaker_queue
-        self.logger_queue = logger_queue
+        self.interface = interface
 
     def run(self):
         while True:
 
-            if not self.speaker_queue.empty():
+            if not self.interface.queues.speaker.empty():
 
-                entry = self.speaker_queue.get()
-                self.logger_queue.put({'message': entry['message']})
+                message = self.interface.queues.speaker.get()
+                self.interface.queues.logger.put(message)
                 error = 0
 
                 sound_directory = 'sounds'
                 os.makedirs(sound_directory, exist_ok=True)
 
-                file_path = sound_directory + '/' + slugify(entry['message']) + '.wav'
+                file_path = sound_directory + '/' + slugify(message) + '.wav'
 
                 if not (os.path.exists(file_path)):
-                    params = (('INPUT_TEXT', entry['message']),
+                    params = (('INPUT_TEXT', message),
                               ('INPUT_TYPE', 'TEXT'),
                               ('OUTPUT_TYPE', 'AUDIO'),
                               ('AUDIO', 'WAVE_FILE'),

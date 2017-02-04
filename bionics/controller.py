@@ -2,18 +2,18 @@
 
 import time
 from essentials.speaker import Speaker
-from test import Queue
+from bionics.interface import Interface
 
 class Controller:
 
     def __init__(self):
-        self.speaker_queue = Queue()
-        self.logger_queue = Queue()
+        self.interface = Interface()
 
-        self.speaker = Speaker(self.speaker_queue, self.logger_queue)
+        self.speaker = Speaker(self.interface)
         self.speaker.start()
 
-        self.speaker_queue.put({'message': 'Hallo mein Freund'})
+        self.interface.queues.speaker.put('Hallo mein Freund')
+
         print('hello')
 
     def run(self):
