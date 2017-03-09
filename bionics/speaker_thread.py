@@ -2,22 +2,22 @@
 
 from threading import Thread
 from essentials.speaker import Speaker
+from bionics.dispatcher import Dispatcher
 
 
 class SpeakerThread(Thread):
 
-    def __init__(self, interface):
+    def __init__(self):
         Thread.__init__(self)
-        self.interface = interface
         self.speaker = Speaker()
         self.start()
 
     def run(self):
         while True:
 
-            if not self.interface.queues.speaker.empty():
+            if not Dispatcher.speaker.empty():
 
-                message = self.interface.queues.speaker.get()
-                self.interface.queues.logger.put(message)
+                message = Dispatcher.speaker.get()
+                Dispatcher.logger.put(message)
                 self.speaker.speak(message)
 

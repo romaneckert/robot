@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from bionics.interface import Interface
+from bionics.dispatcher import Interface
 
 interface = Interface()
 

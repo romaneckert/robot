@@ -18,15 +18,10 @@ class Queue:
         return self.__queue.empty()
 
 
-class Queues:
+class Dispatcher:
 
     speaker = Queue()
     logger = Queue()
-
-
-class Interface:
-
-    queues = Queues()
 
 
 
