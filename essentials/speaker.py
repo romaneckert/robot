@@ -19,7 +19,7 @@ class Speaker:
         while 5.2 != self.mary_tts_server.get_version():
             pass
 
-    def speak(self, message):
+    def say(self, message):
 
         error_message = None
         os.makedirs(self.sound_directory, exist_ok=True)

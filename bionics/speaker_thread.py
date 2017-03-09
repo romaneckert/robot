@@ -19,5 +19,5 @@ class SpeakerThread(Thread):
 
                 message = Dispatcher.speaker.get()
                 Dispatcher.logger.put(message)
-                self.speaker.speak(message)
+                self.speaker.say(message)
 
