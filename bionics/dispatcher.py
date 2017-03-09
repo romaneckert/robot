@@ -8,7 +8,7 @@ class Queue:
         self.__queue = queue.Queue()
         pass
 
-    def put(self, item):
+    def put(self, item, type):
         self.__queue.put(item)
 
     def get(self):

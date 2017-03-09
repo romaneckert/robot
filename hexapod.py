@@ -9,7 +9,7 @@ class Hexapod:
 
     def __init__(self):
 
-        Dispatcher.speaker.put('Alle Systeme gestartet.')
+        Dispatcher.speaker.put('Alle Systeme gestartet.', 'notice')
 
         self.speaker_thread = SpeakerThread()
         self.controller_thread = ControllerThread()
