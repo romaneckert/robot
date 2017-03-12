@@ -1,20 +1,51 @@
-const marytts = require('./marytts');
+const config = require('./config').speaker;
+const request = require('request');
+const logger = require('./logger');
+const spawn = require('child_process').spawn;
 
 class Speaker {
 
     constructor() {
+        this._ready = false;
 
-        this._config = {
-            'directory' : 'sounds'
-        };
+        request('http://' + config.marytts.host + ':' + config.marytts.port + '/version', function (error, response, body) {
+
+            if(response && 200 === response.statusCode) {
+                this._ready = true;
+            } else {
+                this._startMaryTTS();
+            }
+
+        }.bind(this));
+
     }
 
-    get config() {
-        return this._config;
+    get ready() {
+        return this._ready;
     }
 
-    set config(config) {
-        this._config = config;
+    _startMaryTTS() {
+
+        logger.info('Start MaryTts Server');
+
+        const child = spawn('./' + config.marytts.path, {
+            detached: true
+        });
+
+        child.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+        });
+
+        child.stderr.on('data', (data) => {
+            console.log(`stderr: ${data}`);
+        });
+
+        child.on('close', (code) => {
+            console.log(`child process exited with code ${code}`);
+        });
+
+        child.unref();
+
     }
 
     say(message) {

@@ -12,13 +12,15 @@ class Hexapod {
         logger.info('Start Hexapod.');
 
         function intervalFunc () {
-            console.log('Cant stop me now!');
+            console.log('interval');
+
+            if(speaker.ready) {
+                speaker.say('hello world');
+            }
 
         }
 
         setInterval(intervalFunc, 1500);
-
-        console.log(db.logs.find());
 
     }
 }
