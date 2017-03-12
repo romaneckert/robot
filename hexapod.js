@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 const sleep = require('sleep');
-const speaker = require('./essentials/speaker');
+const speaker = require('./bionics/speaker');
+const logger = require('./bionics/logger');
 
 class Hexapod {
 
@@ -11,7 +12,17 @@ class Hexapod {
             'directory' : 'sound'
         };
 
-        console.log('hello');
+        logger.info('Start Hexapod.');
+
+
+        function intervalFunc () {
+            console.log('Cant stop me now!');
+
+        }
+
+        setInterval(intervalFunc, 1500);
+
+        console.log('in');
 
     }
 }
