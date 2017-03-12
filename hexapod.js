@@ -14,7 +14,6 @@ class Hexapod {
 
         logger.info('Start Hexapod.');
 
-
         function intervalFunc () {
             console.log('Cant stop me now!');
 

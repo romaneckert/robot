@@ -1,19 +1,12 @@
-var fs = require('fs');
+const fs = require('fs');
+const db = require('./db');
+const strftime = require('strftime');
+const config = require('./config').logger;
 
 class Logger {
 
     constructor() {
-        this._config = {
-            'directory' : 'logs'
-        };
-    }
-
-    get config() {
-        return this._config;
-    }
-
-    set config(config) {
-        this._config = config;
+        if (!fs.existsSync(config.directory)) fs.mkdirSync(config.directory);
     }
 
     info(message, data) {
@@ -25,10 +18,23 @@ class Logger {
     }
 
     _log(message, data, type) {
-        fs.appendFile(this.config.directory + '/' + type + '.log', message);
+
+        var date = new Date();
+
+        fs.appendFile(
+            config.directory + '/' + type + '.log',
+            '[' + strftime('%F %T', date) + '] ' + message + '\r\n',
+            (error) => {
+                if (error) console.log(error);
+            }
+        );
+
+        db.logs.insert({
+            'date' : date.getTime(),
+            'type' : type,
+            'message' : message
+        });
     }
-
-
 
 }
 

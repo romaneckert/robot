@@ -2,6 +2,7 @@
   "name": "robot",
   "version": "1.0.0",
   "dependencies": {
+    "file-db": "0.0.2",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-filter": "^4.0.0",
@@ -10,8 +11,6 @@
     "gulp-sourcemaps": "^1.9.1",
     "gulp-uglify": "2.0.0",
     "jquery": "^3.1.1",
-    "sleep": "^5.1.0",
-    "subprocess": "^0.3.0",
-    "three": "^0.82.1"
+    "strftime": "^0.10.0",
   }
 }

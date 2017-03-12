@@ -3,6 +3,7 @@
 .DS_Store
 .sass-cache
 logs/*
+db/*
 sounds/*
 node_modules/
 *.map
