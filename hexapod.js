@@ -3,6 +3,7 @@
 const sleep = require('sleep');
 const speaker = require('./bionics/speaker');
 const logger = require('./bionics/logger');
+const db = require('./bionics/db');
 
 class Hexapod {
 
@@ -21,7 +22,7 @@ class Hexapod {
 
         setInterval(intervalFunc, 1500);
 
-        console.log('in');
+        console.log(db.logs.find());
 
     }
 }

@@ -11,10 +11,29 @@ class Table {
         fdb.open(config.directory, (error, db) => {
             if(error) logger.error(error);
 
-            db.use(this._title).save(data).exec((error, documents) => {
+            db.use(this._title).save(data).exec((error, data) => {
                 if(error) logger.error(error);
             });
         });
+    }
+
+    find() {
+
+        var results = {};
+
+        fdb.open(config.directory, (error, db) => {
+            if(error) logger.error(error);
+
+            db.use(this._title).find().exec((error, data) => {
+                if(error) logger.error(error);
+
+                results = data;
+                console.log(results);
+            });
+        });
+
+        return results;
+
     }
 }
 
