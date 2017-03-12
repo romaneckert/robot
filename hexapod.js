@@ -9,10 +9,6 @@ class Hexapod {
 
     constructor() {
 
-        speaker.config = {
-            'directory' : 'sound'
-        };
-
         logger.info('Start Hexapod.');
 
         function intervalFunc () {

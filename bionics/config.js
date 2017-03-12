@@ -4,6 +4,9 @@ var config = {
     },
     db : {
         directory : 'db'
+    },
+    speaker : {
+        directory : 'sounds'
     }
 }
 
