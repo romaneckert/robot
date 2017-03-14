@@ -1,5 +1,4 @@
 const fs = require('fs');
-const db = require('./db');
 const strftime = require('strftime');
 const config = require('./config').logger;
 
@@ -9,31 +8,53 @@ class Logger {
         if (!fs.existsSync(config.directory)) fs.mkdirSync(config.directory);
     }
 
-    info(message, data) {
-        this._log(message, data, 'info');
-    }
-
-    error(message, data) {
-        this._log(message, data, 'error');
-    }
-
-    _log(message, data, type) {
-
+    debug(data, meta) {
         var date = new Date();
+        this._log(date, data, meta, 'debug');
+    }
 
-        fs.appendFile(
-            config.directory + '/' + type + '.log',
-            '[' + strftime('%F %T', date) + '] ' + message + '\r\n',
-            (error) => {
-                if (error) console.log(error);
+    info(data, meta) {
+        var date = new Date();
+        this._log(date, data, meta, 'debug');
+        this._log(date, data, meta, 'info');
+    }
+
+    error(data, meta) {
+        var date = new Date();
+        this._log(date, data, meta, 'debug');
+        this.data(date, data, meta, 'error');
+    }
+
+    _log(date, data, meta, type) {
+
+        switch(typeof data) {
+            case 'string':
+                data = data.split("\n");
+                break;
+            default:
+                console.log('logger not defined for type: ' + typeof data);
+                break;
+        }
+
+        for (var line of data) {
+            if(line) {
+
+                var message = '[' + strftime('%F %T', date) + ']';
+                message += ' [' + type + ']';
+                message += ' ' + line;
+                if(meta) message += ' [' + String(meta) + ']';
+                message += '\r\n';
+
+                fs.appendFile(
+                    config.directory + '/' + type + '.log',
+                    message,
+                    (error) => {
+                        if (error) console.log(error);
+                    }
+                );
             }
-        );
+        }
 
-        db.logs.insert({
-            'date' : date.getTime(),
-            'type' : type,
-            'message' : message
-        });
     }
 
 }
