@@ -1,8 +1,10 @@
 const config = require('./config').speaker;
-const request = require('request');
+const http = require('http');
 const logger = require('./logger');
 const spawn = require('child_process').spawn;
 const fs = require('fs');
+const querystring = require('querystring');
+const slug = require('slug');
 
 class Speaker {
 
@@ -11,15 +13,17 @@ class Speaker {
 
         if (!fs.existsSync(config.directory)) fs.mkdirSync(config.directory);
 
-        request('http://' + config.marytts.host + ':' + config.marytts.port + '/version', function (error, response, body) {
+        http.get('http://' + config.marytts.host + ':' + config.marytts.port + '/version', function(response) {
 
-            if(response && 200 === response.statusCode) {
+            if(response && 200 == response.statusCode) {
                 this._ready = true;
             } else {
                 this._startMaryTTS();
             }
 
-        }.bind(this));
+        }.bind(this)).on('error', (e) => {
+            this._startMaryTTS();
+        });
 
     }
 
@@ -57,7 +61,45 @@ class Speaker {
     }
 
     say(message) {
-        console.log(message);
+
+        var params = {
+            'INPUT_TEXT' : message,
+            'INPUT_TYPE': 'TEXT',
+            'OUTPUT_TYPE' : 'AUDIO',
+            'AUDIO' : 'WAVE_FILE',
+            'LOCALE' : 'de',
+            'effect_Chorus_selected' : 'on',
+            'effect_Chorus_parameters' : 'delay1:466;amp1:0.54;delay2:600;amp2:-0.10;delay3:250;amp3:0.30'
+        };
+
+        var queryString = querystring.stringify(params);
+        var url = 'http://' + config.marytts.host + ':' + config.marytts.port + '/process?' + queryString;
+        var filePath = config.directory + '/' + slug(message, {lower: true}) + '.wav';
+
+        http.get(url, function (response) {
+
+            console.log(response.statusCode);
+
+            if(response && 200 === response.statusCode) {
+
+                var file = fs.createWriteStream(filePath);
+
+                file.on('finish', () => {
+                    file.close(function() {
+                        console.log('play file: ' + filePath);
+                    });
+                });
+
+                response.pipe(file);
+
+            } else {
+                logger.error('can not get message from marytts server for url: ' + url);
+            }
+
+        }.bind(this)).on('error', (e) => {
+            logger.error('can not get message from marytts server for url: ' + url);
+        });
+
     }
 }
 

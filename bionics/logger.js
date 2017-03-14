@@ -20,6 +20,13 @@ class Logger {
     }
 
     error(data, meta) {
+
+        if(data && meta) {
+            console.error(String(data), String(meta));
+        } else {
+            console.error(String(data));
+        }
+
         var date = new Date();
         this._log(date, data, meta, 'debug');
         this._log(date, data, meta, 'error');
