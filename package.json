@@ -2,7 +2,9 @@
   "name": "robot",
   "version": "1.0.0",
   "dependencies": {
+    "clean": "^4.0.2",
     "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
     "gulp-filter": "^4.0.0",
     "gulp-rename": "^1.2.2",

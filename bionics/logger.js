@@ -22,7 +22,7 @@ class Logger {
     error(data, meta) {
         var date = new Date();
         this._log(date, data, meta, 'debug');
-        this.data(date, data, meta, 'error');
+        this._log(date, data, meta, 'error');
     }
 
     _log(date, data, meta, type) {

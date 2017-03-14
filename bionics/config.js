@@ -9,7 +9,7 @@ var config = {
         directory : 'sounds',
         marytts : {
             host : '127.0.0.1',
-            post : 59125,
+            port : 59125,
             path : 'vendor/marytts-5.2/bin/marytts-server'
         }
     }

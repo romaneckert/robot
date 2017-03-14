@@ -8,20 +8,20 @@ const db = require('./bionics/db');
 class Hexapod {
 
     constructor() {
+        this._initialCheck = false;
+        this.start();
+    }
 
-        logger.info('Start Hexapod.');
+    start() {
+        logger.info('Start Hexapod');
+        setInterval(this.checkSystem, 100);
+    }
 
-        function intervalFunc () {
-            console.log('interval');
-
-            if(speaker.ready) {
-                speaker.say('hello world');
-            }
-
+    checkSystem() {
+        if(speaker.ready && !this._initialCheck) {
+            speaker.say('Alle Systeme erfolgreich gestartet.');
+            this._initialCheck = true;
         }
-
-        setInterval(intervalFunc, 1500);
-
     }
 }
 

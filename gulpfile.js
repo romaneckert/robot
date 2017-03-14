@@ -5,6 +5,18 @@ var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var filter = require('gulp-filter');
 var sourcemaps = require('gulp-sourcemaps');
+var clean = require('gulp-clean');
+
+gulp.task('clean', function() {
+
+    var dirs = [
+        'sounds',
+        'logs'
+    ];
+
+    return gulp.src(dirs, {read: false})
+        .pipe(clean());
+});
 
 gulp.task('vendor', function() {
 

@@ -7,3 +7,7 @@ npm update
 use gulp
 
 pip3 install websocket-server
+
+# clean
+
+gulp clean

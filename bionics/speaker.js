@@ -2,11 +2,14 @@ const config = require('./config').speaker;
 const request = require('request');
 const logger = require('./logger');
 const spawn = require('child_process').spawn;
+const fs = require('fs');
 
 class Speaker {
 
     constructor() {
         this._ready = false;
+
+        if (!fs.existsSync(config.directory)) fs.mkdirSync(config.directory);
 
         request('http://' + config.marytts.host + ':' + config.marytts.port + '/version', function (error, response, body) {
 
@@ -26,7 +29,7 @@ class Speaker {
 
     _startMaryTTS() {
 
-        logger.info('Start MaryTts Server');
+        logger.info('Start MaryTTS Server');
 
         const child = spawn('./' + config.marytts.path, {
             detached: true
@@ -37,6 +40,11 @@ class Speaker {
         });
 
         child.stderr.on('data', (data) => {
+
+            if(data.toString().includes('started in') && data.toString().includes('on port')) {
+                this._ready = true;
+            }
+
             logger.debug(data.toString());
         });
 
