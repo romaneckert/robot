@@ -66,58 +66,60 @@ class Speaker {
 
     say(message) {
 
-        if(null === this._currentMessage) {
-
-            this._currentMessage = message;
-
-            var params = {
-                'INPUT_TEXT' : message,
-                'INPUT_TYPE': 'TEXT',
-                'OUTPUT_TYPE' : 'AUDIO',
-                'AUDIO' : 'WAVE_FILE',
-                'LOCALE' : 'de',
-                'effect_Chorus_selected' : 'on',
-                'effect_Chorus_parameters' : 'delay1:466;amp1:0.54;delay2:600;amp2:-0.10;delay3:250;amp3:0.30'
-            };
-
-            var queryString = querystring.stringify(params);
-            var url = 'http://' + config.marytts.host + ':' + config.marytts.port + '/process?' + queryString;
-            var filePath = config.directory + '/' + slug(message, {lower: true}) + '.wav';
-
-            http.get(url, function (response) {
-
-                if(response && 200 === response.statusCode) {
-
-                    var file = fs.createWriteStream(filePath);
-
-                    file.on('finish', () => {
-                        file.close(() => {
-                            player.play(filePath, (error) => {
-                                if (error) {
-                                    logger.error(error);
-                                } else {
-                                    this._currentMessage = null;
-
-                                    if(this._queue.length > 0) {
-                                        this.say(this._queue.shift());
-                                    }
-                                }
-                            })
-                        });
-                    });
-
-                    response.pipe(file);
-
-                } else {
-                    logger.error('can not get message from marytts server for url: ' + url);
-                }
-
-            }.bind(this)).on('error', (e) => {
-                logger.error('can not get message from marytts server for url: ' + url);
-            });
-        } else {
+        // queue message if current say process running
+        if(null !== this._currentMessage) {
             this._queue.push(message);
+            return false;
         }
+
+        this._currentMessage = message;
+
+        var params = {
+            'INPUT_TEXT' : message,
+            'INPUT_TYPE': 'TEXT',
+            'OUTPUT_TYPE' : 'AUDIO',
+            'AUDIO' : 'WAVE_FILE',
+            'LOCALE' : 'de',
+            'effect_Chorus_selected' : 'on',
+            'effect_Chorus_parameters' : 'delay1:466;amp1:0.54;delay2:600;amp2:-0.10;delay3:250;amp3:0.30'
+        };
+
+        var queryString = querystring.stringify(params);
+        var url = 'http://' + config.marytts.host + ':' + config.marytts.port + '/process?' + queryString;
+        var filePath = config.directory + '/' + slug(message, {lower: true}) + '.wav';
+
+        http.get(url, function (response) {
+
+            if(response && 200 === response.statusCode) {
+
+                var file = fs.createWriteStream(filePath);
+
+                file.on('finish', () => {
+                    file.close(() => {
+                        player.play(filePath, (error) => {
+                            if (error) {
+                                logger.error(error);
+                            } else {
+                                logger.debug(this._currentMessage);
+                                this._currentMessage = null;
+
+                                if(this._queue.length > 0) {
+                                    this.say(this._queue.shift());
+                                }
+                            }
+                        })
+                    });
+                });
+
+                response.pipe(file);
+
+            } else {
+                logger.error('can not get message from marytts server for url: ' + url);
+            }
+
+        }.bind(this)).on('error', (e) => {
+            logger.error('can not get message from marytts server for url: ' + url);
+        });
 
     }
 }
