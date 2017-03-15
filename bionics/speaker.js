@@ -17,7 +17,7 @@ class Speaker {
 
         if (!fs.existsSync(config.directory)) fs.mkdirSync(config.directory);
 
-        http.get('http://' + config.marytts.host + ':' + config.marytts.port + '/version', function(response) {
+        http.get('http://' + config.marytts.host + ':' + config.marytts.port + '/version', (response) => {
 
             if(response && 200 == response.statusCode) {
                 this._ready = true;
@@ -25,7 +25,7 @@ class Speaker {
                 this._startMaryTTS();
             }
 
-        }.bind(this)).on('error', (e) => {
+        }).on('error', (e) => {
             this._startMaryTTS();
         });
 
@@ -48,11 +48,7 @@ class Speaker {
         });
 
         child.stderr.on('data', (data) => {
-
-            if(data.toString().includes('started in') && data.toString().includes('on port')) {
-                this._ready = true;
-            }
-
+            if(data.toString().includes('started in') && data.toString().includes('on port')) this._ready = true;
             logger.debug(data.toString());
         });
 
@@ -87,8 +83,9 @@ class Speaker {
         var queryString = querystring.stringify(params);
         var url = 'http://' + config.marytts.host + ':' + config.marytts.port + '/process?' + queryString;
         var filePath = config.directory + '/' + slug(message, {lower: true}) + '.wav';
+        var errorMessage = 'can not get message from marytts server for url: ' + url;
 
-        http.get(url, function (response) {
+        http.get(url, (response) => {
 
             if(response && 200 === response.statusCode) {
 
@@ -99,6 +96,7 @@ class Speaker {
                         player.play(filePath, (error) => {
                             if (error) {
                                 logger.error(error);
+                                throw error;
                             } else {
                                 logger.debug(this._currentMessage);
                                 this._currentMessage = null;
@@ -114,11 +112,13 @@ class Speaker {
                 response.pipe(file);
 
             } else {
-                logger.error('can not get message from marytts server for url: ' + url);
+                logger.error(errorMessage);
+                throw errorMessage;
             }
 
-        }.bind(this)).on('error', (e) => {
-            logger.error('can not get message from marytts server for url: ' + url);
+        }).on('error', (e) => {
+            logger.error(errorMessage);
+            throw errorMessage;
         });
 
     }
