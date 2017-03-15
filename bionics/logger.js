@@ -56,7 +56,8 @@ class Logger {
                     config.directory + '/' + type + '.log',
                     message,
                     (error) => {
-                        if (error) console.log(error);
+                        if ('error' == type) throw data;
+                        if (error) throw error;
                     }
                 );
             }
