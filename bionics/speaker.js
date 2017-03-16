@@ -12,8 +12,8 @@ class Speaker {
 
     constructor() {
         this._ready = false;
+        this._working = false;
         this._queue = [];
-        this._currentMessage = null;
 
         if (!fs.existsSync(config.directory)) fs.mkdirSync(config.directory);
 
@@ -63,12 +63,12 @@ class Speaker {
     say(message) {
 
         // queue message if current say process running
-        if(null !== this._currentMessage) {
+        if(this._working) {
             this._queue.push(message);
             return false;
         }
 
-        this._currentMessage = message;
+        this._working = true;
 
         var params = {
             'INPUT_TEXT' : message,
@@ -98,8 +98,8 @@ class Speaker {
                                 logger.error(error);
                                 throw error;
                             } else {
-                                logger.debug(this._currentMessage);
-                                this._currentMessage = null;
+                                logger.debug(message);
+                                this._working = false;
 
                                 if(this._queue.length > 0) {
                                     this.say(this._queue.shift());

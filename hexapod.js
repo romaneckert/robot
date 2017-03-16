@@ -15,6 +15,8 @@ class Hexapod {
     start() {
         logger.info('Start Hexapod');
         setInterval(this.checkSystem, 100);
+        speaker.say('Starte');
+
     }
 
     checkSystem() {
