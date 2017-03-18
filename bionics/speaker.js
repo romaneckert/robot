@@ -2,7 +2,7 @@ const config = require('./config').speaker;
 const http = require('http');
 const logger = require('./logger');
 const spawn = require('child_process').spawn;
-const fs = require('fs');
+const fs = require('node-fs');
 const querystring = require('querystring');
 const slug = require('slug');
 const player = require('play-sound')(opts = {})

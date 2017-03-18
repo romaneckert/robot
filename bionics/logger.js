@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('node-fs');
 const strftime = require('strftime');
 const config = require('./config').logger;
 
@@ -9,21 +9,20 @@ class Logger {
     }
 
     debug(data, meta) {
-        let date = new Date();
-        this._log(date, data, meta, ['debug']);
+        this._log(data, meta, 'debug');
     }
 
     info(data, meta) {
-        let date = new Date();
-        this._log(date, data, meta, ['debug', 'info']);
+        this._log(data, meta, 'info ');
     }
 
     error(data, meta) {
-        let date = new Date();
-        this._log(date, data, meta, ['debug', 'error']);
+        this._log(data, meta, 'error');
     }
 
-    _log(date, data, meta, types) {
+    _log(data, meta, type) {
+
+        let date = new Date();
 
         switch(typeof data) {
             case 'string':
@@ -34,36 +33,31 @@ class Logger {
                 break;
         }
 
-        for(let type of types) {
+        for (let line of data) {
+            if(line) {
 
-            for (let line of data) {
-                if(line) {
+                let message = '[' + strftime('%F %T', date) + ']';
+                message += ' [' + type + ']';
+                message += ' ' + line;
+                if(meta) message += ' [' + String(meta) + ']';
+                message += ' [' + new Error().stack.split("at ")[3].match(/\w+\.js:\d+:\d+/g)[0] + ']';
+                message += '\r\n';
 
-                    let message = '[' + strftime('%F %T', date) + ']';
-                    message += ' [' + type + ']';
-                    message += ' [' + new Error().stack.split("at ")[3].match(/\w+\.js:\d+:\d+/g)[0] + ']';
-                    message += ' ' + line;
-                    if(meta) message += ' [' + String(meta) + ']';
-                    message += '\r\n';
-
-                    if(types.indexOf('error') > -1) {
-                        fs.appendFileSync(
-                            config.directory + '/' + type + '.log',
-                            message
-                        )
-                    } else {
-                        fs.appendFile(
-                            config.directory + '/' + type + '.log',
-                            message,
-                            (error) => { if (error) throw error; }
-                        );
-                    }
+                if('error' == type) {
+                    fs.appendFileSync(
+                        config.directory + '/log.log',
+                        message
+                    )
+                } else {
+                    fs.appendFile(
+                        config.directory + '/log.log',
+                        message,
+                        (error) => { if (error) throw error; }
+                    );
                 }
             }
         }
-
     }
-
 }
 
 module.exports = new Logger();

@@ -3,13 +3,17 @@
 const sleep = require('sleep');
 const speaker = require('./bionics/speaker');
 const logger = require('./bionics/logger');
+const em = require('./hawk/entity-manager');
+const Log = require('./app/entity/log');
 
 class Hexapod {
 
     constructor() {
 
+        em.persist(new Log());
+
         this._initialCheck = false;
-        this.start();
+        //this.start();
     }
 
     start() {

@@ -1,26 +1,26 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var sass = require('gulp-sass');
-var rename = require('gulp-rename');
-var filter = require('gulp-filter');
-var sourcemaps = require('gulp-sourcemaps');
-var clean = require('gulp-clean');
+const gulp = require('gulp');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const sass = require('gulp-sass');
+const rename = require('gulp-rename');
+const filter = require('gulp-filter');
+const sourcemaps = require('gulp-sourcemaps');
+const clean = require('gulp-clean');
 
-gulp.task('clean', function() {
+gulp.task('clean', () => {
 
-    var dirs = [
-        'sounds',
-        'logs'
+    let dirs = [
+        'var/sounds',
+        'var/logs'
     ];
 
     return gulp.src(dirs, {read: false})
         .pipe(clean());
 });
 
-gulp.task('vendor', function() {
+gulp.task('vendor', () => {
 
-    var files = ['node_modules/jquery/dist/jquery.min.js',
+    let files = ['node_modules/jquery/dist/jquery.min.js',
                  'node_modules/three/build/three.min.js'];
 
     return gulp.src(files)
@@ -28,9 +28,9 @@ gulp.task('vendor', function() {
         .pipe(gulp.dest('public/js'));
 });
 
-gulp.task('js', function() {
+gulp.task('js', () => {
 
-    var files = [
+    let files = [
         'src/js/interface.js'
     ];
 
@@ -42,7 +42,7 @@ gulp.task('js', function() {
         .pipe(gulp.dest('public/js'));
 });
 
-gulp.task('scss', function () {
+gulp.task('scss', () => {
  return gulp.src('src/scss/style.scss')
   .pipe(sourcemaps.init())
   .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
@@ -51,7 +51,7 @@ gulp.task('scss', function () {
   .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
     gulp.watch('src/js/*', ['js']);
     gulp.watch('src/scss/*', ['scss']);
 });
