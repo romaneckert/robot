@@ -1,7 +1,6 @@
 const fs = require('fs');
 const strftime = require('strftime');
 const config = require('./config').logger;
-const Exception = require('./exception');
 
 class Logger {
 
@@ -10,17 +9,17 @@ class Logger {
     }
 
     debug(data, meta) {
-        var date = new Date();
+        let date = new Date();
         this._log(date, data, meta, ['debug']);
     }
 
     info(data, meta) {
-        var date = new Date();
+        let date = new Date();
         this._log(date, data, meta, ['debug', 'info']);
     }
 
     error(data, meta) {
-        var date = new Date();
+        let date = new Date();
         this._log(date, data, meta, ['debug', 'error']);
     }
 
@@ -35,12 +34,12 @@ class Logger {
                 break;
         }
 
-        for(var type of types) {
+        for(let type of types) {
 
-            for (var line of data) {
+            for (let line of data) {
                 if(line) {
 
-                    var message = '[' + strftime('%F %T', date) + ']';
+                    let message = '[' + strftime('%F %T', date) + ']';
                     message += ' [' + type + ']';
                     message += ' [' + new Error().stack.split("at ")[3].match(/\w+\.js:\d+:\d+/g)[0] + ']';
                     message += ' ' + line;
