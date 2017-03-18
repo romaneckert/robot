@@ -70,7 +70,7 @@ class Speaker {
 
         this._working = true;
 
-        var params = {
+        let params = {
             'INPUT_TEXT' : message,
             'INPUT_TYPE': 'TEXT',
             'OUTPUT_TYPE' : 'AUDIO',
@@ -80,16 +80,16 @@ class Speaker {
             'effect_Chorus_parameters' : 'delay1:466;amp1:0.54;delay2:600;amp2:-0.10;delay3:250;amp3:0.30'
         };
 
-        var queryString = querystring.stringify(params);
-        var url = 'http://' + config.marytts.host + ':' + config.marytts.port + '/process?' + queryString;
-        var filePath = config.directory + '/' + slug(message, {lower: true}) + '.wav';
-        var errorMessage = 'can not get message from marytts server for url: ' + url;
+        let queryString = querystring.stringify(params);
+        let url = 'http://' + config.marytts.host + ':' + config.marytts.port + '/process?' + queryString;
+        let filePath = config.directory + '/' + slug(message, {lower: true}) + '.wav';
+        let errorMessage = 'can not get message from marytts server for url: ' + url;
 
         http.get(url, (response) => {
 
             if(response && 200 === response.statusCode) {
 
-                var file = fs.createWriteStream(filePath);
+                let file = fs.createWriteStream(filePath);
 
                 file.on('finish', () => {
                     file.close(() => {
