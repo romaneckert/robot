@@ -1,12 +1,12 @@
 const config = {
     logger : {
-        directory : 'logs'
+        directory : 'var/logs'
     },
     db : {
         directory : 'db'
     },
     speaker : {
-        directory : 'sounds',
+        directory : 'var/sounds',
         marytts : {
             host : '127.0.0.1',
             port : 59125,
