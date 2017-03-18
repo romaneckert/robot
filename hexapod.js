@@ -3,19 +3,20 @@
 const sleep = require('sleep');
 const speaker = require('./bionics/speaker');
 const logger = require('./bionics/logger');
-const db = require('./bionics/db');
 
 class Hexapod {
 
     constructor() {
+
         this._initialCheck = false;
         this.start();
     }
 
     start() {
-        logger.info('Start Hexapod');
+
+        logger.info("Start Hexapod");
         setInterval(this.checkSystem, 100);
-        speaker.say('Starte');
+        speaker.say('Starte Systeme...');
 
     }
 

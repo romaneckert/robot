@@ -1,6 +1,7 @@
 const fs = require('fs');
 const strftime = require('strftime');
 const config = require('./config').logger;
+const Exception = require('./exception');
 
 class Logger {
 
@@ -10,55 +11,55 @@ class Logger {
 
     debug(data, meta) {
         var date = new Date();
-        this._log(date, data, meta, 'debug');
+        this._log(date, data, meta, ['debug']);
     }
 
     info(data, meta) {
         var date = new Date();
-        this._log(date, data, meta, 'debug');
-        this._log(date, data, meta, 'info');
+        this._log(date, data, meta, ['debug', 'info']);
     }
 
     error(data, meta) {
-
-        if(data && meta) {
-            console.error(String(data), String(meta));
-        } else {
-            console.error(String(data));
-        }
-
         var date = new Date();
-        this._log(date, data, meta, 'debug');
-        this._log(date, data, meta, 'error');
+        this._log(date, data, meta, ['debug', 'error']);
     }
 
-    _log(date, data, meta, type) {
+    _log(date, data, meta, types) {
 
         switch(typeof data) {
             case 'string':
                 data = data.split("\n");
                 break;
             default:
-                console.log('logger not defined for type: ' + typeof data);
+                throw new Error('logger not defined for type: ' + typeof data + ' message: ' + String(data));
                 break;
         }
 
-        for (var line of data) {
-            if(line) {
+        for(var type of types) {
 
-                var message = '[' + strftime('%F %T', date) + ']';
-                message += ' [' + type + ']';
-                message += ' ' + line;
-                if(meta) message += ' [' + String(meta) + ']';
-                message += '\r\n';
+            for (var line of data) {
+                if(line) {
 
-                fs.appendFile(
-                    config.directory + '/' + type + '.log',
-                    message,
-                    (error) => {
-                        if (error) throw error;
+                    var message = '[' + strftime('%F %T', date) + ']';
+                    message += ' [' + type + ']';
+                    message += ' [' + new Error().stack.split("at ")[3].match(/\w+\.js:\d+:\d+/g)[0] + ']';
+                    message += ' ' + line;
+                    if(meta) message += ' [' + String(meta) + ']';
+                    message += '\r\n';
+
+                    if(types.indexOf('error') > -1) {
+                        fs.appendFileSync(
+                            config.directory + '/' + type + '.log',
+                            message
+                        )
+                    } else {
+                        fs.appendFile(
+                            config.directory + '/' + type + '.log',
+                            message,
+                            (error) => { if (error) throw error; }
+                        );
                     }
-                );
+                }
             }
         }
 
