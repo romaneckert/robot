@@ -16,6 +16,7 @@
     "play-sound": "^1.1.1",
     "request": "^2.81.0",
     "slug": "^0.9.1",
-    "strftime": "^0.10.0"
+    "strftime": "^0.10.0",
+    "sinfonie" : "file:sinfonie"
   }
 }

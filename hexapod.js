@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
 const sleep = require('sleep');
-const speaker = require('./bionics/speaker');
-const logger = require('./bionics/logger');
-const em = require('./hawk/entity-manager');
+const speaker = require('./bionics_old/speaker');
+const logger = require('./bionics_old/logger');
+const em = require('sinfonie/manager/entity-manager');
 const Log = require('./app/entity/log');
 
 class Hexapod {
 
     constructor() {
 
-        em.persist(new Log());
+        em.persist(new Log(''));
 
         this._initialCheck = false;
         //this.start();
@@ -32,4 +32,4 @@ class Hexapod {
     }
 }
 
-var hexapod = new Hexapod();
+let hexapod = new Hexapod();

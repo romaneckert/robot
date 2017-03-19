@@ -1,8 +1,9 @@
-const Entity = require('../../hawk/entity');
+const Entity = require('sinfonie/entity/entity');
 
 class Log extends Entity {
 
     constructor(message, type) {
+
         super();
 
         this._date = new Date();
