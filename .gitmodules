@@ -1,0 +1,4 @@
+[submodule "sinfonie"]
+	path = sinfonie
+	url = https://github.com/romaneckert/sinfonie.git
+	branch = master
