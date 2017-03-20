@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
-const sleep = require('sleep');
-const speaker = require('./bionics_old/speaker');
-const logger = require('./bionics_old/logger');
-const em = require('sinfonie/manager/entity-manager');
+const speaker = require('jeneric/util/speaker');
+const logger = require('jeneric/util/logger');
+const em = require('jeneric/manager/entity-manager');
 const Log = require('./app/entity/log');
 
 class Hexapod {
