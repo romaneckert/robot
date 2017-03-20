@@ -1,4 +1,4 @@
-[submodule "sinfonie"]
-	path = sinfonie
-	url = https://github.com/romaneckert/sinfonie.git
+[submodule "jeneric"]
+	path = jeneric
+	url = https://github.com/romaneckert/jeneric.git
 	branch = master
