@@ -11,12 +11,17 @@
     "gulp-sass": "^3.0.0",
     "gulp-sourcemaps": "^1.9.1",
     "gulp-uglify": "2.0.0",
+    "jeneric": "file:jeneric",
     "jquery": "^3.2.1",
     "node-fs": "^0.1.7",
     "play-sound": "^1.1.1",
     "request": "^2.81.0",
     "slug": "^0.9.1",
-    "strftime": "^0.10.0",
-    "jeneric" : "file:jeneric"
+    "strftime": "^0.10.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romaneckert/robot.git"
   }
 }

@@ -1,15 +1,10 @@
 #!/usr/bin/env node
 
-const speaker = require('jeneric/util/speaker');
-const logger = require('jeneric/util/logger');
-const em = require('jeneric/manager/entity-manager');
-const Log = require('./app/entity/log');
+const config = require('jeneric/core/config');
 
 class Hexapod {
 
     constructor() {
-
-        em.persist(new Log(''));
 
         this._initialCheck = false;
         //this.start();

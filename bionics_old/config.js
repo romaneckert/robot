@@ -1,9 +1,4 @@
-const config = {
-    logger : {
-        directory : 'var/logs'
-    },
-    db : {
-        directory : 'db'
+const config = {directory : 'db'
     },
     speaker : {
         directory : 'var/sounds',

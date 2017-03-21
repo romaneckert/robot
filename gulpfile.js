@@ -6,6 +6,7 @@ const rename = require('gulp-rename');
 const filter = require('gulp-filter');
 const sourcemaps = require('gulp-sourcemaps');
 const clean = require('gulp-clean');
+const exec = require('child_process').exec;
 
 gulp.task('clean', () => {
 
@@ -51,9 +52,18 @@ gulp.task('scss', () => {
   .pipe(gulp.dest('public/css'));
 });
 
+gulp.task('npm-install', function (cb) {
+    exec('rm -R node_modules/jeneric && npm install', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
+});
+
 gulp.task('watch', () => {
     gulp.watch('src/js/*', ['js']);
     gulp.watch('src/scss/*', ['scss']);
+    gulp.watch('jeneric/**/*', ['npm-install']);
 });
 
-gulp.task('default', ['vendor', 'js', 'scss', 'watch']);
+gulp.task('default', ['vendor', 'js', 'scss', 'watch', 'npm-install']);
