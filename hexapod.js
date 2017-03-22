@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 
-const config = require('jeneric/core/config');
+const logger = require('jeneric/util/logger');
+const speaker = require('jeneric/util/speaker');
 
 class Hexapod {
 
     constructor() {
 
         this._initialCheck = false;
-        //this.start();
+        this.start();
     }
 
     start() {
 
         logger.info("Start Hexapod");
         setInterval(this.checkSystem, 100);
-        speaker.say('Starte Systeme...');
 
     }
 

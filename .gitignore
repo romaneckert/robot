@@ -2,9 +2,7 @@
 *.pyc
 .DS_Store
 .sass-cache
-logs/*
-db/*
-sounds/*
+var/**/*
 node_modules/
 *.map
 vendor/marytts-5.2/log/*
