@@ -1,28 +1,34 @@
 #!/usr/bin/env node
 
-const logger = require('jeneric/util/logger');
-const speaker = require('jeneric/util/speaker');
+const config = require('jeneric/core/config');
+const logger = require('jeneric/module/logger');
+const marytts = require('jeneric/module/marytts');
+const speaker = require('jeneric/module/speaker');
 
 class Hexapod {
 
     constructor() {
 
-        this._initialCheck = false;
-        this.start();
+        this._running = false;
+
+        setInterval(this.checkSystem.bind(this), 500);
+
     }
 
     start() {
 
-        logger.info("Start Hexapod");
-        setInterval(this.checkSystem, 100);
+        speaker.say('Alle Systeme erfolgreich gestartet.');
 
     }
 
     checkSystem() {
-        if(speaker.ready && !this._initialCheck) {
-            speaker.say('Alle Systeme erfolgreich gestartet.');
-            this._initialCheck = true;
+        if(!marytts.running) {
+            marytts.start();
+        } else {
+            this._running = true;
         }
+
+        if(this._running) this.start();
     }
 }
 

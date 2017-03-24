@@ -2,10 +2,9 @@
   "logger": {
     "directory": "var/logs/"
   },
-  "speaker": {
-    "directory": "var/sounds/"
-  },
+
   "marytts": {
+    "directory": "var/sounds",
     "host": "127.0.0.1",
     "port": 59125,
     "bin": "vendor/marytts-5.2/bin/marytts-server"
