@@ -9,26 +9,33 @@ class Hexapod {
 
     constructor() {
 
-        this._running = false;
+        this._check = false;
+        this._initialCheck = 0;
 
-        setInterval(this.checkSystem.bind(this), 500);
+        setInterval(this.update.bind(this), 200);
 
     }
 
-    start() {
+    update() {
 
-        speaker.say('Alle Systeme erfolgreich gestartet.');
+        this.checkSystem();
+
+        if(1 === this._initialCheck) {
+            this._initialCheck = 2;
+            speaker.say('Alle Systeme erfolgreich gestartet.');
+        }
 
     }
 
     checkSystem() {
+        this._check = true;
+
         if(!marytts.running) {
             marytts.start();
-        } else {
-            this._running = true;
+            this._check = false;
         }
 
-        if(this._running) this.start();
+        if(this._check && 0 === this._initialCheck) this._initialCheck = 1;
     }
 }
 
