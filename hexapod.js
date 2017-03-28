@@ -4,6 +4,7 @@ const config = require('jeneric/core/config');
 const logger = require('jeneric/module/logger');
 const marytts = require('jeneric/module/marytts');
 const speaker = require('jeneric/module/speaker');
+const server = require('jeneric/core/server');
 
 class Hexapod {
 
