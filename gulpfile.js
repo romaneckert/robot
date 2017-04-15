@@ -21,8 +21,10 @@ gulp.task('clean', () => {
 
 gulp.task('vendor', () => {
 
-    let files = ['node_modules/jquery/dist/jquery.min.js',
-                 'node_modules/three/build/three.min.js'];
+    let files = [
+        'node_modules/socket.io-client/dist/socket.io.min.js',
+        'node_modules/jquery/dist/jquery.min.js'
+    ];
 
     return gulp.src(files)
         .pipe(concat('vendor.min.js'))
