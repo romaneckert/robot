@@ -4,12 +4,13 @@ const config = require('jeneric/core/config');
 const logger = require('jeneric/module/logger');
 const marytts = require('jeneric/module/marytts');
 const speaker = require('jeneric/module/speaker');
-const server = require('jeneric/core/server');
+const Server = require('jeneric/core/server');
 
 class Hexapod {
 
     constructor() {
 
+        this._server = new Server(this.handleIOConnection.bind(this));
         this._check = false;
         this._initialCheck = 0;
 
@@ -37,6 +38,16 @@ class Hexapod {
         }
 
         if(this._check && 0 === this._initialCheck) this._initialCheck = 1;
+    }
+
+    handleIOConnection(socket) {
+        logger.debug('new client connection');
+        socket.on('data', this.handleIODataConnection);
+    }
+
+    handleIODataConnection(data) {
+        logger.debug('new data input', data);
+        console.log(data);
     }
 }
 

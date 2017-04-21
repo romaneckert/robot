@@ -5,7 +5,7 @@ Interface.Main = {
     init : function() {
         $(document).ready(this.handleDocumentReady.bind(this));
 
-        this._socket = io('http://' + window.location.hostname + ':' + window.location.port);
+        this._socket = io(window.location.href);
 
     },
 
@@ -19,7 +19,7 @@ Interface.Main = {
     },
 
     handleButtonClick : function(e) {
-        this._socket.emit('input', {'test' : 'test'})
+        this._socket.emit('data', {'test' : 'test'})
     }
 };
 

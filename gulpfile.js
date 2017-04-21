@@ -54,8 +54,8 @@ gulp.task('scss', () => {
   .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('npm-install', function (cb) {
-    exec('rm -R node_modules/jeneric || true && npm install', function (err, stdout, stderr) {
+gulp.task('npm-install', (cb) => {
+    exec('rm -R node_modules/jeneric || true && npm install', (err, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         cb(err);
