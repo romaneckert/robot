@@ -1,8 +1,4 @@
 {
-  "logger": {
-    "directory": "var/logs/"
-  },
-
   "marytts": {
     "directory": "var/sounds",
     "host": "127.0.0.1",
