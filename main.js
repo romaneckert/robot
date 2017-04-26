@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const Exception = require('jeneric/core/exception');
 const Application = require('jeneric/core/application');
 
 class Main extends Application {
@@ -9,9 +8,14 @@ class Main extends Application {
 
         super();
 
-        console.log(this.logger);
+        this.services.logger.info('info message');
 
-        //throw new Exception({'test' : 'test'});
+        this.services.logger.debug('debug message');
+
+        this.services.logger.debug('debug message', false);
+        this.services.logger.debug(true, false);
+
+        this.error('an error occurred', {'test':'test'});
 
         //setInterval(this.update.bind(this), 200);
     }

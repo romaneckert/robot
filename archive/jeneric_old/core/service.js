@@ -1,9 +1,11 @@
 const Abstract = require('./abstract');
 
-class Logger extends Abstract {
+class Service extends Abstract {
+
     constructor() {
         super();
     }
+
 }
 
-module.exports = Logger;
+module.exports = Service;
