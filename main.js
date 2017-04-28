@@ -8,6 +8,8 @@ class Main extends Application {
 
         super();
 
+        this.pipe.emit('message', 'info');
+
         this.services.logger.info('info message');
 
         this.services.logger.debug('debug message');
@@ -15,7 +17,7 @@ class Main extends Application {
         this.services.logger.debug('debug message', false);
         this.services.logger.debug(true, false);
 
-        this.error('an error occurred', {'test':'test'});
+        //this.error('an error occurred', {'test':'test'});
 
         //setInterval(this.update.bind(this), 200);
     }
