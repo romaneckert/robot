@@ -8,16 +8,12 @@ class Main extends Application {
 
         super();
 
-        this.pipe.emit('message', 'info');
+        this.components.brain.on('data', (data) => {
 
-        this.services.logger.info('info message');
+            this.components.logger.debug(data);
 
-        this.services.logger.debug('debug message');
-
-        this.services.logger.debug('debug message', false);
-        this.services.logger.debug(true, false);
-
-        //this.error('an error occurred', {'test':'test'});
+            console.log(data);
+        });
 
         //setInterval(this.update.bind(this), 200);
     }
