@@ -8,9 +8,9 @@ class Main extends Application {
 
         super();
 
-        this.components.brain.on('data', (data) => {
+        this.modules.brain.on('data', (data) => {
 
-            this.components.logger.debug(data);
+            this.modules.logger.debug(data);
 
             console.log(data);
         });
