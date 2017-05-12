@@ -9,6 +9,14 @@ class Application extends JenericApplication {
         return this.modules.logger;
     }
 
+    get speaker() {
+        return this.modules.speaker;
+    }
+
+    get marytts() {
+        return this.modules.marytts;
+    }
+
     get brain() {
         return this.modules.brain;
     }

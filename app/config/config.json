@@ -2,6 +2,12 @@
   "modules": {
     "brain" : {
       "active" : true
+    },
+    "speaker" : {
+      "active" : true
+    },
+    "marytts" : {
+      "active" : true
     }
   }
 }
