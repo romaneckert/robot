@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const Application = require('jeneric/core/application');
+const Application = require('./app/core/application');
 
 class Main extends Application {
 
@@ -8,9 +8,11 @@ class Main extends Application {
 
         super();
 
-        this.modules.brain.on('data', (data) => {
+        this.logger.debug('start application');
 
-            this.modules.logger.debug(data);
+        this.brain.on('data', (data) => {
+
+            this.logger.debug(data);
 
             console.log(data);
         });

@@ -12,7 +12,8 @@ gulp.task('clean', () => {
 
     let dirs = [
         'var/sounds',
-        'var/logs'
+        'var/logs',
+        'node_modules'
     ];
 
     return gulp.src(dirs, {read: false})
