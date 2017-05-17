@@ -8,6 +8,9 @@
     },
     "marytts" : {
       "active" : true
+    },
+    "server" : {
+      "active" : true
     }
   }
 }
