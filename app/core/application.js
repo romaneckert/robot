@@ -17,6 +17,10 @@ class Application extends JenericApplication {
         return this.modules.marytts;
     }
 
+    get server() {
+        return this.modules.server;
+    }
+
     get brain() {
         return this.modules.brain;
     }

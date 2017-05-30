@@ -19,7 +19,7 @@ Interface.Main = {
     },
 
     handleButtonClick : function(e) {
-        this._socket.emit('data', {'test' : 'test'})
+        this._socket.emit('data', {'test' : 'test'});
     }
 };
 

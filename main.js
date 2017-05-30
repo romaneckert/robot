@@ -8,40 +8,60 @@ class Main extends Application {
 
         super();
 
-        this._status = 0;
-
-        this.brain.on('data', (data) => {
-
-            this.logger.debug(data);
-
-        });
-
-        setInterval(this.update.bind(this), 200);
-    }
-
-    update() {
-
-        if(1 === this._status) {
-            this._status = 2;
-            this.speaker.say('Systeme gestartet.');
-        }
-
-        if(!this.systemCheck()) return false;
+        this._initialCheck = false;
+        this._updateInterval = setInterval(this.update.bind(this), 20);
 
     }
 
-    systemCheck() {
+    get systemCheck() {
 
         if(!this.marytts.running) {
             this.marytts.start();
             return false;
         }
 
-        if(0 === this._status) this._status = 1;
-
         return true;
+
     }
 
+    registerListener() {
+        this.server.on('connection', this.handleServerConnection.bind(this));
+        this.server.on('data', this.handleData.bind(this))
+    }
+
+    handleServerConnection() {
+        this.logger.debug('new user connection');
+    }
+
+    handleData(data) {
+        this.logger.debug('new data send', data);
+    }
+
+    update() {
+
+        if(false === this.systemCheck) {
+
+            // check system, if initial check correct but system check not correct stop running update method
+            if(true === this._initialCheck) {
+                this.logger.error('system check false. initial check true. stop running update method.');
+                clearInterval(this._updateInterval);
+                return false;
+            }
+
+            return false;
+
+        }
+
+        // check system and set initial check
+        if(true === this.systemCheck && false === this._initialCheck) {
+            this.speaker.say('Systeme gestartet.');
+            this.logger.info('Systeme gestartet.');
+            this._initialCheck = true;
+            this.registerListener();
+        }
+
+        // do all things
+    }
 }
 
 let main = new Main();

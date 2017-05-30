@@ -1,8 +1,5 @@
 {
   "modules": {
-    "brain" : {
-      "active" : true
-    },
     "speaker" : {
       "active" : true
     },
