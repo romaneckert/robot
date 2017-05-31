@@ -56,7 +56,7 @@ gulp.task('scss', () => {
 });
 
 gulp.task('npm-install', (cb) => {
-    exec('rm -R node_modules/jeneric || true && npm install', (err, stdout, stderr) => {
+    exec('rm -R node_modules/jeneric* || true && npm install', (err, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         cb(err);

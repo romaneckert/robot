@@ -21,8 +21,12 @@ class Application extends JenericApplication {
         return this.modules.server;
     }
 
-    get brain() {
-        return this.modules.brain;
+    persist(object) {
+        return this.modules.entityManager.persist(object);
+    }
+
+    flush() {
+        return this.modules.entityManager.flush();
     }
 }
 

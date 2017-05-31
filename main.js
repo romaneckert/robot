@@ -55,7 +55,7 @@ class Main extends Application {
         // check system and set initial check
         if(true === this.systemCheck && false === this._initialCheck) {
             this.speaker.say('Systeme gestartet.');
-            this.logger.info('Systeme gestartet.');
+            this.logger.info('system start');
             this._initialCheck = true;
             this.registerListener();
         }
