@@ -9,11 +9,13 @@ class Main extends Application {
         super();
 
         this._initialCheck = false;
-        this._loopInterval = setInterval(this.loop.bind(this), 1000);
+        this._loopInterval = setInterval(this.loop.bind(this), 100);
         this._deltaTime = null; // delta time
         this._loopStartTime = null;
         this._lastLoopStartTime = null;
         this._loopEndTime = null;
+        this._loopDurations = [];
+        this._loopAverageDuration = 0;
     }
 
     get systemCheck() {
@@ -42,7 +44,7 @@ class Main extends Application {
 
     loop() {
 
-        this._loopStartTime = process.hrtime()[1];
+        this._loopStartTime = (process.hrtime()[0] * 1e9 + process.hrtime()[1]) / 1e6;
 
         if(false === this.systemCheck) {
 
@@ -71,19 +73,29 @@ class Main extends Application {
             return true;
         }
 
-        console.log('last: ' + (this._lastLoopStartTime / 1000000000));
-        console.log('current: ' + (this._loopStartTime / 1000000000));
-
-
         this._deltaTime = this._loopStartTime - this._lastLoopStartTime;
 
-        console.log('diff: ' + (this._deltaTime / 1000000000));
+        //console.log('diff: ' + this._deltaTime);
 
         this._lastLoopStartTime = this._loopStartTime;
 
-        this._loopEndTime = process.hrtime()[1];
+        this._loopEndTime = (process.hrtime()[0] * 1e9 + process.hrtime()[1]) / 1e6;
 
+        this._loopDurations.push(this._loopEndTime - this._loopStartTime);
+        if(this._loopDurations.length > 100) this._loopDurations.shift();
 
+        console.log(this.loopAverageDuration);
+
+    }
+
+    get loopAverageDuration() {
+
+        let total = 0;
+        for(let i in this._loopDurations) {
+            total += this._loopDurations[i];
+        }
+
+        return total / this._loopDurations.length;
     }
 }
 
