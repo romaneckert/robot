@@ -6,3 +6,4 @@ var/**/*
 node_modules/
 *.map
 vendor/marytts-5.2/log/*
+package-lock.json

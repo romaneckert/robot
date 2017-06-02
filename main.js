@@ -9,8 +9,11 @@ class Main extends Application {
         super();
 
         this._initialCheck = false;
-        this._updateInterval = setInterval(this.update.bind(this), 20);
-
+        this._loopInterval = setInterval(this.loop.bind(this), 1000);
+        this._deltaTime = null; // delta time
+        this._loopStartTime = null;
+        this._lastLoopStartTime = null;
+        this._loopEndTime = null;
     }
 
     get systemCheck() {
@@ -37,14 +40,16 @@ class Main extends Application {
         this.logger.debug('new data send', data);
     }
 
-    update() {
+    loop() {
+
+        this._loopStartTime = process.hrtime()[1];
 
         if(false === this.systemCheck) {
 
             // check system, if initial check correct but system check not correct stop running update method
             if(true === this._initialCheck) {
                 this.logger.error('system check false. initial check true. stop running update method.');
-                clearInterval(this._updateInterval);
+                clearInterval(this._loopInterval);
                 return false;
             }
 
@@ -60,7 +65,25 @@ class Main extends Application {
             this.registerListener();
         }
 
-        // do all things
+        // update date times for calculation in loops
+        if(null === this._lastLoopStartTime) {
+            this._lastLoopStartTime = this._loopStartTime;
+            return true;
+        }
+
+        console.log('last: ' + (this._lastLoopStartTime / 1000000000));
+        console.log('current: ' + (this._loopStartTime / 1000000000));
+
+
+        this._deltaTime = this._loopStartTime - this._lastLoopStartTime;
+
+        console.log('diff: ' + (this._deltaTime / 1000000000));
+
+        this._lastLoopStartTime = this._loopStartTime;
+
+        this._loopEndTime = process.hrtime()[1];
+
+
     }
 }
 
