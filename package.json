@@ -13,6 +13,7 @@
     "gulp-uglify": "2.0.0",
     "jeneric": "file:jeneric",
     "jquery": "^3.2.1",
+    "merge": "^1.2.0",
     "play-sound": "^1.1.1",
     "request": "^2.81.0",
     "slug": "^0.9.1",
