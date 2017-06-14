@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const Application = require('./app/core/application');
+const sleep = require('sleep');
 
 class Main extends Application {
 
@@ -85,6 +86,11 @@ class Main extends Application {
         if(this._loopDurations.length > 100) this._loopDurations.shift();
 
         console.log(this.loopAverageDuration);
+
+        this.pca9685.setPwm(1, 0, 400);
+        sleep.msleep(1000);
+        this.pca9685.setPwm(1, 0, 500);
+        sleep.msleep(1000)
 
     }
 

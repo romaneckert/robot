@@ -8,6 +8,9 @@
     },
     "server" : {
       "active" : true
+    },
+    "pca9685" : {
+      "active" : true
     }
   }
 }

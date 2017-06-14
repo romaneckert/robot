@@ -21,6 +21,10 @@ class Application extends JenericApplication {
         return this.modules.server;
     }
 
+    get pca9685() {
+        return this.modules.pca9685;
+    }
+
     persist(object) {
         return this.modules.entityManager.persist(object);
     }
