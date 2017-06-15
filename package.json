@@ -11,7 +11,7 @@
     "gulp-sass": "^3.0.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "3.0.0",
-    "jeneric": "file:jeneric",
+    "jeneric": "latest",
     "jquery": "^3.2.1",
     "merge": "^1.2.0",
     "play-sound": "^1.1.1",
