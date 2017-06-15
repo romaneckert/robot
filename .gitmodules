@@ -1,4 +1,0 @@
-[submodule "jeneric"]
-	path = jeneric
-	url = https://github.com/romaneckert/jeneric.git
-	branch = master
