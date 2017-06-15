@@ -55,18 +55,10 @@ gulp.task('scss', () => {
   .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('npm-install', (cb) => {
-    exec('rm -R node_modules/jeneric* || true && npm install', (err, stdout, stderr) => {
-        console.log(stdout);
-        console.log(stderr);
-        cb(err);
-    });
-});
-
 gulp.task('watch', () => {
     gulp.watch('src/js/*', ['js']);
     gulp.watch('src/scss/*', ['scss']);
     gulp.watch('jeneric/**/*', ['npm-install']);
 });
 
-gulp.task('default', ['vendor', 'js', 'scss', 'watch', 'npm-install']);
+gulp.task('default', ['vendor', 'js', 'scss', 'watch']);
