@@ -87,9 +87,9 @@ class Main extends Application {
 
         console.log(this.loopAverageDuration);
 
-        this.pca9685.setPwm(1, 0, 400);
+        this.pca9685.setPwm(0, 0, 400);
         sleep.msleep(1000);
-        this.pca9685.setPwm(1, 0, 500);
+        this.pca9685.setPwm(0, 0, 500);
         sleep.msleep(1000)
 
     }
