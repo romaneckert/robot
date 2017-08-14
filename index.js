@@ -9,14 +9,19 @@ class Main extends Application {
 
         super();
 
+        this.kernel.init(require('./app/config/config.js'));
+
         this._initialCheck = false;
-        this._loopInterval = setInterval(this.loop.bind(this), 100);
         this._deltaTime = null; // delta time
         this._loopStartTime = null;
         this._lastLoopStartTime = null;
         this._loopEndTime = null;
         this._loopDurations = [];
         this._loopAverageDuration = 0;
+
+        this.logger.debug('start application');
+
+        //this._loopInterval = setInterval(this.loop.bind(this), 100);
     }
 
     get systemCheck() {
@@ -87,10 +92,10 @@ class Main extends Application {
 
         console.log(this.loopAverageDuration);
 
-        this.pca9685.setPwm(0, 0, 400);
-        sleep.msleep(1000);
-        this.pca9685.setPwm(0, 0, 500);
-        sleep.msleep(1000)
+        //this.pca9685.setPwm(0, 0, 400);
+        //sleep.msleep(1000);
+        //this.pca9685.setPwm(0, 0, 500);
+        //sleep.msleep(1000)
 
     }
 
