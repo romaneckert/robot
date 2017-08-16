@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
-const rename = require('gulp-rename');
+const concat = require('gulp-concat');
 const sourcemaps = require('gulp-sourcemaps');
 const clean = require('gulp-clean');
 const exec = require('gulp-exec');
@@ -25,7 +25,8 @@ const conf = {
         '@jeneric/core': '../jeneric-core',
         '@jeneric/logger': '../jeneric-logger',
         '@jeneric/entities': '../jeneric-entities',
-        '@jeneric/marytts': '../jeneric-marytts'
+        '@jeneric/marytts': '../jeneric-marytts',
+        '@jeneric/server': '../jeneric-server'
     }
 
 };
@@ -34,7 +35,33 @@ const reportOptions = {
     err: true,
     stderr: true,
     stdout: true
+};
+
+linkCommand = 'rm -R node_modules/@jeneric';
+
+for(let module in conf.linkedModules) {
+
+    let command = 'cd ' + conf.linkedModules[module] +
+        ' && npm unlink' +
+        ' && npm link' +
+        ' && rm -R node_modules || true' +
+        ' && npm install' +
+        ' && npm link @jeneric/core';
+
+    let task = module;
+
+    gulp.task(task, () => {
+        return gulp.src('./').pipe(exec(command)).pipe(exec.reporter(reportOptions));
+    });
+
+    linkCommand += ' && npm link ' + module;
 }
+
+gulp.task('link_all', () => {
+    return gulp.src('./').pipe(exec(linkCommand)).pipe(exec.reporter(reportOptions));
+});
+
+gulp.task('link', gulp.series(gulp.parallel('@jeneric/core', '@jeneric/logger', '@jeneric/entities', '@jeneric/marytts', '@jeneric/server'), 'link_all'));
 
 gulp.task('clean', () => {
 
@@ -48,66 +75,26 @@ gulp.task('clean', () => {
         .pipe(clean());
 });
 
-gulp.task('link', (cb) => {
-
-    let command1 = 'cd ' + conf.linkedModules['@jeneric/core'] +
-        ' && npm unlink' +
-        ' && npm link' +
-        ' && rm -R node_modules || true' +
-        ' && npm install';
-
-    let command2 = 'cd ' + conf.linkedModules['@jeneric/logger'] +
-        ' && npm unlink' +
-        ' && npm link' +
-        ' && rm -R node_modules || true' +
-        ' && npm install' +
-        ' && npm link @jeneric/core';
-
-    let command3 = 'cd ' + conf.linkedModules['@jeneric/entities'] +
-        ' && npm unlink' +
-        ' && npm link' +
-        ' && rm -R node_modules || true' +
-        ' && npm install' +
-        ' && npm link @jeneric/core';
-
-    /*
-    let command4 = 'cd ' + conf.linkedModules['@jeneric/marytts'] +
-        ' && npm unlink' +
-        ' && npm link' +
-        ' && rm -R node_modules || true' +
-        ' && npm install' +
-        ' && npm link @jeneric/core';*/
-
-    let command5 = 'rm -R node_modules/@jeneric' +
-        ' && npm link @jeneric/core' +
-        ' && npm link @jeneric/logger' +
-        ' && npm link @jeneric/entities';
-        //' && npm link @jeneric/marytts';
-
-    return gulp.src('./')
-        .pipe(exec(command1))
-        .pipe(exec(command2))
-        .pipe(exec(command3))
-        //.pipe(exec(command4))
-        .pipe(exec(command5))
-        .pipe(exec.reporter(reportOptions));
-
-});
-
 gulp.task('js', () => {
 
     return browserify(conf.browserify)
         .transform('babelify', conf.bablify)
         .bundle()
-        .pipe(fs.createWriteStream('web-app/index.js'));
+        .pipe(fs.createWriteStream('./web/js/index.js'));
 
 });
 
 gulp.task('js-uglify', () => {
 
-    return gulp.src('./web-app/index.js')
+    let files = [
+        'node_modules/socket.io-client/dist/socket.io.js',
+        'node_modules/jquery/dist/jquery.min.js',
+        './web/js/index.js'
+    ];
+
+    return gulp.src(files)
         .pipe(uglify())
-        .pipe(rename('index.min.js'))
+        .pipe(concat('index.min.js'))
         .pipe(gulp.dest('./web/js'));
 
 });
@@ -122,9 +109,7 @@ gulp.task('scss', () => {
 });
 
 gulp.task('watch', () => {
-    gulp.watch('src/js/*', ['js'])
+    gulp.watch('web-app/**/*', gulp.series('js', 'js-uglify'))
 });
 
-gulp.task('default', gulp.series('js', 'js-uglify'));
-
-//gulp.task('default', gulp.series('js', 'js-uglify', gulp.parallel('connect', 'watch')));
+gulp.task('default', gulp.series('js', 'js-uglify', 'watch'));

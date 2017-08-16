@@ -5,8 +5,16 @@ class Application extends AbstractApplication {
         super();
     }
 
-    get logger() {
-        return this.services.logger;
+    get marytts() {
+        return this.services.marytts;
+    }
+
+    get speaker() {
+        return this.services.speaker;
+    }
+
+    get server() {
+        return this.services.server;
     }
 }
 

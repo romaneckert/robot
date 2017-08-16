@@ -5,16 +5,8 @@ class Application extends AbstractApplication {
         super();
     }
 
-    debug(message, meta) {
-        return this.services.logger.debug(message, meta);
-    }
-
-    info(message, meta) {
-        return this.services.logger.info(message, meta);
-    }
-
-    error(message, meta) {
-        return this.services.logger.error(message, meta);
+    get logger() {
+        return this.services.logger;
     }
 }
 

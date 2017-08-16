@@ -1,4 +1,31 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
+const Application = require('./core/application');
 
-},{}]},{},[1]);
+class Main extends Application {
+
+    constructor() {
+        super();
+
+        this._socket = io(window.location.href);
+
+        this.registerEventListener();
+    }
+
+    registerEventListener() {
+        $('body').on('touchmove', this.handleDocumentTouchMove.bind(this));
+        $('.btn').on('click', this.handleButtonClick.bind(this));
+    }
+
+    handleDocumentTouchMove(e) {
+        e.preventDefault();
+    }
+
+    handleButtonClick(e) {
+        e.preventDefault();
+
+        console.log('click');
+
+        this._socket.emit('data', {'test' : 'test'});
+    }
+}
+
+let main = new Main();
