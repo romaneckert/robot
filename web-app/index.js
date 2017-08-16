@@ -23,6 +23,7 @@ class Main extends Application {
         e.preventDefault();
 
         console.log('click');
+        console.log(this._socket);
 
         this._socket.emit('data', {'test' : 'test'});
     }

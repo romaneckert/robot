@@ -37,7 +37,7 @@ const reportOptions = {
     stdout: true
 };
 
-linkCommand = 'rm -R node_modules/@jeneric';
+let linkCommand = 'rm -R node_modules/@jeneric';
 
 for(let module in conf.linkedModules) {
 
@@ -48,9 +48,7 @@ for(let module in conf.linkedModules) {
         ' && npm install' +
         ' && npm link @jeneric/core';
 
-    let task = module;
-
-    gulp.task(task, () => {
+    gulp.task(module, () => {
         return gulp.src('./').pipe(exec(command)).pipe(exec.reporter(reportOptions));
     });
 

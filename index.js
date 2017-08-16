@@ -50,18 +50,16 @@ class Main extends Application {
     }
 
     registerListener() {
-        this.server.on('connection', this.handleServerConnection.bind(this));
-        this.server.on('data', this.handleData.bind(this))
+        this.server.onConnection(this.handleServerConnection.bind(this));
     }
 
-    handleServerConnection() {
+    handleServerConnection(socket) {
         this.logger.info('new user connection');
+
+        socket.on('data', this.handleData.bind(this));
     }
 
     handleData(data) {
-
-        console.log(data);
-
         this.logger.info('new data send', data);
     }
 
