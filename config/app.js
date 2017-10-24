@@ -8,5 +8,10 @@ module.exports = {
                 }
             }
         }
-    }
+    },
+    handler : {
+        log : {
+            class : require('../handler/log')
+        }
+    },
 };
