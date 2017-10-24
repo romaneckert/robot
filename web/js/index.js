@@ -203,6 +203,14 @@ var Main = function (_Application) {
 
         _this._socket = io(window.location.href);
 
+        _this._socket.on('event', function (event) {
+            console.log(event);
+        });
+
+        _this._socket.emit('event', {
+            handler: 'log'
+        });
+
         _this.registerEventListener();
         return _this;
     }

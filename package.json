@@ -8,10 +8,6 @@
   },
   "dependencies": {
     "@jeneric/core": "^1.0.0",
-    "@jeneric/entities": "^1.0.0",
-    "@jeneric/logger": "^1.0.0",
-    "@jeneric/marytts": "^1.0.0",
-    "@jeneric/server": "^1.0.0",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
     "babelify": "^7.3.0",

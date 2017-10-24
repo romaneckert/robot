@@ -7,6 +7,14 @@ class Main extends Application {
 
         this._socket = io(window.location.href);
 
+        this._socket.on('event', function(event) {
+            console.log(event);
+        });
+
+        this._socket.emit('event', {
+            handler : 'log'
+        });
+
         this.registerEventListener();
     }
 

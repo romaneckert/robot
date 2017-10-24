@@ -23,10 +23,10 @@ const conf = {
 
     linkedModules: {
         '@jeneric/core': '../jeneric-core',
-        '@jeneric/logger': '../jeneric-logger',
-        '@jeneric/entities': '../jeneric-entities',
-        '@jeneric/marytts': '../jeneric-marytts',
-        '@jeneric/server': '../jeneric-server'
+        //'@jeneric/logger': '../jeneric-logger',
+        //'@jeneric/entities': '../jeneric-entities',
+        //'@jeneric/marytts': '../jeneric-marytts',
+        //'@jeneric/server': '../jeneric-server'
     }
 
 };
@@ -59,7 +59,7 @@ gulp.task('link_all', () => {
     return gulp.src('./').pipe(exec(linkCommand)).pipe(exec.reporter(reportOptions));
 });
 
-gulp.task('link', gulp.series(gulp.parallel('@jeneric/core', '@jeneric/logger', '@jeneric/entities', '@jeneric/marytts', '@jeneric/server'), 'link_all'));
+gulp.task('link', gulp.series(gulp.parallel('@jeneric/core'), 'link_all'));
 
 gulp.task('clean', () => {
 
