@@ -1,9 +1,14 @@
 const AbstractApplication = require('@jeneric/core/abstract-application');
+const config = require('./config/config.js');
 
 class Main extends AbstractApplication {
 
-    constructor() {
-        super();
+    constructor(config) {
+        super(config);
+    }
+
+    start() {
+        this.logger.info('application started');
 
         //this._socket = null;
         this._socket = io(window.location.href);
@@ -35,4 +40,4 @@ class Main extends AbstractApplication {
     }
 }
 
-let main = new Main();
+let main = new Main(config);
