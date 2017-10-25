@@ -16,7 +16,7 @@ const conf = {
     },
 
     bablify: {
-        presets: [[require.resolve('babel-preset-es2015')]],
+        presets: [[require.resolve('babel-preset-env')]],
         global: true,
         plugins: [require.resolve("babel-plugin-transform-object-assign")]
     },
@@ -78,7 +78,7 @@ gulp.task('js', () => {
     return browserify(conf.browserify)
         .transform('babelify', conf.bablify)
         .bundle()
-        .pipe(fs.createWriteStream('./web/index.js'));
+        .pipe(fs.createWriteStream('public/js/index.js'));
 
 });
 
