@@ -7,7 +7,7 @@ class LogHandler extends AbstractHandler {
 
     handle(event) {
         this.repositories.log.find({}, function(logs) {
-            this.server.send(event.socket, {
+            this.server.send(event.socketId, {
                 handler : 'log',
                 data : {
                     logs : logs

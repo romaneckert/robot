@@ -1,0 +1,1 @@
+[2017-10-25 19:22:10] [critical] listen EACCES 0.0.0.0:80 [Server.constructor /jeneric-core/service/server.js:38 <- Kernel.init /jeneric-core/kernel.js:36 <- AbstractApplication.constructor /jeneric-core/abstract-application.js:6 <- Main.constructor /robot/app/index.js:8 <- Object.<anonymous> /robot/app/index.js:50]

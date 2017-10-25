@@ -9,7 +9,7 @@ class Main extends Application {
 
         super();
 
-        this.kernel.init(require('./config/config.js'));
+        this.kernel.init(require('./app/config/config.js'));
 
         this.logger.debug('===================================================');
         this.logger.debug('start application');
