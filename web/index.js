@@ -14,7 +14,7 @@ class Main extends AbstractApplication {
         this._socket = io(window.location.href);
 
         this._socket.on('event', function(event) {
-            console.log(event);
+            console.log(event.data.logs[0].code);
         });
 
         this._socket.emit('event', {
