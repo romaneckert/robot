@@ -1,4 +1,4 @@
-const AbstractHandler = require('@jeneric/core/abstract-handler');
+const AbstractHandler = require('@jeneric/app/abstract-handler');
 
 class LogHandler extends AbstractHandler {
     constructor() {
