@@ -9,6 +9,11 @@ class Main extends AbstractApplication {
 
     start() {
         this.logger.info('application started');
+        this.say('application started');
+    }
+
+    say(message) {
+        return this.services.speaker.say(message);
     }
 }
 

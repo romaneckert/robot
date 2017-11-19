@@ -21,12 +21,10 @@ const conf = {
         plugins: [require.resolve("babel-plugin-transform-object-assign")]
     },
 
-    linkedModules: {
-        '@jeneric/core': '../jeneric-core',
-        //'@jeneric/logger': '../jeneric-logger',
-        //'@jeneric/entities': '../jeneric-entities',
-        //'@jeneric/marytts': '../jeneric-marytts',
-        //'@jeneric/server': '../jeneric-server'
+    linkedModules : {
+        'jeneric-app' : '@jeneric/app',
+        'jeneric-web' : '@jeneric/web',
+        'jeneric-marytts' : '@jeneric/marytts'
     }
 
 };
@@ -37,29 +35,30 @@ const reportOptions = {
     stdout: true
 };
 
-let linkCommand = 'rm -R node_modules/@jeneric';
+gulp.task('link', () => {
 
-for(let module in conf.linkedModules) {
+    let commands = [];
+    commands.push('rm -R node_modules/@jeneric');
 
-    let command = 'cd ' + conf.linkedModules[module] +
-        ' && npm unlink' +
-        ' && npm link' +
-        ' && rm -R node_modules || true' +
-        ' && npm install' +
-        ' && npm link @jeneric/core';
+    for(let moduleName in conf.linkedModules) {
 
-    gulp.task(module, () => {
-        return gulp.src('./').pipe(exec(command)).pipe(exec.reporter(reportOptions));
-    });
+        let packageName = conf.linkedModules[moduleName];
 
-    linkCommand += ' && npm link ' + module;
-}
+        commands.push('cd ../' + moduleName + ' && npm unlink && npm link');
+        commands.push('npm link ' + packageName);
+        commands.push('echo "linked: ' + packageName + '"');
+    }
 
-gulp.task('link_all', () => {
-    return gulp.src('./').pipe(exec(linkCommand)).pipe(exec.reporter(reportOptions));
+    let stream = gulp.src('./');
+
+    for(let command of commands) {
+        stream = stream.pipe(exec(command));
+    }
+
+    stream = stream.pipe(exec.reporter(reportOptions));
+
+    return stream;
 });
-
-gulp.task('link', gulp.series(gulp.parallel('@jeneric/core'), 'link_all'));
 
 gulp.task('clean', () => {
 

@@ -7,6 +7,14 @@ module.exports = {
                     database : 'robot'
                 }
             }
+        },
+        marytts : {
+            class : require('@jeneric/marytts/service/marytts')
+        },
+        server : {
+            config : {
+                port : 3030
+            }
         }
     },
     handler : {
