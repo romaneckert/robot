@@ -1,4 +1,4 @@
-const AbstractApplication = require('@jeneric/core/abstract-application');
+const AbstractApplication = require('@jeneric/web/abstract-application');
 const config = require('./config/config.js');
 
 class Main extends AbstractApplication {
@@ -10,11 +10,10 @@ class Main extends AbstractApplication {
     start() {
         this.logger.info('application started');
 
-        //this._socket = null;
         this._socket = io(window.location.href);
 
         this._socket.on('event', function(event) {
-            console.log(event.data.logs[0].code);
+            console.log(event.data.logs[0]);
         });
 
         this._socket.emit('event', {

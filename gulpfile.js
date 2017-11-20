@@ -24,7 +24,7 @@ const conf = {
     linkedModules : {
         'jeneric-app' : '@jeneric/app',
         'jeneric-web' : '@jeneric/web',
-        'jeneric-marytts' : '@jeneric/marytts'
+        //'jeneric-marytts' : '@jeneric/marytts'
     }
 
 };
@@ -38,11 +38,12 @@ const reportOptions = {
 gulp.task('link', () => {
 
     let commands = [];
-    commands.push('rm -R node_modules/@jeneric');
 
     for(let moduleName in conf.linkedModules) {
 
         let packageName = conf.linkedModules[moduleName];
+
+        commands.push('rm -R node_modules/' + packageName);
 
         commands.push('cd ../' + moduleName + ' && npm unlink && npm link');
         commands.push('npm link ' + packageName);
