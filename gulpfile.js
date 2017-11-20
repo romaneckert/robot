@@ -85,15 +85,27 @@ gulp.task('js', () => {
 gulp.task('js-uglify', () => {
 
     let files = [
-        'node_modules/three/build/three.min.js',
-        'node_modules/socket.io-client/dist/socket.io.js',
-        'node_modules/jquery/dist/jquery.min.js',
         './public/js/index.js'
     ];
 
     return gulp.src(files)
         .pipe(uglify())
         .pipe(concat('index.min.js'))
+        .pipe(gulp.dest('./public/js'));
+
+});
+
+gulp.task('js-uglify-vendor', () => {
+
+    let files = [
+        'node_modules/three/build/three.min.js',
+        'node_modules/socket.io-client/dist/socket.io.js',
+        'node_modules/jquery/dist/jquery.min.js'
+    ];
+
+    return gulp.src(files)
+        .pipe(uglify())
+        .pipe(concat('vendor.min.js'))
         .pipe(gulp.dest('./public/js'));
 
 });
@@ -111,4 +123,4 @@ gulp.task('watch', () => {
     gulp.watch('web/**/*', gulp.series('scss', 'js', 'js-uglify'))
 });
 
-gulp.task('default', gulp.series('scss', 'js', 'js-uglify', 'watch'));
+gulp.task('default', gulp.series('scss', 'js', 'js-uglify', 'js-uglify-vendor', 'watch'));
