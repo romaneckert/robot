@@ -9,12 +9,18 @@ module.exports = {
             }
         },
         marytts : {
-            class : require('@jeneric/marytts/service/marytts')
+            class : require('@jeneric/marytts/service/marytts'),
+            config : {
+                bin : '../vendor/marytts-5.2/bin/marytts-server'
+            }
         },
         server : {
             config : {
                 port : 3030
             }
+        },
+        speaker : {
+            class : require('../service/speaker')
         }
     },
     handler : {

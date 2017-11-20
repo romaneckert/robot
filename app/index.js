@@ -9,7 +9,8 @@ class Main extends AbstractApplication {
 
     start() {
         this.logger.info('application started');
-        this.say('application started');
+        this.say('Systeme erfolgreich gestartet.');
+        this.say('Erwarte Eingabe.');
     }
 
     say(message) {

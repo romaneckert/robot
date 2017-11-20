@@ -14,12 +14,16 @@ class Speaker extends AbstractService {
 
     say(message) {
 
+        let entry = {
+            message : message,
+            filePath : null,
+        };
+
+        this._queue.push(entry);
+
         this.services.marytts.textToSpeech(message, (message, filePath) => {
 
-            this._queue.push({
-                message: message,
-                filePath: filePath
-            });
+            entry.filePath = filePath;
 
             this._speak();
 
@@ -27,16 +31,17 @@ class Speaker extends AbstractService {
     }
 
     _speak() {
-        if(this._isSpeaking || 0 === this._queue.length) return false;
+        if(this._isSpeaking || 0 === this._queue.length || this._queue[0].filePath === null) return false;
 
         this._isSpeaking = true;
 
         let entry = this._queue.shift();
 
+        this.logger.debug(entry.message);
+
         player.play(entry.filePath, (error) => {
             if (error) throw new Error(error);
 
-            this.services.logger.info(entry.message);
             this._isSpeaking = false;
             this._speak();
 
