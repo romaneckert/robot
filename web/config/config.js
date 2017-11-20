@@ -9,6 +9,11 @@ module.exports = {
             deviceorientation : {
                 class : require('../handler/window/deviceorientation')
             }
+        },
+        socket : {
+            log : {
+                class : require('../handler/socket/log')
+            }
         }
     }
 };
