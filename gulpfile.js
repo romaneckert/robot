@@ -85,6 +85,7 @@ gulp.task('js', () => {
 gulp.task('js-uglify', () => {
 
     let files = [
+        'node_modules/three/build/three.min.js',
         'node_modules/socket.io-client/dist/socket.io.js',
         'node_modules/jquery/dist/jquery.min.js',
         './public/js/index.js'

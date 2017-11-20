@@ -24,6 +24,7 @@
     "jquery": "^3.2.1",
     "play-sound": "^1.1.1",
     "sleep": "^5.1.1",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "three": "^0.88.0"
   }
 }
