@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const AbstractApplication = require('@jeneric/app/abstract-application');
+const AbstractApplication = require('@jeneric/core/app/abstract-application');
 const config = require('./config/config.js');
 
 class Main extends AbstractApplication {

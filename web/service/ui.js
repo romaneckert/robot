@@ -1,4 +1,4 @@
-const AbstractService = require('@jeneric/web/abstract-service');
+const AbstractService = require('@jeneric/core/web/abstract-service');
 
 class Scene extends AbstractService {
 

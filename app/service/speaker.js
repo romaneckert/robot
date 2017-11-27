@@ -1,5 +1,5 @@
 const player = require('play-sound')(opts = {});
-const AbstractService = require('@jeneric/app/abstract-service');
+const AbstractService = require('@jeneric/core/app/abstract-service');
 
 /** speaker module */
 class Speaker extends AbstractService {

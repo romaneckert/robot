@@ -1,4 +1,4 @@
-const AbstractHandler = require('@jeneric/web/abstract-handler');
+const AbstractHandler = require('@jeneric/core/web/abstract-handler');
 
 class DeviceOrientationHandler extends AbstractHandler {
     constructor() {
