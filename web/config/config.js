@@ -1,13 +1,17 @@
 module.exports = {
     services : {
-        scene : {
-            class : require('../service/scene')
-        },
+        /*
+        ui : {
+            class : require('../service/ui')
+        },*/
     },
     handler: {
         window : {
             deviceorientation : {
                 class : require('../handler/window/deviceorientation')
+            },
+            resize : {
+                class : require('../handler/window/resize')
             }
         },
         socket : {
