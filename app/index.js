@@ -17,7 +17,7 @@ class Main extends AbstractApplication {
 
     loop() {
 
-        this.logger.debug('loop');
+        this.logger.debug('loop ' + Date.now());
 
         this.server.broadcast({
             handler : 'log'
