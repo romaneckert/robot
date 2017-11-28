@@ -8,6 +8,9 @@ class Main extends AbstractApplication {
     }
 
     start() {
+
+        // TODO: Listen on logger and broadcast new logs
+
         this.logger.info('application started');
         this.say('Systeme erfolgreich gestartet.');
         this.say('Erwarte Eingabe.');
