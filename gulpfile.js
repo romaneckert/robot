@@ -22,9 +22,7 @@ const conf = {
     },
 
     linkedModules : {
-        'jeneric-app' : '@jeneric/app',
-        'jeneric-web' : '@jeneric/web',
-        //'jeneric-marytts' : '@jeneric/marytts'
+        'jeneric-core' : '@jeneric/core',
     }
 
 };
