@@ -3,6 +3,7 @@ const AbstractApplication = require('@jeneric/core/app/abstract-application');
 const config = require('./config/config.js');
 
 class Main extends AbstractApplication {
+
     constructor(config) {
         super(config);
     }
@@ -32,4 +33,4 @@ class Main extends AbstractApplication {
     }
 }
 
-let main = new Main(config);
+new Main(config);

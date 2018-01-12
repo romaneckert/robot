@@ -6,7 +6,7 @@ class LogHandler extends AbstractHandler {
     }
 
     handle(event) {
-        this.logger.debug(event);
+        this.logger.info(event);
     }
 }
 
