@@ -14,7 +14,6 @@ class Main extends AbstractApplication {
 
         this.logger.info('application started');
         this.say('Systeme erfolgreich gestartet.');
-        this.say('Erwarte Eingabe.');
 
         setInterval(this.loop.bind(this), 2000);
     }
@@ -24,7 +23,10 @@ class Main extends AbstractApplication {
         this.logger.debug('loop ' + Date.now());
 
         this.server.broadcast({
-            handler : 'log'
+            handler : 'log',
+            data : {
+                test : 1
+            }
         });
     }
 
