@@ -1,21 +1,25 @@
 module.exports = {
-    services : {
-        logList : {
-            class : require('../service/log-list')
+    services: {
+        logList: {
+            class: require('../service/log-list')
         }
     },
     handler: {
-        window : {
-            deviceorientation : {
-                class : require('../handler/window/deviceorientation')
-            },
-            resize : {
-                class : require('../handler/window/resize')
+        document: {
+            'log-list': {
+                scroll: {
+                    class: require('../handler/document/log-list/scroll')
+                }
             }
         },
-        socket : {
-            log : {
-                class : require('../handler/socket/log')
+        socket: {
+            log: {
+                class: require('../handler/socket/log')
+            }
+        },
+        window: {
+            resize: {
+                class: require('../handler/window/resize')
             }
         }
     }

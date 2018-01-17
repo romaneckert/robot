@@ -11,11 +11,11 @@ class Scene extends AbstractService {
 
     add(log) {
 
-        console.log(log);
-
         let $entryMarkup = $('<div class="log-list-entry">' + log.message + '</div>');
 
         this._$list.append($entryMarkup);
+
+        this._$list.scrollTop( this._$list.outerHeight())
     }
 
 }

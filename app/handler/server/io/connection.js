@@ -12,7 +12,7 @@ class CustomConnectionHandler extends ConnectionHandler {
         this.data.log.find(
             {},
             {
-                limit: 10,
+                limit: 20,
                 sort: {
                     $natural : -1
                 }
