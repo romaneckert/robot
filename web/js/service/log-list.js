@@ -5,16 +5,17 @@ class Scene extends AbstractService {
     constructor() {
         super();
 
-        this._$list = $('.log-list');
+        this._$list = $('#log-list');
 
     }
 
     add(log) {
 
-        let $entryMarkup = $('<div>' + log.title + '</div>');
+        console.log(log);
+
+        let $entryMarkup = $('<div class="log-list-entry">' + log.message + '</div>');
 
         this._$list.append($entryMarkup);
-        console.log(entry);
     }
 
 }
