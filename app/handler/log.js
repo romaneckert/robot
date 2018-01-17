@@ -17,6 +17,7 @@ class LogHandler extends AbstractHandler {
                 }
             });
         }.bind(this));
+
     }
 }
 

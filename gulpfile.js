@@ -12,7 +12,7 @@ const fs = require('fs');
 const conf = {
 
     browserify: {
-        entries: ['./web/index.js']
+        entries: ['./web/js/index.js']
     },
 
     bablify: {
@@ -109,7 +109,7 @@ gulp.task('js-uglify-vendor', () => {
 });
 
 gulp.task('scss', () => {
-    return gulp.src('web/resources/scss/style.scss')
+    return gulp.src('web/scss/style.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(concat('style.min.css'))
