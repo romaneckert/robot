@@ -8,6 +8,7 @@ const exec = require('gulp-exec');
 const browserify = require('browserify');
 const babelify = require('babelify');
 const fs = require('fs');
+const pug = require('gulp-pug');
 
 const conf = {
 
@@ -23,6 +24,15 @@ const conf = {
 
     linkedModules : {
         'jeneric-core' : '@jeneric/core',
+    },
+
+    pug: {
+        src: './web/pug/',
+        //partials: './web/pug/partials/',
+        dest: './public/',
+        conf: {
+            pretty: true
+        }
     }
 
 };
@@ -69,6 +79,16 @@ gulp.task('clean', () => {
 
     return gulp.src(dirs, {read: false})
         .pipe(clean());
+});
+
+/**
+ * pug
+ */
+gulp.task('pug', () => {
+
+    return gulp.src(conf.pug.src + '**/*.pug')
+        .pipe(pug(conf.pug.conf))
+        .pipe(gulp.dest(conf.pug.dest));
 });
 
 gulp.task('js', () => {
@@ -118,7 +138,19 @@ gulp.task('scss', () => {
 });
 
 gulp.task('watch', () => {
-    gulp.watch('web/**/*', gulp.series('scss', 'js', 'js-uglify'))
+    gulp.watch('web/**/*', gulp.series('pug', 'scss', 'js', 'js-uglify'))
 });
 
-gulp.task('default', gulp.series('scss', 'js', 'js-uglify', 'js-uglify-vendor', 'watch'));
+gulp.task(
+    'default',
+    gulp.series(
+        gulp.parallel(
+            'pug',
+            'scss',
+            'js'
+        ),
+        'js-uglify',
+        'js-uglify-vendor',
+        'watch'
+    )
+);
