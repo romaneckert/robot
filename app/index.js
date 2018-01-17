@@ -10,12 +10,11 @@ class Main extends AbstractApplication {
 
     start() {
 
-        // TODO: Listen on logger and broadcast new logs
-
-        this.logger.info('application started');
         this.say('Systeme erfolgreich gestartet.');
 
         setInterval(this.loop.bind(this), 2000);
+        this.logger.info('application started');
+
     }
 
     loop() {
@@ -28,6 +27,7 @@ class Main extends AbstractApplication {
                 test : 1
             }
         });
+
     }
 
     say(message) {
