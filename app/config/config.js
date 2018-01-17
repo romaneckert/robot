@@ -24,6 +24,11 @@ module.exports = {
         }
     },
     handler: {
+        logger: {
+            log: {
+                class: require('../handler/logger/log')
+            }
+        },
         server: {
             io: {
                 connection: {
