@@ -1,23 +1,48 @@
 const AbstractService = require('@jeneric/core/web/abstract-service');
 
-class Scene extends AbstractService {
+class LogList extends AbstractService {
 
     constructor() {
         super();
 
         this._$list = $('#log-list');
+        this._autoScroll = true;
 
+    }
+
+    get scrollHeight() {
+        return this._$list[0].scrollHeight;
+    }
+
+    get scrollTop() {
+        return this._$list.scrollTop();
+    }
+
+    get height() {
+        return this._$list.outerHeight();
     }
 
     add(log) {
 
-        let $entryMarkup = $('<div class="log-list-entry">' + log.message + '</div>');
+        let $entryElement = this.services.template.getTemplate('log-list-entry', log);
 
-        this._$list.append($entryMarkup);
+        this._$list.append($entryElement);
 
-        this._$list.scrollTop( this._$list.outerHeight())
+        if(this._autoScroll) {
+            this._$list.scrollTop(this.scrollHeight)
+        }
+
+    }
+
+    checkAutoScroll() {
+
+        if(Math.floor(this.scrollHeight - this.height) > this.scrollTop) {
+            this._autoScroll = false;
+        } else {
+            this._autoScroll = true;
+        }
     }
 
 }
 
-module.exports = Scene;
+module.exports = LogList;

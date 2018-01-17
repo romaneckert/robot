@@ -3,7 +3,7 @@ const AbstractHandler = require('@jeneric/core/web/abstract-handler');
 class ScrollHandler extends AbstractHandler {
 
     handle(event) {
-        console.log('scroll event on log list');
+        this.services.logList.checkAutoScroll();
     }
 }
 
