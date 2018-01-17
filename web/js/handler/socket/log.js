@@ -6,7 +6,11 @@ class LogHandler extends AbstractHandler {
     }
 
     handle(event) {
-        this.logger.info(event.data);
+
+        for(let log of event.data.logs) {
+            this.services.logList.add(log);
+        }
+
     }
 }
 

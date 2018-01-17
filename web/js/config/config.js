@@ -1,9 +1,8 @@
 module.exports = {
     services : {
-        /*
-        ui : {
-            class : require('../service/ui')
-        },*/
+        logList : {
+            class : require('../service/log-list')
+        }
     },
     handler: {
         window : {

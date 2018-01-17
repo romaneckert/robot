@@ -21,13 +21,6 @@ class Main extends AbstractApplication {
 
         this.logger.debug('loop ' + Date.now());
 
-        this.server.broadcast({
-            handler : 'log',
-            data : {
-                test : 1
-            }
-        });
-
     }
 
     say(message) {

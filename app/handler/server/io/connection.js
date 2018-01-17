@@ -9,16 +9,25 @@ class CustomConnectionHandler extends ConnectionHandler {
 
         super.handle(socket);
 
-        this.data.log.find({}, function(logs) {
-
-            this.server.broadcast({
-                handler : 'log',
-                data : {
-                    logs : logs
+        this.data.log.find(
+            {},
+            {
+                limit: 10,
+                sort: {
+                    $natural : -1
                 }
-            });
+            },
+            function(logs) {
 
-        }.bind(this));
+                this.server.broadcast({
+                    handler : 'log',
+                    data : {
+                        logs : logs
+                    }
+                });
+
+            }.bind(this)
+        );
 
     }
 }
