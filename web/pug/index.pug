@@ -14,12 +14,14 @@ html
 
     body
 
-        #log-list.log-list
+        .page
 
-        template#log-list-entry
-            .entry
-                .message(data-attribute="message")
-                .code(data-attribute="code")
+            #log-list.log-list
+
+            template#log-list-entry
+                .entry
+                    .message(data-attribute="message")
+                    .code(data-attribute="code")
 
         script(src="/js/vendor.min.js")
         script(src="/js/index.min.js")

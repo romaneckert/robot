@@ -29,6 +29,8 @@ class CustomConnectionHandler extends ConnectionHandler {
             }.bind(this)
         );
 
+        this.services.speaker.say('Neues Gerät verbunden.');
+
     }
 }
 
