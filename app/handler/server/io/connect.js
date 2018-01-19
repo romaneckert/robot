@@ -1,6 +1,6 @@
-const ConnectionHandler = require('@jeneric/core/app/handler/server/io/connection');
+const ConnectHandler = require('@jeneric/core/app/handler/server/io/connect');
 
-class CustomConnectionHandler extends ConnectionHandler {
+class CustomConnectHandler extends ConnectHandler {
     constructor() {
         super();
     }
@@ -34,4 +34,4 @@ class CustomConnectionHandler extends ConnectionHandler {
     }
 }
 
-module.exports = CustomConnectionHandler;
+module.exports = CustomConnectHandler;

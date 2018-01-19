@@ -31,8 +31,8 @@ module.exports = {
         },
         server: {
             io: {
-                connection: {
-                    class: require('../handler/server/io/connection')
+                connect: {
+                    class: require('../handler/server/io/connect')
                 }
             }
         }
