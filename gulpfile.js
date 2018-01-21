@@ -9,6 +9,9 @@ const browserify = require('browserify');
 const babelify = require('babelify');
 const fs = require('fs');
 const pug = require('gulp-pug');
+const fsUtil = require('@jeneric/core/app/util/fs');
+const del = require('del');
+const path = require('path');
 
 const conf = {
 
@@ -22,8 +25,8 @@ const conf = {
         plugins: [require.resolve("babel-plugin-transform-object-assign")]
     },
 
-    linkedModules : {
-        'jeneric-core' : '@jeneric/core',
+    linkedModules: {
+        'jeneric-core': '@jeneric/core',
     },
 
     pug: {
@@ -33,21 +36,41 @@ const conf = {
         conf: {
             pretty: true
         }
-    }
+    },
+
+    js: {
+        src: './src/js/',
+        dest: './public/js/'
+    },
+
+    img: {
+        src: './web/img',
+        dest: './public/img'
+    },
+
+    reportOptions: {
+        err: true,
+        stderr: true,
+        stdout: true
+    },
+
+    publicPath: './public'
 
 };
 
-const reportOptions = {
-    err: true,
-    stderr: true,
-    stdout: true
-};
+gulp.task('init', (cb) => {
+    del.sync(conf.publicPath);
+    fs.mkdirSync(conf.publicPath);
+    fs.mkdirSync(conf.js.dest);
+    fsUtil.copySync(path.join(__dirname, conf.img.src), path.join(__dirname, conf.img.dest));
+    cb();
+});
 
 gulp.task('link', () => {
 
     let commands = [];
 
-    for(let moduleName in conf.linkedModules) {
+    for (let moduleName in conf.linkedModules) {
 
         let packageName = conf.linkedModules[moduleName];
 
@@ -60,11 +83,11 @@ gulp.task('link', () => {
 
     let stream = gulp.src('./');
 
-    for(let command of commands) {
+    for (let command of commands) {
         stream = stream.pipe(exec(command));
     }
 
-    stream = stream.pipe(exec.reporter(reportOptions));
+    stream = stream.pipe(exec.reporter(conf.reportOptions));
 
     return stream;
 });
@@ -143,6 +166,7 @@ gulp.task('watch', () => {
 gulp.task(
     'default',
     gulp.series(
+        'init',
         gulp.parallel(
             'pug',
             'scss',

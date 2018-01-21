@@ -26,5 +26,8 @@
     "play-sound": "^1.1.2",
     "sleep": "^5.1.1",
     "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "del": "^3.0.0"
   }
 }
