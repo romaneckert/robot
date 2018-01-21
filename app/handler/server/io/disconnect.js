@@ -1,6 +1,6 @@
-const ConnectHandler = require('@jeneric/core/app/handler/server/io/connect');
+const DisconnectHandler = require('@jeneric/core/app/handler/server/io/disconnect');
 
-class CustomDisconnectHandler extends ConnectHandler {
+class CustomDisconnectHandler extends DisconnectHandler {
     constructor() {
         super();
     }
