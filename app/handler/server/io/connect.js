@@ -17,7 +17,7 @@ class CustomConnectHandler extends ConnectHandler {
                     $natural : -1
                 }
             },
-            function(logs) {
+            (logs) => {
 
                 this.server.broadcast({
                     handler : 'log',
@@ -26,7 +26,7 @@ class CustomConnectHandler extends ConnectHandler {
                     }
                 });
 
-            }.bind(this)
+            }
         );
 
         this.services.speaker.say('Neues Gerät verbunden.');
