@@ -8,7 +8,9 @@ class LogHandler extends AbstractHandler {
     handle(event) {
 
         for(let log of event.data.logs) {
-            this.services.logList.add(log);
+            if(log.code !== 8) {
+                this.services.logList.add(log);
+            }
         }
 
     }

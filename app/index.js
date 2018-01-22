@@ -12,7 +12,7 @@ class Main extends AbstractApplication {
 
         this.say('Systeme erfolgreich gestartet.');
 
-        setInterval(this.loop.bind(this), 2000);
+        setInterval(this.loop.bind(this), 5000);
         this.logger.info('application started');
 
     }

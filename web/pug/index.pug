@@ -20,10 +20,9 @@ html
             #log-list.log-list
 
             template#log-list-entry
-                .entry
+                .entry(data-id data-code)
                     .id(data-attribute="id")
                     .message(data-attribute="message")
-                    .code(data-attribute="code")
                     .date(data-attribute="date")
 
         script(src="/js/vendor.min.js")
