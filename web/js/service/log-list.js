@@ -25,11 +25,14 @@ class LogList extends AbstractService {
 
     add(log) {
 
-        console.log(log.message + ' (' + log.code + ')');
-
         let sameLog = true;
 
         for(let logInHistory of this._logHistory) {
+
+            if(log.code === logInHistory.code && log.message === logInHistory.message && log.module === log.module) {
+                console.log(log, 'new log');
+                console.log(logInHistory, 'history log');
+            }
 
             if(log.code !== logInHistory.code) sameLog = false;
             if(log.date !== logInHistory.date) sameLog = false;
@@ -39,6 +42,8 @@ class LogList extends AbstractService {
         }
 
         if(sameLog && this._logHistory.length > 0) return false;
+
+        this._logHistory.push(log);
 
         let $entryElement = this.services.template.getTemplate('log-list-entry', log);
 

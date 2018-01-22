@@ -6,7 +6,7 @@ class ResizeHandler extends AbstractHandler {
     }
 
     handle(event) {
-        this.services.ui.update();
+
     }
 }
 

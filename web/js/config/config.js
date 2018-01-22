@@ -10,11 +10,6 @@ module.exports = {
                 scroll: {
                     class: require('../handler/document/log-list/scroll')
                 }
-            },
-            page: {
-                'swipe-left': {
-                    class: require('../handler/document/page/swipe-left')
-                }
             }
         },
         socket: {
