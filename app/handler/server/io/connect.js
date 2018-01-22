@@ -9,6 +9,7 @@ class CustomConnectHandler extends ConnectHandler {
 
         super.handle(socket);
 
+        /**
         this.data.log.find(
             {},
             {
@@ -27,9 +28,16 @@ class CustomConnectHandler extends ConnectHandler {
                 });
 
             }
-        );
+        );**/
 
         this.services.speaker.say('Neues Gerät verbunden.');
+
+        this.server.broadcast({
+            handler : 'log',
+            data : {
+                logs : this.logger.history
+            }
+        });
 
     }
 }
