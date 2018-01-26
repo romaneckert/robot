@@ -40,12 +40,15 @@ class LogList extends AbstractService {
 
         this._logHistory.push(log);
 
-        this._$list.find('*').remove();
+        //this._$list.find('*').remove();
 
-        for(let logEntry in this._logHistory) {
-            let $entryElement = this.services.template.getTemplate('log-list-entry', logEntry);
-            this._$list.append($entryElement);
-        }
+        /*
+        for(let logEntry of this._logHistory) {
+
+        }*/
+
+        let $entryElement = this.services.template.getTemplate('log-list-entry', log);
+        this._$list.append($entryElement);
 
         if(this._autoScroll) {
             this._$list.scrollTop(this.scrollHeight)

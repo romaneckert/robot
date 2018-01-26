@@ -1,13 +1,13 @@
 const AbstractHandler = require('@jeneric/core/web/abstract-handler');
 
-class ResizeHandler extends AbstractHandler {
+class TouchstartHandler extends AbstractHandler {
     constructor() {
         super();
     }
 
     handle(event) {
-        this.services.pages.update();
+        this.services.pages.touchstart();
     }
 }
 
-module.exports = ResizeHandler;
+module.exports = TouchstartHandler;

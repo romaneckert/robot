@@ -1,6 +1,6 @@
 const AbstractHandler = require('@jeneric/core/web/abstract-handler');
 
-class ResizeHandler extends AbstractHandler {
+class LoadHandler extends AbstractHandler {
     constructor() {
         super();
     }
@@ -10,4 +10,4 @@ class ResizeHandler extends AbstractHandler {
     }
 }
 
-module.exports = ResizeHandler;
+module.exports = LoadHandler;
