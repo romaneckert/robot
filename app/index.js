@@ -6,9 +6,6 @@ class Main extends AbstractApplication {
 
     constructor(config) {
         super(config);
-    }
-
-    start() {
 
         this.say('Systeme erfolgreich gestartet.');
 
