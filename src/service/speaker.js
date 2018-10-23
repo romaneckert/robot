@@ -1,8 +1,7 @@
 const player = require('play-sound')(opts = {});
-const AbstractService = require('@jeneric/core/app/abstract-service');
 
 /** speaker module */
-class Speaker extends AbstractService {
+class Speaker {
 
     constructor() {
         super();
@@ -15,13 +14,13 @@ class Speaker extends AbstractService {
     say(message) {
 
         let entry = {
-            message : message,
-            filePath : null,
+            message: message,
+            filePath: null,
         };
 
         this._queue.push(entry);
 
-        this.services.marytts.textToSpeech(message, (message, filePath) => {
+        this.module.marytts.textToSpeech(message, (message, filePath) => {
 
             entry.filePath = filePath;
 
@@ -31,7 +30,7 @@ class Speaker extends AbstractService {
     }
 
     _speak() {
-        if(this._isSpeaking || 0 === this._queue.length || this._queue[0].filePath === null) return false;
+        if (this._isSpeaking || 0 === this._queue.length || this._queue[0].filePath === null) return false;
 
         this._isSpeaking = true;
 

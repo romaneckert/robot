@@ -30,12 +30,12 @@ class CustomConnectHandler extends ConnectHandler {
             }
         );**/
 
-        this.services.speaker.say('Neues Gerät verbunden.');
+        this.module.speaker.say('Neues Gerät verbunden.');
 
         this.server.broadcast({
-            handler : 'log',
-            data : {
-                logs : this.logger.history
+            handler: 'log',
+            data: {
+                logs: this.logger.history
             }
         });
 

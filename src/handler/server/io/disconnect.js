@@ -9,7 +9,7 @@ class CustomDisconnectHandler extends DisconnectHandler {
 
         super.handle(socket);
 
-        this.services.speaker.say('Gerät abgemeldet.');
+        this.module.speaker.say('Gerät abgemeldet.');
 
     }
 }
